@@ -90,3 +90,23 @@ No failures, errors, skipped checks or expected failures were reported. VI solve
 in the reduced workload reached residual zero; this does not establish convergence
 for unrun full-horizon scenarios. The existing dependency deprecation warnings
 remain; no package versions were changed.
+
+
+# Phase 3 adapter validation
+
+Phase 3 starts from Phase 2 merge commit `6ccc3c8` on main. The final four-thread
+`Pkg.test()` run passed **582 assertions**: the prior 174, 45 assignment/conditioning
+checks, 4 independent-cache checks, and 359 fresh VI/replay/limiting-case/marginal
+checks. The existing standalone greedy smoke and its 8 score-schema assertions
+also passed. An initial test-only heterogeneous-result container issue was fixed
+before the passing run; it did not require changing the imported algorithms.
+
+A five-robot/two-frame CI pilot freshly ran greedy and RSP-2/4/8 in both modes.
+The CI workflow now launches four Julia threads, runs this pilot and its metadata
+checks, and uploads the small raw artifact. Hosted Actions status is not claimed
+without GitHub API access. Full-scale experiments and rendering remain unrun.
+
+The three-seed five-robot pilot and supplementary two-robot smoke evidence will
+be recorded below after their actual measurements. Timing definitions and replay
+instructions are in PHASE3.md. Original source, baseline dispatch, camera/motion
+settings, dependency locks and Phase 2 objective code remain unchanged.
