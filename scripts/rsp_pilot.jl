@@ -45,14 +45,17 @@ function validate_result(configs,states,result)
     (max_difference_error=max_difference_error,max_single_robot_error=max_single_robot_error)
 end
 
-# All three concrete call paths are warmed on fresh solves before any recorded run.
-# Same model/camera/array types; all five robots and an all-in-one partition engage workers.
+# Warm unconditioned and conditioned paths, empty/nonempty neighbor maps and all
+# earlier-partition prefix lengths 0:7 before measurement. A same-round group of
+# four engages every worker; another robot then exercises the threaded dependency path.
 warm = pilot_configuration(;horizon=2)
 warm_states = initial_states(warm;seed=initial_seed)
-println("Warming sequential, serial RSP and threaded RSP; $(Threads.nthreads()) Julia threads, one BLAS thread")
+println("Warming sequential, conditioned serial RSP and concurrent/conditioned threaded RSP; $(Threads.nthreads()) Julia threads, one BLAS thread")
+flush(stdout)
 quiet(() -> measure_sequential(warm,warm_states))
-quiet(() -> plan_rsp(warm,warm_states,RSPPlanner(1)))
-quiet(() -> plan_rsp(warm,warm_states,RSPPlanner(1;threaded=true)))
+quiet(() -> plan_rsp(warm,warm_states,RSPPlanner(8);assignments=[1,2,4,6,8]))
+quiet(() -> plan_rsp(warm,warm_states,RSPPlanner(8);assignments=[1,3,5,7,8]))
+quiet(() -> plan_rsp(warm,warm_states,RSPPlanner(2;threaded=true);assignments=[1,1,1,1,2]))
 
 records = Any[]
 for (replicate,seed) in enumerate(partition_seeds)
@@ -64,6 +67,7 @@ for (replicate,seed) in enumerate(partition_seeds)
         normalized_srppa=1.0,scores=greedy.scores,metadata=greedy.metadata,validation=checks,
         solution=(value=greedy.solution.value,elements=greedy.solution.elements)))
     println("replicate=$replicate greedy reward=$(greedy.scores.joint_srppa) planning_s=$(greedy.metadata.planning_seconds)")
+    flush(stdout)
     for rounds in (2,4,8)
         paired = Dict{Bool,Any}()
         # Alternate order to reduce a systematic serial-first timing bias.
@@ -77,6 +81,7 @@ for (replicate,seed) in enumerate(partition_seeds)
                 scores=result.scores,metadata=result.metadata,validation=checks,
                 solution=(value=result.solution.value,elements=result.solution.elements)))
             println("replicate=$replicate RSP-$rounds threaded=$threaded reward=$(result.scores.joint_srppa) occupied=$(result.metadata.occupied_rounds) planning_s=$(result.metadata.planning_seconds)")
+            flush(stdout)
         end
         @assert paired[false].solution.elements == paired[true].solution.elements
         @assert paired[false].scores == paired[true].scores
@@ -131,7 +136,7 @@ context = (workload=ci ? "ci_five_robot_two_frame" : small ? "supplementary_two_
     cpu_quota= isfile("/sys/fs/cgroup/cpu.max") ? strip(read("/sys/fs/cgroup/cpu.max",String)) : "unknown",
     available_threads=Threads.nthreads(),blas_threads=BLAS.get_num_threads(),
     initial_seed=initial_seed,partition_seeds=partition_seeds,initial_states=states,
-    settings=first(records).metadata.settings,warmup_runs=3,warmup_vi_calls=15,
+    settings=first(records).metadata.settings,warmup_runs=4,warmup_vi_calls=20,
     timing="warmed wall clock including VI/cache/coverage/scheduler/instrumentation/GC; excludes final legacy evaluation, joint scoring, validation, assignment generation, installation, rendering and result serialization; verbose solver output redirected to devnull",
     statistics="sample SD across three partition seeds with fixed initial states; single observations in CI/supplementary workloads; no full-scale or distributed-network claims")
 open(joinpath(out,"run.json"),"w") do io

@@ -93,9 +93,11 @@ evidence and observations are linked from VALIDATION.md after an actual run.
 
 ## Timing and interpretation
 
-A dedicated process first warms sequential greedy, serial RSP and threaded RSP on
-five-robot/two-frame solves, including an all-in-one partition to engage workers.
-Those three warmups (15 VI calls) are excluded from recorded trials. Use four Julia
+A dedicated process first warms sequential greedy, conditioned serial RSP and
+concurrent/conditioned threaded RSP on five-robot/two-frame solves. Serial labels
+[1,2,4,6,8] and [1,3,5,7,8] cover every earlier-partition prefix length 0:7;
+threaded labels [1,1,1,1,2] engage all four workers and then condition a later robot.
+Those four warmups (20 VI calls) are excluded from recorded trials. Use four Julia
 threads and one BLAS thread. Installation, warmup, result serialization, rendering,
 Phase 2 scoring and validation are outside planning timing. Explicit full GC
 runs before each solve, outside the timing boundary. GC arising inside a measured
