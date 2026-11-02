@@ -4,7 +4,9 @@ module DistributedFilming
 include("submodular/SubmodularMaximization.jl")
 include("filming/MDMA.jl")
 include("planners/baselines.jl")
+include("evaluation/srppa.jl")
 
+export joint_srppa, marginal_srppa, motion_bonuses, legacy_value, evaluate_solution
 export SubmodularMaximization, MDMA
 export load_scenario, cluster_scenario, initial_states, smoke_configuration, plan_baseline
 export GreedyPlanner, MultipleRoundsGreedyPlanner, MyopicPlanner, FormationPlanner, AssignmentPlanner

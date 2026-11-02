@@ -8,6 +8,8 @@ const M = DistributedFilming.MDMA
 const S = DistributedFilming.SubmodularMaximization
 const provenance = TOML.parsefile(joinpath(@__DIR__, "..", "third_party", "SOURCES.toml"))
 
+include("srppa.jl")
+
 @testset "Scenario inputs and reproducible initialization" begin
     entry = only(filter(e -> endswith(e["destination"], "cluster_data.json"), provenance["files"]))
     @test bytes2hex(sha256(read(cluster_scenario()))) == entry["sha256"]
@@ -47,15 +49,19 @@ end
     before = copy(states)
     greedy = plan_baseline(configs, states, GreedyPlanner())
     check_vi_trajectory(greedy, configs, states)
+    check_joint_evaluation(greedy, configs)
+    @test greedy.value ≈ 12.048784128677479 atol=1e-11 rtol=1e-12
     @test states == before
     @test greedy.value == S.objective(M.MultiRobotTargetCoverageProblem(states, configs), greedy.elements)
     for planner in (MyopicPlanner(), MultipleRoundsGreedyPlanner(), AssignmentPlanner())
         solution = plan_baseline(configs, states, planner)
         check_vi_trajectory(solution, configs, states)
+        check_joint_evaluation(solution, configs)
     end
     formation = plan_baseline(configs, states, FormationPlanner())
     @test length(formation.elements) == configs.num_robots
     @test all(e -> length(last(e)) == configs.horizon, formation.elements)
+    check_joint_evaluation(formation, configs; check_transitions=false)
     @test formation.value == 1.0 # Preserve the upstream placeholder, not a quality claim.
     @test first(last(first(formation.elements))) != first(states)
     @test_throws ArgumentError plan_baseline(configs, states[1:1], GreedyPlanner())

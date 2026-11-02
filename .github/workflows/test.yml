@@ -1,4 +1,4 @@
-name: Julia foundation
+name: Julia filming and joint SRPPA
 on: [push, pull_request]
 jobs:
   test:
@@ -10,3 +10,4 @@ jobs:
           version: '1.8.5'
       - run: julia --startup-file=no --project=. -e 'using Pkg; Pkg.instantiate(); Pkg.test()'
       - run: julia --startup-file=no --project=. scripts/baseline.jl --smoke
+      - run: julia --startup-file=no --project=. test/score_output.jl
