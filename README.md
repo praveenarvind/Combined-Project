@@ -1,9 +1,10 @@
-# Distributed Multi-Drone Filming — Phase 1 foundation
+# Distributed Multi-Drone Filming — Joint SRPPA evaluation
 
 A Julia package based on Hughes et al.'s multi-drone filming implementation.
-This phase imports the existing filming model, value iteration, baseline planners,
-and a **single copy** of the upstream submodular/RSP scheduling framework. It does
-not implement RSP experiments, R-IRSP, evaluator corrections, or theoretical claims.
+The foundation imports the existing filming model, value iteration, baseline
+planners, and a **single copy** of the upstream submodular/RSP scheduling framework.
+Phase 2 adds one authoritative analytical joint SRPPA evaluator, separate legacy
+values and transition bonuses. RSP experiments, R-IRSP and theory remain out of scope.
 
 ## Sources and attribution
 
@@ -69,7 +70,8 @@ size and horizon are explicitly reduced for fast validation. This is not a claim
 of reproducing a complete paper experiment.
 
 The seed is 2026. The runner writes a newly computed `solution.json` and `run.json`
-under `results/smoke/greedy/`. Outputs are ignored by Git. No precomputed solutions
+with separate `joint_srppa`, `legacy_value`, `heading_bonus` and `stationary_bonus`
+fields (score schema version 2), under `results/smoke/greedy/`. Outputs are ignored by Git. No precomputed solutions
 are imported or loaded. The original `cluster_data.json` and `cluster.blend` are
 provided as inputs, with provenance hashes. Tests verify the JSON input hash.
 
@@ -93,6 +95,12 @@ using DistributedFilming
 configs = smoke_configuration(load_scenario())
 states = initial_states(configs; seed=2026)
 solution = plan_baseline(configs, states, GreedyPlanner())
+scores = evaluate_solution(configs, solution)
+# scores.joint_srppa is the common quality metric for every baseline.
+# solution.value and scores.legacy_value remain the unmodified upstream value.
+prior = solution.elements[1:1]
+candidate = solution.elements[2]
+gain = marginal_srppa(configs, prior, candidate)
 ```
 
 Submodular interfaces and existing scheduling functions remain available through
@@ -102,11 +110,14 @@ Submodular interfaces and existing scheduling functions remain available through
 ## Docker
 
 ```sh
-docker build -t distributed-filming:phase1 .
-docker run --rm distributed-filming:phase1
-docker run --rm distributed-filming:phase1 \
+docker build -t distributed-filming:phase2 .
+docker run --rm distributed-filming:phase2
+docker run --rm distributed-filming:phase2 \
   julia --startup-file=no --project=. -e 'using Pkg; Pkg.test()'
 ```
+
+The score-output CI check runs `test/score_output.jl` after the fresh greedy
+smoke command.
 
 The default container command runs only the reduced greedy baseline. The base
 image is pinned by digest, Julia dependencies by the manifest. Four Julia
@@ -117,14 +128,50 @@ For a managed proxy, supply its combined public CA bundle at build time:
 
 ```sh
 docker build --secret id=proxy_ca,src=/etc/ssl/certs/ca-certificates.crt \
-  -t distributed-filming:phase1 .
+  -t distributed-filming:phase2 .
 ```
 
 The certificate is mounted only for dependency installation, not copied into the
 image. Runtime baseline execution needs no network. A later networked `Pkg` command
 in a managed container also needs the current session's proxy/CA configuration.
 
-## Preserved limitations and Phase 2 boundary
+## Joint SRPPA and separate legacy scores
+
+`joint_srppa(configs, selections_or_solution)` accumulates the unchanged camera's
+nonnegative densities across all selected robots **before** applying the square
+root independently for each actor face and time step:
+
+```text
+sum(time, actor, face): weight * area * sqrt(sum(robot densities))
+```
+
+Empty selections score zero. Duplicate/out-of-range robot IDs, malformed state
+sequences, inconsistent horizons, nonfinite positions and invalid face weights or
+densities are rejected. Accumulation is in robot-ID order for repeatability.
+`evaluate_solution(configs, solution)` uses this same objective for all five
+baselines; it does not modify the supplied solution. Legacy JSON `value` remains
+legacy for compatibility and is explicitly labeled `value_kind="legacy"`.
+
+`marginal_srppa(configs, prior, candidate)` sums per-face reward increments; tests
+compare it both with a difference of joint scores and with the original
+single-robot marginal reward. `motion_bonuses` separately counts 0.02 per unchanged
+heading and 0.01 per stationary position on actual adjacent transitions. It does
+not add a fictitious self-transition at frame 1. No combined quality-plus-bonuses
+score is silently substituted for SRPPA.
+
+The quality objective includes all recorded frames. VI optimizes transitions into
+frames 2:H; frame-1 view quality is fixed by the initial state. Tests account for
+that initial-state constant when relating VI rewards to full-path marginals.
+The old legacy objective instead evaluates each state against itself, so its
+bonuses differ from actual transition bonuses. See [docs/PHASE2.md](docs/PHASE2.md)
+for API details and numerical examples.
+
+Scoring validates trajectory structure and geometry, not movement feasibility:
+the preserved Formation reference uses continuous positions and may leave the VI
+grid or violate movement limits. This permits one quality metric for every
+baseline without changing any baseline's motion model.
+
+## Preserved limitations
 
 **`solution.value` is the original legacy value, not a corrected joint SRPPA
 score.** The upstream objective independently sums robot rewards with empty prior
@@ -148,10 +195,9 @@ Other behavior intentionally retained:
 Serialization is headless: `MDMA.save_solution` no longer invokes Cairo renders.
 The empty upstream import-time testset is omitted; executable tests are in `test/`.
 
-Phase 2 requires a separately reviewed authoritative joint SRPPA evaluator,
-consistent marginal checks, separation of motion bonuses, and tests for overlap,
-face weights and order invariance. See [docs/PHASE2.md](docs/PHASE2.md). Those changes
-have **not** been implemented here.
+The analytical joint evaluator is implemented and tested in Phase 2. Rendered
+metrics remain unweighted and have not been reconciled with weighted analytical
+SRPPA. RSP experiment integration and Phase 3 remain pending review.
 
 Actual executed checks are recorded in [docs/VALIDATION.md](docs/VALIDATION.md).
 
@@ -162,10 +208,11 @@ src/DistributedFilming.jl        package entry point
 src/submodular/                  reused interfaces and unchanged generic solvers
 src/filming/                     imported cameras, actor model, VI and baseline algorithms
 src/planners/baselines.jl        seeded initialization and baseline dispatch
+src/evaluation/srppa.jl          common joint objective, marginals and separate bonuses
 scripts/baseline.jl              one fresh baseline at a time
 data/scenarios/cluster/         original JSON and Blender scene inputs
 third_party/                    source references, hashes and BSD notices
-test/runtests.jl                 executable integration and compatibility checks
-docs/                           import notes, validation and Phase 2 boundary
+test/                           integration, compatibility and SRPPA unit checks
+docs/                           import notes, validation and evaluator conventions
 results/                        generated local outputs (ignored)
 ```
