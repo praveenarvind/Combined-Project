@@ -1,0 +1,1221 @@
+{
+    "context": {
+        "workload": "supplementary_two_robot_four_frame",
+        "scenario": "cluster",
+        "scenario_sha256": "67b4c1b3aea58758c7ccf888b58aa9b6bc36728871b9eb3f8b175df4205992a7",
+        "source_commit": "337a1564f8f58aa41c1cba41a0f1b1cc8dcf1cd2",
+        "source_dirty": false,
+        "source_tree_sha256": "2c3f8238b87bc35ba9db0375ab5eaa35bf66e43ef55f2fa3cc0df76534a6ff68",
+        "julia_version": "1.8.5",
+        "cpu_quota": "400000 100000",
+        "available_threads": 4,
+        "blas_threads": 1,
+        "initial_seed": 2026,
+        "partition_seeds": [
+            11
+        ],
+        "initial_states": [
+            {
+                "state": {
+                    "x": 18,
+                    "y": 12,
+                    "heading": "SW"
+                },
+                "depth": 1,
+                "horizon": 4
+            },
+            {
+                "state": {
+                    "x": 7,
+                    "y": 15,
+                    "heading": "SW"
+                },
+                "depth": 1,
+                "horizon": 4
+            }
+        ],
+        "settings": {
+            "horizon": 4,
+            "num_robots": 2,
+            "grid": {
+                "width": 20,
+                "height": 20,
+                "headings": 8
+            },
+            "camera": {
+                "model": "DistributedFilming.MDMA.ViewConeSensor",
+                "fov": 1.5707963267948966,
+                "cutoff": 100
+            },
+            "move_dist": 3,
+            "vi": {
+                "max_iterations": 90,
+                "belres": 1.0e-6,
+                "include_Q": false,
+                "discount": 1,
+                "verbose": true
+            }
+        },
+        "warmup_runs": 4,
+        "warmup_vi_calls": 20,
+        "timing": "warmed wall clock including VI/cache/coverage/scheduler/instrumentation/GC; excludes final legacy evaluation, joint scoring, validation, assignment generation, installation, rendering and result serialization; verbose solver output redirected to devnull",
+        "statistics": "sample SD across three partition seeds with fixed initial states; single observations in CI/supplementary workloads; no full-scale or distributed-network claims"
+    },
+    "records": [
+        {
+            "replicate": 1,
+            "mode": "serial",
+            "initial_seed": 2026,
+            "normalized_srppa": 1,
+            "scores": {
+                "joint_srppa": 10.759347621832795,
+                "legacy_value": 12.048784128677479,
+                "heading_bonus": 0.04,
+                "stationary_bonus": 0.01
+            },
+            "metadata": {
+                "planner": "greedy",
+                "configured_rounds": 2,
+                "occupied_rounds": 2,
+                "assignments": [
+                    1,
+                    2
+                ],
+                "partition_seed": null,
+                "assignment_source": "ordered_singletons",
+                "rng": "MersenneTwister",
+                "threaded": false,
+                "available_threads": 4,
+                "worker_threads": [
+                    1
+                ],
+                "vi_calls": 2,
+                "planning_seconds": 9.10098241,
+                "solver_seconds": 9.759391461,
+                "legacy_evaluation_seconds": 0.658409051,
+                "block_observations": [
+                    {
+                        "robot_id": 1,
+                        "conditioned_on": [
+                        ],
+                        "thread_id": 1,
+                        "started_ns": 10552513621995,
+                        "finished_ns": 10557022313125
+                    },
+                    {
+                        "robot_id": 2,
+                        "conditioned_on": [
+                            1
+                        ],
+                        "thread_id": 1,
+                        "started_ns": 10557022314788,
+                        "finished_ns": 10561614601011
+                    }
+                ],
+                "settings": {
+                    "horizon": 4,
+                    "num_robots": 2,
+                    "grid": {
+                        "width": 20,
+                        "height": 20,
+                        "headings": 8
+                    },
+                    "camera": {
+                        "model": "DistributedFilming.MDMA.ViewConeSensor",
+                        "fov": 1.5707963267948966,
+                        "cutoff": 100
+                    },
+                    "move_dist": 3,
+                    "vi": {
+                        "max_iterations": 90,
+                        "belres": 1.0e-6,
+                        "include_Q": false,
+                        "discount": 1,
+                        "verbose": true
+                    }
+                }
+            },
+            "validation": {
+                "max_difference_error": 7.993605777301127e-15,
+                "max_single_robot_error": 1.7763568394002505e-15
+            },
+            "solution": {
+                "value": 12.048784128677479,
+                "elements": [
+                    [
+                        1,
+                        [
+                            {
+                                "state": {
+                                    "x": 18,
+                                    "y": 12,
+                                    "heading": "SW"
+                                },
+                                "depth": 1,
+                                "horizon": 4
+                            },
+                            {
+                                "state": {
+                                    "x": 16,
+                                    "y": 10,
+                                    "heading": "W"
+                                },
+                                "depth": 2,
+                                "horizon": 4
+                            },
+                            {
+                                "state": {
+                                    "x": 14,
+                                    "y": 9,
+                                    "heading": "W"
+                                },
+                                "depth": 3,
+                                "horizon": 4
+                            },
+                            {
+                                "state": {
+                                    "x": 14,
+                                    "y": 9,
+                                    "heading": "W"
+                                },
+                                "depth": 4,
+                                "horizon": 4
+                            }
+                        ]
+                    ],
+                    [
+                        2,
+                        [
+                            {
+                                "state": {
+                                    "x": 7,
+                                    "y": 15,
+                                    "heading": "SW"
+                                },
+                                "depth": 1,
+                                "horizon": 4
+                            },
+                            {
+                                "state": {
+                                    "x": 7,
+                                    "y": 13,
+                                    "heading": "S"
+                                },
+                                "depth": 2,
+                                "horizon": 4
+                            },
+                            {
+                                "state": {
+                                    "x": 5,
+                                    "y": 11,
+                                    "heading": "SE"
+                                },
+                                "depth": 3,
+                                "horizon": 4
+                            },
+                            {
+                                "state": {
+                                    "x": 4,
+                                    "y": 9,
+                                    "heading": "E"
+                                },
+                                "depth": 4,
+                                "horizon": 4
+                            }
+                        ]
+                    ]
+                ]
+            }
+        },
+        {
+            "replicate": 1,
+            "mode": "serial",
+            "initial_seed": 2026,
+            "normalized_srppa": 0.9828112051124895,
+            "scores": {
+                "joint_srppa": 10.574407402437688,
+                "legacy_value": 12.247753996351435,
+                "heading_bonus": 0.06,
+                "stationary_bonus": 0.02
+            },
+            "metadata": {
+                "planner": "rsp",
+                "configured_rounds": 2,
+                "occupied_rounds": 1,
+                "assignments": [
+                    2,
+                    2
+                ],
+                "partition_seed": 11,
+                "assignment_source": "seeded_independent_uniform",
+                "rng": "MersenneTwister",
+                "threaded": false,
+                "available_threads": 4,
+                "worker_threads": [
+                    1
+                ],
+                "vi_calls": 2,
+                "planning_seconds": 8.970816102,
+                "solver_seconds": 9.599383523,
+                "legacy_evaluation_seconds": 0.628567421,
+                "block_observations": [
+                    {
+                        "robot_id": 1,
+                        "conditioned_on": [
+                        ],
+                        "thread_id": 1,
+                        "started_ns": 10563099972395,
+                        "finished_ns": 10567625267629
+                    },
+                    {
+                        "robot_id": 2,
+                        "conditioned_on": [
+                        ],
+                        "thread_id": 1,
+                        "started_ns": 10567625277514,
+                        "finished_ns": 10572070777090
+                    }
+                ],
+                "settings": {
+                    "horizon": 4,
+                    "num_robots": 2,
+                    "grid": {
+                        "width": 20,
+                        "height": 20,
+                        "headings": 8
+                    },
+                    "camera": {
+                        "model": "DistributedFilming.MDMA.ViewConeSensor",
+                        "fov": 1.5707963267948966,
+                        "cutoff": 100
+                    },
+                    "move_dist": 3,
+                    "vi": {
+                        "max_iterations": 90,
+                        "belres": 1.0e-6,
+                        "include_Q": false,
+                        "discount": 1,
+                        "verbose": true
+                    }
+                }
+            },
+            "validation": {
+                "max_difference_error": 4.440892098500626e-15,
+                "max_single_robot_error": 1.3322676295501878e-15
+            },
+            "solution": {
+                "value": 12.247753996351435,
+                "elements": [
+                    [
+                        1,
+                        [
+                            {
+                                "state": {
+                                    "x": 18,
+                                    "y": 12,
+                                    "heading": "SW"
+                                },
+                                "depth": 1,
+                                "horizon": 4
+                            },
+                            {
+                                "state": {
+                                    "x": 16,
+                                    "y": 10,
+                                    "heading": "W"
+                                },
+                                "depth": 2,
+                                "horizon": 4
+                            },
+                            {
+                                "state": {
+                                    "x": 14,
+                                    "y": 9,
+                                    "heading": "W"
+                                },
+                                "depth": 3,
+                                "horizon": 4
+                            },
+                            {
+                                "state": {
+                                    "x": 14,
+                                    "y": 9,
+                                    "heading": "W"
+                                },
+                                "depth": 4,
+                                "horizon": 4
+                            }
+                        ]
+                    ],
+                    [
+                        2,
+                        [
+                            {
+                                "state": {
+                                    "x": 7,
+                                    "y": 15,
+                                    "heading": "SW"
+                                },
+                                "depth": 1,
+                                "horizon": 4
+                            },
+                            {
+                                "state": {
+                                    "x": 7,
+                                    "y": 14,
+                                    "heading": "S"
+                                },
+                                "depth": 2,
+                                "horizon": 4
+                            },
+                            {
+                                "state": {
+                                    "x": 6,
+                                    "y": 13,
+                                    "heading": "SE"
+                                },
+                                "depth": 3,
+                                "horizon": 4
+                            },
+                            {
+                                "state": {
+                                    "x": 6,
+                                    "y": 13,
+                                    "heading": "SE"
+                                },
+                                "depth": 4,
+                                "horizon": 4
+                            }
+                        ]
+                    ]
+                ]
+            }
+        },
+        {
+            "replicate": 1,
+            "mode": "threaded",
+            "initial_seed": 2026,
+            "normalized_srppa": 0.9828112051124895,
+            "scores": {
+                "joint_srppa": 10.574407402437688,
+                "legacy_value": 12.247753996351435,
+                "heading_bonus": 0.06,
+                "stationary_bonus": 0.02
+            },
+            "metadata": {
+                "planner": "rsp",
+                "configured_rounds": 2,
+                "occupied_rounds": 1,
+                "assignments": [
+                    2,
+                    2
+                ],
+                "partition_seed": 11,
+                "assignment_source": "seeded_independent_uniform",
+                "rng": "MersenneTwister",
+                "threaded": true,
+                "available_threads": 4,
+                "worker_threads": [
+                    1,
+                    3
+                ],
+                "vi_calls": 2,
+                "planning_seconds": 12.24019608,
+                "solver_seconds": 12.951305521,
+                "legacy_evaluation_seconds": 0.711109441,
+                "block_observations": [
+                    {
+                        "robot_id": 1,
+                        "conditioned_on": [
+                        ],
+                        "thread_id": 3,
+                        "started_ns": 10573224631712,
+                        "finished_ns": 10585464519138
+                    },
+                    {
+                        "robot_id": 2,
+                        "conditioned_on": [
+                        ],
+                        "thread_id": 1,
+                        "started_ns": 10573224631682,
+                        "finished_ns": 10584917453048
+                    }
+                ],
+                "settings": {
+                    "horizon": 4,
+                    "num_robots": 2,
+                    "grid": {
+                        "width": 20,
+                        "height": 20,
+                        "headings": 8
+                    },
+                    "camera": {
+                        "model": "DistributedFilming.MDMA.ViewConeSensor",
+                        "fov": 1.5707963267948966,
+                        "cutoff": 100
+                    },
+                    "move_dist": 3,
+                    "vi": {
+                        "max_iterations": 90,
+                        "belres": 1.0e-6,
+                        "include_Q": false,
+                        "discount": 1,
+                        "verbose": true
+                    }
+                }
+            },
+            "validation": {
+                "max_difference_error": 4.440892098500626e-15,
+                "max_single_robot_error": 1.3322676295501878e-15
+            },
+            "solution": {
+                "value": 12.247753996351435,
+                "elements": [
+                    [
+                        1,
+                        [
+                            {
+                                "state": {
+                                    "x": 18,
+                                    "y": 12,
+                                    "heading": "SW"
+                                },
+                                "depth": 1,
+                                "horizon": 4
+                            },
+                            {
+                                "state": {
+                                    "x": 16,
+                                    "y": 10,
+                                    "heading": "W"
+                                },
+                                "depth": 2,
+                                "horizon": 4
+                            },
+                            {
+                                "state": {
+                                    "x": 14,
+                                    "y": 9,
+                                    "heading": "W"
+                                },
+                                "depth": 3,
+                                "horizon": 4
+                            },
+                            {
+                                "state": {
+                                    "x": 14,
+                                    "y": 9,
+                                    "heading": "W"
+                                },
+                                "depth": 4,
+                                "horizon": 4
+                            }
+                        ]
+                    ],
+                    [
+                        2,
+                        [
+                            {
+                                "state": {
+                                    "x": 7,
+                                    "y": 15,
+                                    "heading": "SW"
+                                },
+                                "depth": 1,
+                                "horizon": 4
+                            },
+                            {
+                                "state": {
+                                    "x": 7,
+                                    "y": 14,
+                                    "heading": "S"
+                                },
+                                "depth": 2,
+                                "horizon": 4
+                            },
+                            {
+                                "state": {
+                                    "x": 6,
+                                    "y": 13,
+                                    "heading": "SE"
+                                },
+                                "depth": 3,
+                                "horizon": 4
+                            },
+                            {
+                                "state": {
+                                    "x": 6,
+                                    "y": 13,
+                                    "heading": "SE"
+                                },
+                                "depth": 4,
+                                "horizon": 4
+                            }
+                        ]
+                    ]
+                ]
+            }
+        },
+        {
+            "replicate": 1,
+            "mode": "serial",
+            "initial_seed": 2026,
+            "normalized_srppa": 1,
+            "scores": {
+                "joint_srppa": 10.759347621832795,
+                "legacy_value": 12.048784128677479,
+                "heading_bonus": 0.04,
+                "stationary_bonus": 0.01
+            },
+            "metadata": {
+                "planner": "rsp",
+                "configured_rounds": 4,
+                "occupied_rounds": 2,
+                "assignments": [
+                    3,
+                    4
+                ],
+                "partition_seed": 11,
+                "assignment_source": "seeded_independent_uniform",
+                "rng": "MersenneTwister",
+                "threaded": false,
+                "available_threads": 4,
+                "worker_threads": [
+                    1
+                ],
+                "vi_calls": 2,
+                "planning_seconds": 9.525903072,
+                "solver_seconds": 10.160137665,
+                "legacy_evaluation_seconds": 0.634234593,
+                "block_observations": [
+                    {
+                        "robot_id": 1,
+                        "conditioned_on": [
+                        ],
+                        "thread_id": 1,
+                        "started_ns": 10586631337187,
+                        "finished_ns": 10591304868668
+                    },
+                    {
+                        "robot_id": 2,
+                        "conditioned_on": [
+                            1
+                        ],
+                        "thread_id": 1,
+                        "started_ns": 10591304881978,
+                        "finished_ns": 10596157232386
+                    }
+                ],
+                "settings": {
+                    "horizon": 4,
+                    "num_robots": 2,
+                    "grid": {
+                        "width": 20,
+                        "height": 20,
+                        "headings": 8
+                    },
+                    "camera": {
+                        "model": "DistributedFilming.MDMA.ViewConeSensor",
+                        "fov": 1.5707963267948966,
+                        "cutoff": 100
+                    },
+                    "move_dist": 3,
+                    "vi": {
+                        "max_iterations": 90,
+                        "belres": 1.0e-6,
+                        "include_Q": false,
+                        "discount": 1,
+                        "verbose": true
+                    }
+                }
+            },
+            "validation": {
+                "max_difference_error": 7.993605777301127e-15,
+                "max_single_robot_error": 1.7763568394002505e-15
+            },
+            "solution": {
+                "value": 12.048784128677479,
+                "elements": [
+                    [
+                        1,
+                        [
+                            {
+                                "state": {
+                                    "x": 18,
+                                    "y": 12,
+                                    "heading": "SW"
+                                },
+                                "depth": 1,
+                                "horizon": 4
+                            },
+                            {
+                                "state": {
+                                    "x": 16,
+                                    "y": 10,
+                                    "heading": "W"
+                                },
+                                "depth": 2,
+                                "horizon": 4
+                            },
+                            {
+                                "state": {
+                                    "x": 14,
+                                    "y": 9,
+                                    "heading": "W"
+                                },
+                                "depth": 3,
+                                "horizon": 4
+                            },
+                            {
+                                "state": {
+                                    "x": 14,
+                                    "y": 9,
+                                    "heading": "W"
+                                },
+                                "depth": 4,
+                                "horizon": 4
+                            }
+                        ]
+                    ],
+                    [
+                        2,
+                        [
+                            {
+                                "state": {
+                                    "x": 7,
+                                    "y": 15,
+                                    "heading": "SW"
+                                },
+                                "depth": 1,
+                                "horizon": 4
+                            },
+                            {
+                                "state": {
+                                    "x": 7,
+                                    "y": 13,
+                                    "heading": "S"
+                                },
+                                "depth": 2,
+                                "horizon": 4
+                            },
+                            {
+                                "state": {
+                                    "x": 5,
+                                    "y": 11,
+                                    "heading": "SE"
+                                },
+                                "depth": 3,
+                                "horizon": 4
+                            },
+                            {
+                                "state": {
+                                    "x": 4,
+                                    "y": 9,
+                                    "heading": "E"
+                                },
+                                "depth": 4,
+                                "horizon": 4
+                            }
+                        ]
+                    ]
+                ]
+            }
+        },
+        {
+            "replicate": 1,
+            "mode": "threaded",
+            "initial_seed": 2026,
+            "normalized_srppa": 1,
+            "scores": {
+                "joint_srppa": 10.759347621832795,
+                "legacy_value": 12.048784128677479,
+                "heading_bonus": 0.04,
+                "stationary_bonus": 0.01
+            },
+            "metadata": {
+                "planner": "rsp",
+                "configured_rounds": 4,
+                "occupied_rounds": 2,
+                "assignments": [
+                    3,
+                    4
+                ],
+                "partition_seed": 11,
+                "assignment_source": "seeded_independent_uniform",
+                "rng": "MersenneTwister",
+                "threaded": true,
+                "available_threads": 4,
+                "worker_threads": [
+                    2
+                ],
+                "vi_calls": 2,
+                "planning_seconds": 16.728671454,
+                "solver_seconds": 17.482062218,
+                "legacy_evaluation_seconds": 0.753390764,
+                "block_observations": [
+                    {
+                        "robot_id": 1,
+                        "conditioned_on": [
+                        ],
+                        "thread_id": 2,
+                        "started_ns": 10597165772200,
+                        "finished_ns": 10605569515940
+                    },
+                    {
+                        "robot_id": 2,
+                        "conditioned_on": [
+                            1
+                        ],
+                        "thread_id": 2,
+                        "started_ns": 10605569613156,
+                        "finished_ns": 10613894253688
+                    }
+                ],
+                "settings": {
+                    "horizon": 4,
+                    "num_robots": 2,
+                    "grid": {
+                        "width": 20,
+                        "height": 20,
+                        "headings": 8
+                    },
+                    "camera": {
+                        "model": "DistributedFilming.MDMA.ViewConeSensor",
+                        "fov": 1.5707963267948966,
+                        "cutoff": 100
+                    },
+                    "move_dist": 3,
+                    "vi": {
+                        "max_iterations": 90,
+                        "belres": 1.0e-6,
+                        "include_Q": false,
+                        "discount": 1,
+                        "verbose": true
+                    }
+                }
+            },
+            "validation": {
+                "max_difference_error": 7.993605777301127e-15,
+                "max_single_robot_error": 1.7763568394002505e-15
+            },
+            "solution": {
+                "value": 12.048784128677479,
+                "elements": [
+                    [
+                        1,
+                        [
+                            {
+                                "state": {
+                                    "x": 18,
+                                    "y": 12,
+                                    "heading": "SW"
+                                },
+                                "depth": 1,
+                                "horizon": 4
+                            },
+                            {
+                                "state": {
+                                    "x": 16,
+                                    "y": 10,
+                                    "heading": "W"
+                                },
+                                "depth": 2,
+                                "horizon": 4
+                            },
+                            {
+                                "state": {
+                                    "x": 14,
+                                    "y": 9,
+                                    "heading": "W"
+                                },
+                                "depth": 3,
+                                "horizon": 4
+                            },
+                            {
+                                "state": {
+                                    "x": 14,
+                                    "y": 9,
+                                    "heading": "W"
+                                },
+                                "depth": 4,
+                                "horizon": 4
+                            }
+                        ]
+                    ],
+                    [
+                        2,
+                        [
+                            {
+                                "state": {
+                                    "x": 7,
+                                    "y": 15,
+                                    "heading": "SW"
+                                },
+                                "depth": 1,
+                                "horizon": 4
+                            },
+                            {
+                                "state": {
+                                    "x": 7,
+                                    "y": 13,
+                                    "heading": "S"
+                                },
+                                "depth": 2,
+                                "horizon": 4
+                            },
+                            {
+                                "state": {
+                                    "x": 5,
+                                    "y": 11,
+                                    "heading": "SE"
+                                },
+                                "depth": 3,
+                                "horizon": 4
+                            },
+                            {
+                                "state": {
+                                    "x": 4,
+                                    "y": 9,
+                                    "heading": "E"
+                                },
+                                "depth": 4,
+                                "horizon": 4
+                            }
+                        ]
+                    ]
+                ]
+            }
+        },
+        {
+            "replicate": 1,
+            "mode": "serial",
+            "initial_seed": 2026,
+            "normalized_srppa": 1,
+            "scores": {
+                "joint_srppa": 10.759347621832795,
+                "legacy_value": 12.048784128677479,
+                "heading_bonus": 0.04,
+                "stationary_bonus": 0.01
+            },
+            "metadata": {
+                "planner": "rsp",
+                "configured_rounds": 8,
+                "occupied_rounds": 2,
+                "assignments": [
+                    5,
+                    7
+                ],
+                "partition_seed": 11,
+                "assignment_source": "seeded_independent_uniform",
+                "rng": "MersenneTwister",
+                "threaded": false,
+                "available_threads": 4,
+                "worker_threads": [
+                    1
+                ],
+                "vi_calls": 2,
+                "planning_seconds": 10.45773854,
+                "solver_seconds": 11.135732747,
+                "legacy_evaluation_seconds": 0.677994207,
+                "block_observations": [
+                    {
+                        "robot_id": 1,
+                        "conditioned_on": [
+                        ],
+                        "thread_id": 1,
+                        "started_ns": 10615047132473,
+                        "finished_ns": 10620261831504
+                    },
+                    {
+                        "robot_id": 2,
+                        "conditioned_on": [
+                            1
+                        ],
+                        "thread_id": 1,
+                        "started_ns": 10620261842861,
+                        "finished_ns": 10625504863211
+                    }
+                ],
+                "settings": {
+                    "horizon": 4,
+                    "num_robots": 2,
+                    "grid": {
+                        "width": 20,
+                        "height": 20,
+                        "headings": 8
+                    },
+                    "camera": {
+                        "model": "DistributedFilming.MDMA.ViewConeSensor",
+                        "fov": 1.5707963267948966,
+                        "cutoff": 100
+                    },
+                    "move_dist": 3,
+                    "vi": {
+                        "max_iterations": 90,
+                        "belres": 1.0e-6,
+                        "include_Q": false,
+                        "discount": 1,
+                        "verbose": true
+                    }
+                }
+            },
+            "validation": {
+                "max_difference_error": 7.993605777301127e-15,
+                "max_single_robot_error": 1.7763568394002505e-15
+            },
+            "solution": {
+                "value": 12.048784128677479,
+                "elements": [
+                    [
+                        1,
+                        [
+                            {
+                                "state": {
+                                    "x": 18,
+                                    "y": 12,
+                                    "heading": "SW"
+                                },
+                                "depth": 1,
+                                "horizon": 4
+                            },
+                            {
+                                "state": {
+                                    "x": 16,
+                                    "y": 10,
+                                    "heading": "W"
+                                },
+                                "depth": 2,
+                                "horizon": 4
+                            },
+                            {
+                                "state": {
+                                    "x": 14,
+                                    "y": 9,
+                                    "heading": "W"
+                                },
+                                "depth": 3,
+                                "horizon": 4
+                            },
+                            {
+                                "state": {
+                                    "x": 14,
+                                    "y": 9,
+                                    "heading": "W"
+                                },
+                                "depth": 4,
+                                "horizon": 4
+                            }
+                        ]
+                    ],
+                    [
+                        2,
+                        [
+                            {
+                                "state": {
+                                    "x": 7,
+                                    "y": 15,
+                                    "heading": "SW"
+                                },
+                                "depth": 1,
+                                "horizon": 4
+                            },
+                            {
+                                "state": {
+                                    "x": 7,
+                                    "y": 13,
+                                    "heading": "S"
+                                },
+                                "depth": 2,
+                                "horizon": 4
+                            },
+                            {
+                                "state": {
+                                    "x": 5,
+                                    "y": 11,
+                                    "heading": "SE"
+                                },
+                                "depth": 3,
+                                "horizon": 4
+                            },
+                            {
+                                "state": {
+                                    "x": 4,
+                                    "y": 9,
+                                    "heading": "E"
+                                },
+                                "depth": 4,
+                                "horizon": 4
+                            }
+                        ]
+                    ]
+                ]
+            }
+        },
+        {
+            "replicate": 1,
+            "mode": "threaded",
+            "initial_seed": 2026,
+            "normalized_srppa": 1,
+            "scores": {
+                "joint_srppa": 10.759347621832795,
+                "legacy_value": 12.048784128677479,
+                "heading_bonus": 0.04,
+                "stationary_bonus": 0.01
+            },
+            "metadata": {
+                "planner": "rsp",
+                "configured_rounds": 8,
+                "occupied_rounds": 2,
+                "assignments": [
+                    5,
+                    7
+                ],
+                "partition_seed": 11,
+                "assignment_source": "seeded_independent_uniform",
+                "rng": "MersenneTwister",
+                "threaded": true,
+                "available_threads": 4,
+                "worker_threads": [
+                    3,
+                    4
+                ],
+                "vi_calls": 2,
+                "planning_seconds": 16.484535147,
+                "solver_seconds": 17.246381093,
+                "legacy_evaluation_seconds": 0.761845946,
+                "block_observations": [
+                    {
+                        "robot_id": 1,
+                        "conditioned_on": [
+                        ],
+                        "thread_id": 3,
+                        "started_ns": 10626570397552,
+                        "finished_ns": 10634692949932
+                    },
+                    {
+                        "robot_id": 2,
+                        "conditioned_on": [
+                            1
+                        ],
+                        "thread_id": 4,
+                        "started_ns": 10634693106883,
+                        "finished_ns": 10643054678297
+                    }
+                ],
+                "settings": {
+                    "horizon": 4,
+                    "num_robots": 2,
+                    "grid": {
+                        "width": 20,
+                        "height": 20,
+                        "headings": 8
+                    },
+                    "camera": {
+                        "model": "DistributedFilming.MDMA.ViewConeSensor",
+                        "fov": 1.5707963267948966,
+                        "cutoff": 100
+                    },
+                    "move_dist": 3,
+                    "vi": {
+                        "max_iterations": 90,
+                        "belres": 1.0e-6,
+                        "include_Q": false,
+                        "discount": 1,
+                        "verbose": true
+                    }
+                }
+            },
+            "validation": {
+                "max_difference_error": 7.993605777301127e-15,
+                "max_single_robot_error": 1.7763568394002505e-15
+            },
+            "solution": {
+                "value": 12.048784128677479,
+                "elements": [
+                    [
+                        1,
+                        [
+                            {
+                                "state": {
+                                    "x": 18,
+                                    "y": 12,
+                                    "heading": "SW"
+                                },
+                                "depth": 1,
+                                "horizon": 4
+                            },
+                            {
+                                "state": {
+                                    "x": 16,
+                                    "y": 10,
+                                    "heading": "W"
+                                },
+                                "depth": 2,
+                                "horizon": 4
+                            },
+                            {
+                                "state": {
+                                    "x": 14,
+                                    "y": 9,
+                                    "heading": "W"
+                                },
+                                "depth": 3,
+                                "horizon": 4
+                            },
+                            {
+                                "state": {
+                                    "x": 14,
+                                    "y": 9,
+                                    "heading": "W"
+                                },
+                                "depth": 4,
+                                "horizon": 4
+                            }
+                        ]
+                    ],
+                    [
+                        2,
+                        [
+                            {
+                                "state": {
+                                    "x": 7,
+                                    "y": 15,
+                                    "heading": "SW"
+                                },
+                                "depth": 1,
+                                "horizon": 4
+                            },
+                            {
+                                "state": {
+                                    "x": 7,
+                                    "y": 13,
+                                    "heading": "S"
+                                },
+                                "depth": 2,
+                                "horizon": 4
+                            },
+                            {
+                                "state": {
+                                    "x": 5,
+                                    "y": 11,
+                                    "heading": "SE"
+                                },
+                                "depth": 3,
+                                "horizon": 4
+                            },
+                            {
+                                "state": {
+                                    "x": 4,
+                                    "y": 9,
+                                    "heading": "E"
+                                },
+                                "depth": 4,
+                                "horizon": 4
+                            }
+                        ]
+                    ]
+                ]
+            }
+        }
+    ]
+}

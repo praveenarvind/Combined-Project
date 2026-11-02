@@ -89,7 +89,7 @@ Results are written under ignored `results/rsp-five-robot`, `rsp-two-robot` or
 `rsp-ci`: raw `results.csv`, descriptive `summary.csv`, and `run.json` containing
 all trajectories, initial states, source revision, input hash, configuration,
 assignments, seeds, execution traces, validation errors and scores. Committed pilot
-evidence and observations are linked from VALIDATION.md after an actual run.
+evidence and observations are recorded in [PHASE3_RESULTS.md](PHASE3_RESULTS.md).
 
 ## Timing and interpretation
 

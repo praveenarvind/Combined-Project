@@ -1,0 +1,8 @@
+replicate,planner,configured_rounds,mode,max_round_population,peak_overlapping_blocks,worker_threads
+1,greedy,2,serial,1,1,1
+1,rsp,2,serial,2,1,1
+1,rsp,2,threaded,2,2,1;3
+1,rsp,4,serial,1,1,1
+1,rsp,4,threaded,1,1,2
+1,rsp,8,serial,1,1,1
+1,rsp,8,threaded,1,1,3;4

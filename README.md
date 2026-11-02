@@ -119,7 +119,8 @@ result.scores.joint_srppa
 result.metadata.assignments
 ```
 
-Start Julia with `--threads=4`. RSP-2/4/8 reuse the existing partition/DAG scheduler;
+The test suite includes mandatory concurrency checks; use the four-thread test
+command above. Start Julia with `--threads=4`. RSP-2/4/8 reuse the existing partition/DAG scheduler;
 robots in a round condition only on earlier rounds. Each VI call owns its reward
 cache. The adapter saves assignments, seeds, configured/occupied rounds, worker
 traces, observed VI calls and separate planning/legacy-evaluation timings.
@@ -135,6 +136,8 @@ Both use fresh greedy comparisons and identical initial states, targets and came
 settings; modes replay the same assignments. Compilation warmup precedes timing.
 These small pilots do not constitute a full experimental matrix. See
 [docs/PHASE3.md](docs/PHASE3.md) for APIs, timing boundaries and replay instructions.
+Measured rewards, wall times, occupied rounds, assignments and raw artifacts are in
+[docs/PHASE3_RESULTS.md](docs/PHASE3_RESULTS.md).
 
 ## Docker
 
