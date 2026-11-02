@@ -1,0 +1,100 @@
+# Exact upstream inputs; source hashes refer to complete original files.
+[filming]
+repository = "https://github.com/praveenarvind/MultiDroneMultiActorFilming"
+branch = "github/main"
+commit = "42f97540ff002651822a9bbd617bff3d68ab93e2"
+
+[sensing]
+repository = "https://github.com/praveenarvind/MultiAgentSensing"
+branch = "master"
+commit = "fe9162adbedb374fa0e9ca4739e398acc4704309"
+
+[[files]]
+source = "SubmodularMaximization.jl"
+destination = "src/submodular/SubmodularMaximization.jl"
+sha256 = "8e827e578f4ec2da7e073b97eca209e46d7f117ff1b68f12de915c50705cd155"
+adaptations = "Removed Python/plotting initialization and unrelated application includes; retained generic interfaces and algorithms; local solver include."
+
+[[files]]
+source = "src/solvers.jl"
+destination = "src/submodular/solvers.jl"
+sha256 = "7f30e9fecb93a3c96d392831700e94066cebd81f2e0115a1a58ea3aacc685d82"
+adaptations = "none"
+
+[[files]]
+source = "src/mdma_greedy/MDMA_States.jl"
+destination = "src/filming/MDMA_States.jl"
+sha256 = "e0d67a188d9149395fd545fbb7c00238f87667125f3b7a29b35cf7d9f26d26ec"
+adaptations = "Package-relative submodular imports; Omitted unused plotting demonstration"
+
+[[files]]
+source = "src/mdma_greedy/MDMA_Detection.jl"
+destination = "src/filming/MDMA_Detection.jl"
+sha256 = "658fdcc0a83458c1b87abe720cf30dd8e129d57f728dad59d895f55986f33d80"
+adaptations = "Package-relative submodular imports"
+
+[[files]]
+source = "src/mdma_greedy/MDMA_SharedTypes.jl"
+destination = "src/filming/MDMA_SharedTypes.jl"
+sha256 = "63d6342677a452c2059aba8025ed1bfe108572a76bc628e30282232b63405221"
+adaptations = "Package-relative submodular imports"
+
+[[files]]
+source = "src/mdma_greedy/MDMA_MultiAgent.jl"
+destination = "src/filming/MDMA_MultiAgent.jl"
+sha256 = "77a79bb0857e16a9026541bfbd860283d4b600ec9fc894f184cc6a6e6c3aa9ad"
+adaptations = "Package-relative submodular imports"
+
+[[files]]
+source = "src/mdma_greedy/MDMA_Single_Robot.jl"
+destination = "src/filming/MDMA_Single_Robot.jl"
+sha256 = "341a6b447464df1a601ee973c4315e9335ed9adcd06c49d5757146478aac9b62"
+adaptations = "Package-relative submodular imports; Omitted assertion-free import-time testset; real tests live in test/"
+
+[[files]]
+source = "src/mdma_greedy/MDMA_AssignmentPlanner.jl"
+destination = "src/filming/MDMA_AssignmentPlanner.jl"
+sha256 = "4a65d4b8c36ad08853a5f9ed48081fff19b0ba4f454b145c05137126955a86d5"
+adaptations = "Package-relative submodular imports"
+
+[[files]]
+source = "src/mdma_greedy/MDMA_FormationPlanner.jl"
+destination = "src/filming/MDMA_FormationPlanner.jl"
+sha256 = "92486e52e55f0529e43cdcff804d7bae76a13b0ca5e4837135b348ed568b9fd7"
+adaptations = "Package-relative submodular imports"
+
+[[files]]
+source = "src/mdma_greedy/MDMA_Interface.jl"
+destination = "src/filming/MDMA_Interface.jl"
+sha256 = "7c34e0155f7235f0755550f67e77ade441a9ee71f38b61a163a0d0d8afbf4f95"
+adaptations = "Package-relative submodular imports; Serialization no longer invokes omitted Cairo rendering"
+
+[[files]]
+source = "experiments/cluster/cluster_data.json"
+destination = "data/scenarios/cluster/cluster_data.json"
+sha256 = "67b4c1b3aea58758c7ccf888b58aa9b6bc36728871b9eb3f8b175df4205992a7"
+adaptations = "none"
+
+[[files]]
+source = "experiments/cluster/cluster.blend"
+destination = "data/scenarios/cluster/cluster.blend"
+sha256 = "871459ccb81bad3c1978a5a6b208dcd088d2b6e47bbde98b22b4f02f91a3da59"
+adaptations = "none"
+
+[[files]]
+source = "src/mdma_greedy/MDMA_Experiment.jl"
+destination = "src/planners/baselines.jl"
+sha256 = "c6d4be3355296b518af7c398f52ee77637ed2be839f54cbeeac93c2142fe28c1"
+adaptations = "Retained planner tags and original solver dispatch/sweep count; explicit seeded input generation; omitted global state, plotting and all-experiment orchestration."
+
+[[files]]
+source = "juliapackages/Project.toml"
+destination = "Project.toml"
+sha256 = "69e68b6db722496ad309529ad2b6686511a4f44ee15301141f0a21c4e9977017"
+adaptations = "Pruned to the used dependency closure; upstream package versions and tree hashes retained; package metadata/hash regenerated."
+
+[[files]]
+source = "juliapackages/Manifest.toml"
+destination = "Manifest.toml"
+sha256 = "4e00a68990d22bf3f14ea2d3e159b7b7093fe7b76e4e3b229dbaca2e0a8e288c"
+adaptations = "Pruned to the used dependency closure; upstream package versions and tree hashes retained; package metadata/hash regenerated."

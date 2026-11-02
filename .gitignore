@@ -1,0 +1,4 @@
+/results/
+*.mem
+*.jl.cov
+.DS_Store
