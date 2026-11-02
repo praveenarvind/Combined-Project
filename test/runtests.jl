@@ -96,3 +96,5 @@ end
     @test isempty(S.in_neighbors(dag, 1))
     @test S.in_neighbors(dag, 2) == [1]
 end
+
+include("rsp.jl")

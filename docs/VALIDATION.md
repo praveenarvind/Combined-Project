@@ -90,3 +90,43 @@ No failures, errors, skipped checks or expected failures were reported. VI solve
 in the reduced workload reached residual zero; this does not establish convergence
 for unrun full-horizon scenarios. The existing dependency deprecation warnings
 remain; no package versions were changed.
+
+
+# Phase 3 adapter validation
+
+Phase 3 starts from Phase 2 merge commit `6ccc3c8` on main. The final four-thread
+`Pkg.test()` run passed **582 assertions**: the prior 174, 45 assignment/conditioning
+checks, 4 independent-cache checks, and 359 fresh VI/replay/limiting-case/marginal
+checks. The existing standalone greedy smoke and its 8 score-schema assertions
+also passed. An initial test-only heterogeneous-result container issue was fixed
+before the passing run; it did not require changing the imported algorithms.
+
+A five-robot/two-frame CI pilot freshly ran greedy and RSP-2/4/8 in both modes.
+The CI workflow now launches four Julia threads, runs this pilot and its metadata
+checks, and uploads the small raw artifact. Hosted Actions status is not claimed
+without GitHub API access. Full-scale experiments and rendering remain unrun.
+
+The three-seed five-robot pilot (21 measured runs) and supplementary two-robot
+smoke (7 measured runs) both completed from clean implementation commit `337a156`.
+Their raw CSVs, replay metadata, trajectories, trace summaries and interpretation
+are committed under docs/pilots/phase3 and documented in PHASE3_RESULTS.md. Timing definitions and replay
+instructions are in PHASE3.md. Original source, baseline dispatch, camera/motion
+settings, dependency locks and Phase 2 objective code remain unchanged.
+
+
+Final Phase 3 pilot/output checks: five-robot artifact **247/247** assertions;
+supplementary two-robot artifact **85/85**; latest CI pilot artifact **85/85**.
+Every pilot solution additionally passed movement and independent Phase 2 marginal
+assertions before serialization. Per-run VI counts were five for main/CI and two
+for supplementary runs. Four warmups (20 VI calls) preceded each workload and were
+excluded. The first main timing pass was discarded after a warm-up coverage gap
+was found; only the fully warmed rerun is committed. Reward/trajectory correctness
+was unchanged. Normalized scores and recorded conditioning/barrier traces were
+independently checked from the persisted artifacts.
+
+Main five-robot mean planning seconds (serial/threaded) were 15.381/20.123 for
+RSP-2, 15.438/23.748 for RSP-4, and 15.197/25.890 for RSP-8; fixed-order greedy
+was 15.147 seconds. These observations establish no speedup on this host for this
+tiny workload. Raw values and sample SDs are retained. All source repositories,
+original solver/VI/camera/motion code, baseline behavior, Phase 2 score definitions
+and dependency locks remain unchanged.

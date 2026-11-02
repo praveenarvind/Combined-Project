@@ -1,10 +1,11 @@
-# Distributed Multi-Drone Filming — Joint SRPPA evaluation
+# Distributed Multi-Drone Filming — Seeded RSP planning
 
 A Julia package based on Hughes et al.'s multi-drone filming implementation.
 The foundation imports the existing filming model, value iteration, baseline
 planners, and a **single copy** of the upstream submodular/RSP scheduling framework.
 Phase 2 adds one authoritative analytical joint SRPPA evaluator, separate legacy
-values and transition bonuses. RSP experiments, R-IRSP and theory remain out of scope.
+values and transition bonuses. Phase 3 adds seeded serial/threaded RSP adapters and small pilots. R-IRSP,
+full-scale experiments and theory remain out of scope.
 
 ## Sources and attribution
 
@@ -28,7 +29,7 @@ From the repository root:
 
 ```sh
 julia --startup-file=no --project=. -e 'using Pkg; Pkg.instantiate(); Pkg.precompile()'
-julia --startup-file=no --project=. -e 'using Pkg; Pkg.test()'
+julia --threads=4 --startup-file=no --project=. -e 'using Pkg; Pkg.test(; julia_args=["--threads=4"])'
 ```
 
 Commit and use `Manifest.toml`; do not run `Pkg.update()` for reproduction. The
@@ -107,13 +108,44 @@ Submodular interfaces and existing scheduling functions remain available through
 `DistributedFilming.SubmodularMaximization`. Filming internals live in
 `DistributedFilming.MDMA`. No `LOAD_PATH` changes or source checkouts are required.
 
+## Seeded RSP and small pilots
+
+```julia
+using DistributedFilming
+configs = pilot_configuration() # all five original robots, first three frames
+states = initial_states(configs; seed=2026)
+result = plan_rsp(configs, states, RSPPlanner(4; seed=11, threaded=true))
+result.scores.joint_srppa
+result.metadata.assignments
+```
+
+The test suite includes mandatory concurrency checks; use the four-thread test
+command above. Start Julia with `--threads=4`. RSP-2/4/8 reuse the existing partition/DAG scheduler;
+robots in a round condition only on earlier rounds. Each VI call owns its reward
+cache. The adapter saves assignments, seeds, configured/occupied rounds, worker
+traces, observed VI calls and separate planning/legacy-evaluation timings.
+
+```sh
+julia --threads=4 --startup-file=no --project=. scripts/rsp_pilot.jl
+julia --threads=4 --startup-file=no --project=. scripts/rsp_pilot.jl --two-robot
+```
+
+The main pilot uses five robots, three original cluster frames and three partition
+seeds. The supplementary two-robot/four-frame run is a compatibility smoke check.
+Both use fresh greedy comparisons and identical initial states, targets and camera
+settings; modes replay the same assignments. Compilation warmup precedes timing.
+These small pilots do not constitute a full experimental matrix. See
+[docs/PHASE3.md](docs/PHASE3.md) for APIs, timing boundaries and replay instructions.
+Measured rewards, wall times, occupied rounds, assignments and raw artifacts are in
+[docs/PHASE3_RESULTS.md](docs/PHASE3_RESULTS.md).
+
 ## Docker
 
 ```sh
-docker build -t distributed-filming:phase2 .
-docker run --rm distributed-filming:phase2
-docker run --rm distributed-filming:phase2 \
-  julia --startup-file=no --project=. -e 'using Pkg; Pkg.test()'
+docker build -t distributed-filming:phase3 .
+docker run --rm distributed-filming:phase3
+docker run --rm distributed-filming:phase3 \
+  julia --threads=4 --startup-file=no --project=. -e 'using Pkg; Pkg.test(; julia_args=["--threads=4"])'
 ```
 
 The score-output CI check runs `test/score_output.jl` after the fresh greedy
@@ -128,7 +160,7 @@ For a managed proxy, supply its combined public CA bundle at build time:
 
 ```sh
 docker build --secret id=proxy_ca,src=/etc/ssl/certs/ca-certificates.crt \
-  -t distributed-filming:phase2 .
+  -t distributed-filming:phase3 .
 ```
 
 The certificate is mounted only for dependency installation, not copied into the
@@ -197,7 +229,8 @@ The empty upstream import-time testset is omitted; executable tests are in `test
 
 The analytical joint evaluator is implemented and tested in Phase 2. Rendered
 metrics remain unweighted and have not been reconciled with weighted analytical
-SRPPA. RSP experiment integration and Phase 3 remain pending review.
+SRPPA. Phase 3 provides the RSP adapter and small pilots; Phase 4, R-IRSP and
+full-scale experiments remain pending review.
 
 Actual executed checks are recorded in [docs/VALIDATION.md](docs/VALIDATION.md).
 
@@ -208,8 +241,10 @@ src/DistributedFilming.jl        package entry point
 src/submodular/                  reused interfaces and unchanged generic solvers
 src/filming/                     imported cameras, actor model, VI and baseline algorithms
 src/planners/baselines.jl        seeded initialization and baseline dispatch
+src/planners/rsp.jl              upstream-scheduler adapter and execution metadata
 src/evaluation/srppa.jl          common joint objective, marginals and separate bonuses
 scripts/baseline.jl              one fresh baseline at a time
+scripts/rsp_pilot.jl             controlled serial/threaded small pilots
 data/scenarios/cluster/         original JSON and Blender scene inputs
 third_party/                    source references, hashes and BSD notices
 test/                           integration, compatibility and SRPPA unit checks
