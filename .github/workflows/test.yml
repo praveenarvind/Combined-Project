@@ -1,0 +1,12 @@
+name: Julia foundation
+on: [push, pull_request]
+jobs:
+  test:
+    runs-on: ubuntu-latest
+    steps:
+      - uses: actions/checkout@v4
+      - uses: julia-actions/setup-julia@v2
+        with:
+          version: '1.8.5'
+      - run: julia --startup-file=no --project=. -e 'using Pkg; Pkg.instantiate(); Pkg.test()'
+      - run: julia --startup-file=no --project=. scripts/baseline.jl --smoke
