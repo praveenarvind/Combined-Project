@@ -37,3 +37,9 @@ AirLab (2024) and Resilient Intelligent Systems Lab (2020) copyrights.
 Julia Pkg normalized OpenSpecFun_jll metadata from version 0.5.5+0 to 0.5.5+2
 while retaining git tree `13652491f6856acfd2db29360e1bbcd4565d04f1`. All 117 retained
 manifest entries keep their upstream source-tree hashes; all other versions match.
+
+Phase 4 adds only opt-in measurement wrappers around prior coverage, reward-cache
+construction, VI and path extraction in imported C source. The delegated calls,
+settings and mathematical kernels are unchanged; profiling equivalence and
+regression tests cover this boundary. See PHASE4.md. Additional scenario JSON
+inputs retain original hashes/revision in SOURCES.toml; A/B remain untouched.

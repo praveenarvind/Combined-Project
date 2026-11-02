@@ -79,7 +79,9 @@ function solve_block(
     # Submodular solver expects certain output. We send that here.
     policy = solve_single_robot(single_problem)
 
-    solution_trajectory = compute_path(single_problem, policy, state)
+    solution_trajectory = _profile_stage(:path_extraction) do
+        compute_path(single_problem, policy, state)
+    end
 
     (block, solution_trajectory)
 end
@@ -154,7 +156,9 @@ mutable struct SingleRobotTargetAssignmentProblem <: AbstractSingleRobotProblem
             initial_state,
             zeros(Float64, 0, 0, 0, 0)
         )
-        this.view_reward_cache = initialize_reward_cache_assignment(this)
+        this.view_reward_cache = _profile_stage(:reward_cache) do
+            initialize_reward_cache_assignment(this)
+        end
         this
     end
 end

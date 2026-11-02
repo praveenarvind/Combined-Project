@@ -1,4 +1,4 @@
-name: Julia filming, joint SRPPA and threaded RSP
+name: Julia filming and controlled RSP benchmarks
 on: [push, pull_request]
 jobs:
   test:
@@ -20,3 +20,9 @@ jobs:
         with:
           name: rsp-ci-pilot
           path: results/rsp-ci/
+      - run: julia --startup-file=no --project=. scripts/benchmark.jl --config=configs/benchmarks/ci.toml --run --output=results/benchmark-ci
+      - run: julia --startup-file=no --project=. test/benchmark_output.jl
+      - uses: actions/upload-artifact@v4
+        with:
+          name: benchmark-functional-ci
+          path: results/benchmark-ci/

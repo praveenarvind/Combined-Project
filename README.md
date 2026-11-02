@@ -1,11 +1,12 @@
-# Distributed Multi-Drone Filming — Seeded RSP planning
+# Distributed Multi-Drone Filming — Controlled RSP benchmarking
 
 A Julia package based on Hughes et al.'s multi-drone filming implementation.
 The foundation imports the existing filming model, value iteration, baseline
 planners, and a **single copy** of the upstream submodular/RSP scheduling framework.
 Phase 2 adds one authoritative analytical joint SRPPA evaluator, separate legacy
 values and transition bonuses. Phase 3 adds seeded serial/threaded RSP adapters and small pilots. R-IRSP,
-full-scale experiments and theory remain out of scope.
+full-scale experiments and theory remain out of scope. Phase 4 adds explicit-case
+benchmarking and separate task-local diagnostics; original algorithms are retained.
 
 ## Sources and attribution
 
@@ -46,8 +47,8 @@ Direct external dependencies are:
 | POMDPPolicies | 0.4.3 |
 | JSON3 | 1.12.0 |
 
-LinearAlgebra, Random and SparseArrays are Julia standard libraries. Tests also
-use Test, SHA and TOML. Python, PyCall, Cairo, matplotlib, Jupyter, HistogramFilters
+LinearAlgebra, Random, SparseArrays, Profile, SHA, Statistics and TOML are Julia
+standard libraries; tests also use Test. Python, PyCall, Cairo, matplotlib, Jupyter, HistogramFilters
 and Blender are not needed for this headless foundation. Rendering is outside this
 phase; the original Dockerfile's Python/Blender compatibility issues are avoided
 by excluding that optional pipeline rather than changing the planning model.
@@ -139,12 +140,34 @@ These small pilots do not constitute a full experimental matrix. See
 Measured rewards, wall times, occupied rounds, assignments and raw artifacts are in
 [docs/PHASE3_RESULTS.md](docs/PHASE3_RESULTS.md).
 
+## Controlled benchmarks and profiling
+
+```sh
+# Estimate only; this never starts a matrix automatically.
+julia --threads=4 --project=. scripts/benchmark.jl --config=configs/benchmarks/initial-study.toml
+# Execute the bounded reviewed cases with separate diagnostic passes.
+julia --threads=4 --project=. scripts/benchmark.jl --config=configs/benchmarks/initial-study.toml \
+  --run --diagnostics --output=results/phase4-four-thread
+```
+
+The runner supports all original baselines and RSP-2/4/8, configurable teams,
+original actor-frame windows, seeds, repeats and process-level worker counts.
+Exact split_and_join and priority_speaker JSON inputs are also provided. Primary
+wall/CPU/allocation/GC counters are distinct from per-stage diagnostic measurements;
+threaded stage allocation windows are not falsely attributed to individual robots.
+Formation remains a separately labeled idealized reference.
+
+See [docs/PHASE4.md](docs/PHASE4.md) for resource estimates, timing boundaries,
+convergence checks, statistics, CI labels and reproduction instructions. Large
+matrices and Phase 5 remain pending review. Plotting is optional and separate from
+Julia planning; pinned Python plot dependencies are in requirements-plots.txt.
+
 ## Docker
 
 ```sh
-docker build -t distributed-filming:phase3 .
-docker run --rm distributed-filming:phase3
-docker run --rm distributed-filming:phase3 \
+docker build -t distributed-filming:phase4 .
+docker run --rm distributed-filming:phase4
+docker run --rm distributed-filming:phase4 \
   julia --threads=4 --startup-file=no --project=. -e 'using Pkg; Pkg.test(; julia_args=["--threads=4"])'
 ```
 
@@ -160,7 +183,7 @@ For a managed proxy, supply its combined public CA bundle at build time:
 
 ```sh
 docker build --secret id=proxy_ca,src=/etc/ssl/certs/ca-certificates.crt \
-  -t distributed-filming:phase3 .
+  -t distributed-filming:phase4 .
 ```
 
 The certificate is mounted only for dependency installation, not copied into the
@@ -229,8 +252,7 @@ The empty upstream import-time testset is omitted; executable tests are in `test
 
 The analytical joint evaluator is implemented and tested in Phase 2. Rendered
 metrics remain unweighted and have not been reconciled with weighted analytical
-SRPPA. Phase 3 provides the RSP adapter and small pilots; Phase 4, R-IRSP and
-full-scale experiments remain pending review.
+SRPPA. Phase 3 provides the RSP adapter and small pilots; Full-scale experiments, R-IRSP and Phase 5 remain pending review.
 
 Actual executed checks are recorded in [docs/VALIDATION.md](docs/VALIDATION.md).
 
@@ -243,8 +265,12 @@ src/filming/                     imported cameras, actor model, VI and baseline 
 src/planners/baselines.jl        seeded initialization and baseline dispatch
 src/planners/rsp.jl              upstream-scheduler adapter and execution metadata
 src/evaluation/srppa.jl          common joint objective, marginals and separate bonuses
+src/profiling/                  opt-in task-local stage hooks
+src/benchmarking/               explicit cases, metrics, controls and statistics
 scripts/baseline.jl              one fresh baseline at a time
 scripts/rsp_pilot.jl             controlled serial/threaded small pilots
+scripts/benchmark.jl             bounded configurable benchmark runner
+configs/benchmarks/              explicit study and CI cases
 data/scenarios/cluster/         original JSON and Blender scene inputs
 third_party/                    source references, hashes and BSD notices
 test/                           integration, compatibility and SRPPA unit checks

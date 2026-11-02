@@ -1,0 +1,10 @@
+name = "one-thread-control"
+[[case]]
+id = "phase3-match"
+scenario = "cluster"
+robots = 5
+horizon = 3
+initial_seed = 2026
+partition_seed = 11
+repeats = 3
+planners = ["greedy", "rsp2_serial"]

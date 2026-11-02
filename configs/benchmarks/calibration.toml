@@ -1,0 +1,10 @@
+name = "calibration"
+[[case]]
+id = "cluster-n2-h2"
+scenario = "cluster"
+robots = 2
+horizon = 2
+initial_seed = 2026
+partition_seed = 11
+repeats = 1
+planners = ["greedy", "rsp2_serial", "rsp2_threaded"]

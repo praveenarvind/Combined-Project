@@ -1,0 +1,13 @@
+name = "benchmark-functional-ci"
+purpose = "ci_functional_validation"
+max_measured_vi_calls = 20
+# Cold functional check only: these times must not enter performance reports.
+[[case]]
+id = "all-planners-ci"
+scenario = "cluster"
+robots = 1
+horizon = 2
+initial_seed = 2026
+partition_seed = 11
+repeats = 1
+planners = ["greedy", "multiround", "myopic", "assignment", "formation_idealized", "rsp2_serial", "rsp2_threaded", "rsp4_serial", "rsp4_threaded", "rsp8_serial", "rsp8_threaded"]

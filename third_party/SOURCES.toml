@@ -43,19 +43,19 @@ adaptations = "Package-relative submodular imports"
 source = "src/mdma_greedy/MDMA_MultiAgent.jl"
 destination = "src/filming/MDMA_MultiAgent.jl"
 sha256 = "77a79bb0857e16a9026541bfbd860283d4b600ec9fc894f184cc6a6e6c3aa9ad"
-adaptations = "Package-relative submodular imports"
+adaptations = "Package-relative submodular imports; Phase 4 task-local measurement hooks delegate unchanged calls exactly once."
 
 [[files]]
 source = "src/mdma_greedy/MDMA_Single_Robot.jl"
 destination = "src/filming/MDMA_Single_Robot.jl"
 sha256 = "341a6b447464df1a601ee973c4315e9335ed9adcd06c49d5757146478aac9b62"
-adaptations = "Package-relative submodular imports; Omitted assertion-free import-time testset; real tests live in test/"
+adaptations = "Package-relative submodular imports; Omitted assertion-free import-time testset; real tests live in test/; Phase 4 task-local measurement hooks delegate unchanged calls exactly once."
 
 [[files]]
 source = "src/mdma_greedy/MDMA_AssignmentPlanner.jl"
 destination = "src/filming/MDMA_AssignmentPlanner.jl"
 sha256 = "4a65d4b8c36ad08853a5f9ed48081fff19b0ba4f454b145c05137126955a86d5"
-adaptations = "Package-relative submodular imports"
+adaptations = "Package-relative submodular imports; Phase 4 task-local measurement hooks delegate unchanged calls exactly once."
 
 [[files]]
 source = "src/mdma_greedy/MDMA_FormationPlanner.jl"
@@ -98,3 +98,15 @@ source = "juliapackages/Manifest.toml"
 destination = "Manifest.toml"
 sha256 = "4e00a68990d22bf3f14ea2d3e159b7b7093fe7b76e4e3b229dbaca2e0a8e288c"
 adaptations = "Pruned to the used dependency closure; upstream package versions and tree hashes retained; package metadata/hash regenerated."
+
+[[files]]
+source = "experiments/split_and_join/split_and_join_data.json"
+destination = "data/scenarios/split_and_join/split_and_join_data.json"
+sha256 = "48a4d6e2675f013c15aeb22b20fd8f70482688f8fff9d5442a7693a394b3b154"
+adaptations = "None. Phase 4 imports scenario JSON input only; no solutions, rendered outputs or Blender execution."
+
+[[files]]
+source = "experiments/priority_speaker/priority_speaker_data.json"
+destination = "data/scenarios/priority_speaker/priority_speaker_data.json"
+sha256 = "b1aaba4604b8990fcac522e255aba8ba1a2502e2a3dd6d2206504cda4d141100"
+adaptations = "None. Phase 4 imports scenario JSON input only; no solutions, rendered outputs or Blender execution."
