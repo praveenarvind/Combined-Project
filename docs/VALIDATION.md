@@ -161,3 +161,37 @@ joint SRPPA; legacy value and motion bonuses remain separate. Formation is an
 idealized differently constrained reference. CIs are null for this study's single
 initial condition per matched case; timing SD is descriptive. Full matrices,
 Blender, R-IRSP, theoretical guarantees and Phase 5 were not run.
+
+# Phase 5 validation and incomplete-study status
+
+Phase 4 main merge `38bafbc` was confirmed before creating the new feature branch.
+The [Phase 5 report](phase5/EXECUTION_REPORT.md) explicitly records **0/2,996**
+required original-scene primary configurations completed. All 2,988 certification
+replays are also blocked by the unfinished paper audit; no original quality
+statistics or research figures are manufactured.
+
+The local full package suite passed 807 assertions before three added SD/resource
+gate checks. With the final timing/certification separation, the focused Phase 5
+suite passed 190 assertions; the retained regression suite has 625, for an active
+815-assertion package suite validated by Actions. A fresh standalone synthetic CLI
+run passed 1,050 saved-output assertions and completed 73 primary configurations,
+72 certification replays and 292 VI calls. Its eight PNG/PDF plot pairs are
+explicitly synthetic functional checks.
+
+Two full-input single-block resource probes completed, preserving the historical
+four-robot Cluster input and all 60 frames. The final clean-source probe (`b11f120`)
+measured 106.071 s, 249.313 GB cumulative allocation, 0.629 GB peak RSS and zero
+Bellman residual over 192,000 states. It is not a complete team experiment.
+Marginal discrepancy was 7.11e-14. Original moves/full 60-state path passed.
+
+The actual checksummed resource-admission test passed; requesting the original
+matrix then executed zero jobs and preserved all 2,996 fidelity-blocked statuses.
+Every historical scenario input is copied exactly from `0f12ff6`, with per-file
+commit/hash provenance. Source model code and Blend files are unchanged through
+foundation HEAD `42f9754`. Historical feasible starting states agree across all
+four original feasible baselines in every scenario.
+
+[VALIDATION.txt](phase5/VALIDATION.txt) records local outputs. The resource estimate
+includes 13,860 primary plus 13,860 certification VI calls and is explicitly an
+extrapolation, not measured full-study performance. No RSP>5, full matrix,
+R-IRSP, theoretical guarantee or Blender rendering was run in Phase 5.

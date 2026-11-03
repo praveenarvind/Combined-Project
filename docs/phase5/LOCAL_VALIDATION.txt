@@ -1,0 +1,32 @@
+Phase 5 local-execution finalization: no new original-scenario planning or resource probe.
+Julia 1.8.5; 4 Julia threads; OPENBLAS_NUM_THREADS=1; committed Manifest retained.
+Individual local test invocations use a 300-second process cap.
+
+Retained Phase 5 regression group: 190/190 passed.
+  Final ordered inventory and source recovery: 157/157.
+  Numeric checkpoint seals, bounded resume, complete fixture statistics: 23/23.
+  Failure/retry history and RSP-1 discrepancy gate: 10/10.
+New selection/resource/supplemental controls: 35/35 passed.
+  Later added crash-specific regression also tested separately: 4/4 passed.
+Python local-PDF review/hash and per-job cost tests: 2/2 passed.
+Python scripts compile successfully; git diff --check passed.
+
+Fresh synthetic CLI: results/phase5-local-ci (not reused historical output).
+73 successful primary executions, 72 successful certification replays, 292 total VI calls.
+5 complete K-specific summary rows; no failed/blocked/pending fixture jobs.
+Myopic = RSP-1 serial = RSP-1 threaded joint SRPPA: 0.5541007695361958.
+Full path equality, primary/replay equality, movement and marginal checks pass.
+Saved-output assertions: 1050/1050 passed.
+Plotting: 8 PNG/PDF pairs, all labeled SYNTHETIC CI ONLY.
+
+Original inventory: 2996 required primary IDs; reference-cost assessment only.
+2988 estimated above 300 seconds => skipped_resource_limit.
+8 Formation estimates below limit, still blocked by paper audit/normalization dependency.
+No original-scene score distribution or research-performance plot generated.
+Reference calibration has an older source/environment and is not local execution admission.
+
+GitHub Actions workflow runs all retained assertions in bounded groups, plus fresh
+synthetic CLI/saved-output/resume, resource-only assessment, selectors and plots:
+https://github.com/praveenarvind/Combined-Project/actions/workflows/test.yml?query=branch%3Afeature%2Fphase-5-final-evaluation
+Check the branch run for the final source revision; unit default remains the full suite.
+Native Windows and a personal WSL2 PC were not tested here; Linux cloud checks only.

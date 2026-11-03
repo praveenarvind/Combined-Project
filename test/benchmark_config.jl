@@ -3,7 +3,7 @@
         cfg,input=benchmark_configuration(scenario;num_robots=2,horizon=2)
         @test cfg.num_robots==2 && cfg.horizon==2
         @test cfg.sensor.fov==pi/2 && cfg.move_dist==3
-        entry=only(filter(e -> endswith(e["destination"],"$(scenario)_data.json"),provenance["files"]))
+        entry=only(filter(e -> e["destination"]=="data/scenarios/$(scenario)/$(scenario)_data.json",provenance["files"]))
         @test input.sha256==entry["sha256"]
     end
     @test_throws ArgumentError benchmark_configuration("unknown";num_robots=2,horizon=2)

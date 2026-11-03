@@ -1,0 +1,138 @@
+{
+  "kind": "resource_extrapolation_not_measured_full_study",
+  "calibration_source": {
+    "source_commit": "b11f1208cf576cb84da6d049432d49721aa74aa3",
+    "source_dirty": false,
+    "source_sha256": "0a19bb7969db0bcdd8bb5a8f391d5d77f6d22849e0dcaf4e76160e20c0fe2088",
+    "julia_version": "1.8.5",
+    "julia_threads": 4,
+    "blas_threads": 1,
+    "cpu_quota": "400000 100000",
+    "cpu_allowed": "Cpus_allowed_list:\t0-3",
+    "memory_limit": "34359738368"
+  },
+  "calibration_input_sha256": "2093ae376880df18f1e48ebb630136348946b112ced3caa73f1f476a5568bb16",
+  "calibration_peak_rss_bytes": 629321728,
+  "calibration_grid_storage_bytes": 19940896,
+  "scenarios": [
+    {
+      "scenario": "cluster",
+      "robots": 4,
+      "horizon": 60,
+      "executions": 241,
+      "validation_executions": 240,
+      "vi_calls": 1944,
+      "estimated_execution_hours": 232.94644904374886,
+      "estimated_raw_bytes": 45854000,
+      "grid_state_count": 192000,
+      "grid_storage_scale_to_calibration": 1.0
+    },
+    {
+      "scenario": "cross_mix",
+      "robots": 4,
+      "horizon": 100,
+      "executions": 241,
+      "validation_executions": 240,
+      "vi_calls": 1944,
+      "estimated_execution_hours": 999.3345162150949,
+      "estimated_raw_bytes": 65134000,
+      "grid_state_count": 672800,
+      "grid_storage_scale_to_calibration": 3.504166666666667
+    },
+    {
+      "scenario": "four_split",
+      "robots": 4,
+      "horizon": 100,
+      "executions": 241,
+      "validation_executions": 240,
+      "vi_calls": 1944,
+      "estimated_execution_hours": 838.0965631421841,
+      "estimated_raw_bytes": 65134000,
+      "grid_state_count": 672800,
+      "grid_storage_scale_to_calibration": 3.504166666666667
+    },
+    {
+      "scenario": "priority_runners",
+      "robots": 5,
+      "horizon": 150,
+      "executions": 597,
+      "validation_executions": 596,
+      "vi_calls": 6000,
+      "estimated_execution_hours": 8157.246145650811,
+      "estimated_raw_bytes": 270561000,
+      "grid_state_count": 1306800,
+      "grid_storage_scale_to_calibration": 6.80625
+    },
+    {
+      "scenario": "priority_speaker",
+      "robots": 5,
+      "horizon": 60,
+      "executions": 597,
+      "validation_executions": 596,
+      "vi_calls": 6000,
+      "estimated_execution_hours": 1387.5579924317635,
+      "estimated_raw_bytes": 136236000,
+      "grid_state_count": 300000,
+      "grid_storage_scale_to_calibration": 1.5625
+    },
+    {
+      "scenario": "split_and_join",
+      "robots": 4,
+      "horizon": 80,
+      "executions": 241,
+      "validation_executions": 240,
+      "vi_calls": 1944,
+      "estimated_execution_hours": 619.6698157871056,
+      "estimated_raw_bytes": 55494000,
+      "grid_state_count": 538240,
+      "grid_storage_scale_to_calibration": 2.8033333333333332
+    },
+    {
+      "scenario": "spreadout_group",
+      "robots": 4,
+      "horizon": 80,
+      "executions": 241,
+      "validation_executions": 240,
+      "vi_calls": 1944,
+      "estimated_execution_hours": 619.6698157871056,
+      "estimated_raw_bytes": 55494000,
+      "grid_state_count": 538240,
+      "grid_storage_scale_to_calibration": 2.8033333333333332
+    },
+    {
+      "scenario": "track_runners",
+      "robots": 5,
+      "horizon": 150,
+      "executions": 597,
+      "validation_executions": 596,
+      "vi_calls": 6000,
+      "estimated_execution_hours": 7432.963040796872,
+      "estimated_raw_bytes": 270561000,
+      "grid_state_count": 1306800,
+      "grid_storage_scale_to_calibration": 6.80625
+    }
+  ],
+  "totals": {
+    "executions": 2996,
+    "validation_executions": 2988,
+    "vi_calls": 27720,
+    "estimated_execution_hours": 20287.484338854683,
+    "estimated_raw_bytes": 964468000
+  },
+  "assumptions": [
+    "Estimate includes both planner passes, original legacy evaluation, marginal checks, Bellman certification, setup/checkpoint allowance and safety factor.",
+    "State-count and actor-count scaling from one block; no assumed threaded speedup. Assignment and VI sweep counts may differ.",
+    "Safety factor is an allowance, not a statistical interval or guaranteed runtime bound.",
+    "Recorded peak RSS is only the calibration; allocation totals are not live RAM. Larger/threaded peak memory is unmeasured.",
+    "A reference calibration may inform dry-run skips. Execution additionally requires same implementation, Julia, Manifest and CPU/memory/thread settings via the resource gate."
+  ],
+  "inventory_file_sha256": "a60b3fac0b2f9acd5760b1d10ca97857829e56a29a18c20d52163e69c0ffe3dd",
+  "calibration_file_sha256": "c8e4ae0cd548edcdf8d5b73c75786d22c52ea18aa8a27654ff2de19f345dec7f",
+  "default_limit_seconds": 300,
+  "new_original_executions": 0,
+  "status_counts": {
+    "skipped_resource_limit": 2988,
+    "blocked": 8
+  },
+  "note": "Reference-only estimate. No calibration rerun or original-scene job executed in local-execution finalization. Per-ID inventory is resource-limited-inventory.csv."
+}

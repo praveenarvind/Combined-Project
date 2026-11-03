@@ -1,0 +1,25 @@
+Phase 5 local validation; original research matrix remains blocked.
+
+Earlier full package run: 807 assertions passed; subsequent targeted SD/resource checks: 3/3.
+Focused final Phase 5 suite:
+Test Summary:                               | Pass  Total     Time
+Final ordered inventory and source recovery |  157    157  1m19.0s
+Test Summary:                                                            | Pass  Total     Time
+Numeric checkpoint seals, bounded resume and complete fixture statistics |   23     23  1m03.4s
+Test Summary:                                    | Pass  Total  Time
+Failure/retry history and RSP-1 correctness gate |   10     10  5.9s
+
+Retained regression assertions: 625. Current full suite = 815; GitHub Actions validates the final source.
+
+Test Summary:                                               | Pass  Total  Time
+Saved synthetic Phase 5 CLI results (not paper experiments) | 1050   1050  3.5s
+
+ACTUAL_RESOURCE_GATE_OK
+FIDELITY_GATE_OK 0/2996 original experiments
+
+CALIBRATION_BLOCK_DONE seconds=106.071458886; independent validation follows
+RESOURCE_CALIBRATION_OK block_seconds=106.071458886 allocated_bytes=249312689540 gc_seconds=14.04738221 certificate=0.0
+
+PHASE5_PLOTS_OK 8 PDF/PNG pairs; fixture= True
+
+Implementation GitHub Actions: https://github.com/praveenarvind/Combined-Project/actions/runs/41567768357 — Success
