@@ -1,7 +1,30 @@
 name: Julia final-study validation (RSP 1 through 5)
 on: [push, pull_request]
 jobs:
-  test:
+  unit:
+    runs-on: ubuntu-latest
+    strategy:
+      fail-fast: false
+      matrix:
+        group: [core, rsp, benchmark, phase5, controls]
+    env:
+      JULIA_NUM_THREADS: "4"
+      OPENBLAS_NUM_THREADS: "1"
+      FILMING_TEST_GROUP: ${{ matrix.group }}
+    steps:
+      - uses: actions/checkout@v4
+      - uses: julia-actions/setup-julia@v2
+        with:
+          version: '1.8.5'
+      - uses: julia-actions/cache@v2
+      - name: Install pinned dependencies (outside experimental timing)
+        run: julia --startup-file=no --project=. -e 'using Pkg; Pkg.instantiate(); Pkg.precompile()'
+      - name: Retained tests, individually bounded groups
+        timeout-minutes: 5
+        run: timeout 300 julia --startup-file=no --project=. test/runtests.jl
+      - if: matrix.group == 'controls'
+        run: python3 -m unittest discover -s test -p test_phase5_tools.py -v
+  integration:
     runs-on: ubuntu-latest
     env:
       JULIA_NUM_THREADS: "4"
@@ -11,19 +34,43 @@ jobs:
       - uses: julia-actions/setup-julia@v2
         with:
           version: '1.8.5'
-      - run: julia --startup-file=no --project=. -e 'using Pkg; Pkg.instantiate(); Pkg.test(; julia_args=["--threads=4"])'
-      - run: julia --startup-file=no --project=. scripts/baseline.jl --smoke
+      - uses: julia-actions/cache@v2
+      - run: julia --startup-file=no --project=. -e 'using Pkg; Pkg.instantiate(); Pkg.precompile()'
+      - name: Retained reduced baseline CLI check
+        timeout-minutes: 5
+        run: timeout 300 julia --startup-file=no --project=. scripts/baseline.jl --smoke
       - run: julia --startup-file=no --project=. test/score_output.jl
-      - name: Complete synthetic runner fixture, not original-scenario results
-        run: julia --startup-file=no --project=. scripts/phase5.jl --fixture --inventory --batch --summarize --max-jobs=80 --max-seconds=600 --output=results/phase5-ci
+      - name: Complete synthetic fixture, not original-scene results
+        timeout-minutes: 5
+        run: timeout 300 julia --startup-file=no --project=. scripts/phase5.jl --fixture --inventory --batch --summarize --max-jobs=80 --max-seconds=300 --output=results/phase5-ci
       - run: julia --startup-file=no --project=. test/phase5_output.jl
-      - name: Completed fixture replay must perform no new planning
+      - name: Completed fixture resume must perform no planning
         run: julia --startup-file=no --project=. scripts/phase5.jl --fixture --batch --max-jobs=1 --output=results/phase5-ci
-      - name: Freeze the full original-scenario inventory without executing it
+      - name: Original inventory only, no planning
+        timeout-minutes: 5
         run: julia --startup-file=no --project=. scripts/phase5.jl --inventory --output=results/phase5-inventory
+      - name: Resource skip assessment only, no planning
+        timeout-minutes: 5
+        run: |
+          python3 scripts/estimate_phase5.py --inventory=results/phase5-inventory/inventory.json --calibration=docs/phase5/resource-calibration.json --output=results/phase5-inventory
+          julia --startup-file=no --project=. scripts/phase5.jl --assess-resources --output=results/phase5-inventory > results/phase5-inventory/preflight.json
+      - name: Documented selectors and supplemental fixture
+        timeout-minutes: 5
+        run: |
+          julia --startup-file=no --project=. scripts/phase5.jl --fixture --inventory --scenario=synthetic_ci --rounds=4 --assignment=4,1 --output=results/phase5-custom
+          julia --startup-file=no --project=. scripts/phase5.jl --dry-run --scenario=synthetic_ci --rounds=4 --assignment=4,1 --mode=threaded --output=results/phase5-custom > results/phase5-custom/plan.json
+          julia --startup-file=no --project=. scripts/phase5.jl --batch --scenario=synthetic_ci --rounds=4 --assignment=4,1 --max-jobs=6 --output=results/phase5-custom
+          julia --startup-file=no --project=. scripts/phase5_calibrate.jl --dry-run --estimated-total-seconds=600
+      - uses: actions/setup-python@v5
+        with:
+          python-version: '3.12'
+      - run: python -m pip install -r requirements-plots.txt
+      - name: Plot only actual completed synthetic fixture
+        run: python scripts/plot_phase5.py results/phase5-ci results/phase5-ci/figures --allow-fixture
       - uses: actions/upload-artifact@v4
         with:
-          name: phase5-functional-fixture-and-inventory
+          name: phase5-functional-fixtures-and-inventory
           path: |
             results/phase5-ci/
             results/phase5-inventory/
+            results/phase5-custom/

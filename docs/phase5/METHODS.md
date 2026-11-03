@@ -8,20 +8,18 @@ readable evidence and exact recovered starting states in
 
 ## Mandatory gates
 
-Every original scenario currently has `fidelity_status="blocked"`: the paper is
-not accessible through the live network policy, so the mandatory source/paper
-comparison is unfinished. Counts and historical starting states are established
-from Git history, saved artifacts and read-only Blender inspection. These source
-findings do not establish all published conditions. Apply the saved network
-additions for `arxiv.org`/`export.arxiv.org`, retrieve/version/hash the paper and
-compare its table, grid/units, motion, sensor, priorities, VI and initialization
-protocol before changing the audited catalog to verified. Record the PDF SHA-256,
-version and section/table evidence in the catalog's `paper` object. Only mark a
-scenario verified after resolving its discrepancies. The final runner also requires
-a successful calibration and matching inventory/dependency/environment resource
-report; changing a status flag alone does not enable execution. No force flag bypasses the
-gate. Regenerate a frozen inventory into a new output directory after any catalog
-change; completed outputs from an older definition must be preserved.
+The committed original catalog remains fidelity-blocked until an explicit human
+paper/source review. Use the local-PDF prepare/apply workflow in
+[RUN_EXPERIMENTS_ON_PC.md](RUN_EXPERIMENTS_ON_PC.md), which records PDF/catalog hashes,
+reviewer/version, per-scenario observations and section evidence. No source inputs
+are edited. A new reviewed catalog requires a new immutable inventory/output directory.
+Execution additionally requires matching local calibration, code/Manifest/Julia/thread/
+CPU/memory context, and cost admission. The default total estimate limit is 300 seconds
+per experiment, including primary, replay and validation; unestimated/over-budget jobs
+are recorded as `skipped_resource_limit`. Original execution requires `--run-local`.
+Deliberate `--run-local --experiment-limit=unlimited` is intended only for later PC runs;
+it does not bypass the fidelity, calibration or correctness gates. No original-scenario
+experiment is authorized for Codex in this finalization update.
 
 The final runner supports **RSP-1 through RSP-5 only**. No RSP-6/7/8 execution is
 part of this phase, including warmup and current CI commands. Historical Phase 3/4
@@ -63,8 +61,8 @@ without regenerating supplied assignments.
 
 ```sh
 julia --threads=4 --project=. scripts/phase5.jl --inventory --output=results/phase5-final
-# Currently reports fidelity-blocked rows and executes nothing:
-julia --threads=4 --project=. scripts/phase5.jl --batch --max-jobs=1 --max-seconds=600 --output=results/phase5-final
+# Inventory/cost inspection only; no original planning:
+julia --threads=4 --project=. scripts/phase5.jl --dry-run --scenario=cluster --output=results/phase5-final
 # After audited fidelity and resource admission, continue bounded batches.
 julia --threads=4 --project=. scripts/phase5.jl --summarize --output=results/phase5-final
 ```
@@ -153,17 +151,19 @@ python -m pip install -r requirements-plots.txt
 MPLCONFIGDIR=/tmp/filming-mpl python scripts/plot_phase5.py results/phase5-final results/phase5-final/figures
 ```
 
-The plotting script rejects incomplete inventories and synthetic CI data by
+The plotting script rejects incomplete inventories (unless `--completed-scenes` selects only wholly completed scene populations) and synthetic CI data by
 default. It generates PNG/PDF quality-versus-K, distributions, time-versus-K,
 quality/time, redundancy, exact best/worst grouping tables, scenario heatmaps and
 separately labeled idealized Formation baseline plots. Observed min–max shading is
 not a CI. Exhaustive and ten-seed results have distinct labels. Full-study figures
-cannot be generated yet because the required experiments are blocked.
+will be generated from completed experiments on your PC. This does not prevent infrastructure completion.
 
 ## Functional CI is separate from research
 
 ```sh
-julia --threads=4 --project=. -e 'using Pkg; Pkg.test(; julia_args=["--threads=4"])'
+for group in controls core rsp benchmark phase5; do
+  FILMING_TEST_GROUP="$group" timeout 300 julia --threads=4 --project=. test/runtests.jl || break
+done
 julia --threads=4 --project=. scripts/phase5.jl --fixture --inventory --batch --summarize --max-jobs=80 --output=results/phase5-ci
 julia --threads=4 --project=. test/phase5_output.jl
 MPLCONFIGDIR=/tmp/filming-mpl python scripts/plot_phase5.py results/phase5-ci results/phase5-ci/figures --allow-fixture
@@ -179,10 +179,10 @@ inventory is generated in CI but never automatically executed there.
 
 ## Resource probe and admission
 
-After committing a clean implementation, run the bounded resource probe alone:
+On your PC only, after committing a clean implementation and completing local-PDF review, estimate calibration cost before a deliberate run. Example (600 s is an estimate to reassess, not a measured guarantee):
 
 ```sh
-OPENBLAS_NUM_THREADS=1 timeout --kill-after=10s 240s taskset -c 0-3 julia --threads=4 --project=. scripts/phase5_calibrate.jl
+OPENBLAS_NUM_THREADS=1 julia --threads=4 --project=. scripts/phase5_calibrate.jl --run-local --catalog=results/paper/verified_catalog.json --estimated-total-seconds=600 --experiment-limit=unlimited
 python scripts/estimate_phase5.py --inventory=results/phase5-final/inventory.json --calibration=results/phase5-calibration/run.json --output=results/phase5-final
 ```
 
@@ -199,7 +199,7 @@ frozen inventory. Final batches require a successful probe, matching input/code/
 Manifest/Julia/workers/BLAS/affinity/quota/memory settings and matching inventory
 counts/hashes. Estimates distinguish VI, unchanged legacy-cache rebuilding and
 Bellman checks. Runtime scaling is a planning model, not a measured full-study
-result; the half/double envelope is not a confidence interval. Peak RSS is measured
+result; the conservative safety factor is not a confidence interval or runtime bound. Peak RSS is measured
 only for the probe, not assumed to scale linearly or to validate every scene.
 
 Use the same allowed affinity for future measured batches (0–3 here), for example

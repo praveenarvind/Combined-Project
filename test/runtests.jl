@@ -8,7 +8,11 @@ const M = DistributedFilming.MDMA
 const S = DistributedFilming.SubmodularMaximization
 const provenance = TOML.parsefile(joinpath(@__DIR__, "..", "third_party", "SOURCES.toml"))
 
-include("srppa.jl")
+group=get(ENV,"FILMING_TEST_GROUP","all")
+group in ("all","core","rsp","benchmark","phase5","controls") || error("unknown FILMING_TEST_GROUP")
+if group in ("all","core","rsp");include("srppa.jl");end
+
+if group in ("all","core")
 
 @testset "Scenario inputs and reproducible initialization" begin
     entry = only(filter(e -> e["destination"]=="data/scenarios/cluster/cluster_data.json", provenance["files"]))
@@ -24,6 +28,8 @@ include("srppa.jl")
     @test (reduced.num_robots, reduced.horizon) == (2, 4)
     @test reduced.target_trajectories == configs.target_trajectories[1:4, :]
     @test reduced.sensor === configs.sensor
+end
+
 end
 
 function check_vi_trajectory(solution, configs, states)
@@ -43,6 +49,7 @@ function check_vi_trajectory(solution, configs, states)
     end
 end
 
+if group in ("all","core")
 @testset "Fresh baseline solves on a reduced cluster scenario" begin
     configs = smoke_configuration(load_scenario())
     states = initial_states(configs)
@@ -97,8 +104,11 @@ end
     @test S.in_neighbors(dag, 2) == [1]
 end
 
-include("rsp.jl")
+end
 
-include("benchmarking.jl")
+if group in ("all","rsp");include("rsp.jl");end
 
-include("phase5.jl")
+if group in ("all","benchmark");include("benchmarking.jl");end
+
+if group in ("all","phase5");include("phase5.jl");end
+if group in ("all","controls");include("phase5_controls.jl");end

@@ -47,6 +47,9 @@ function phase5_configuration(scene)
     configs.sensor.fov==scene["camera"]["fov"] && configs.sensor.cutoff==scene["camera"]["cutoff"] && configs.move_dist==scene["move_dist"] || error("camera/motion changed")
     configs.grid.angle_divisions==scene["grid"]["headings"] || error("heading resolution changed")
     scene["vi"]==Dict("max_iterations"=>90,"belres"=>1e-6,"discount"=>1,"include_Q"=>false) || error("VI settings changed")
+    if haskey(scene,"starting_states_sha256")
+        _phase5_digest(scene["initial_states"])==scene["starting_states_sha256"] || error("historical starting states hash mismatch")
+    end
     entries=sort(scene["initial_states"];by=first)
     first.(entries)==collect(1:configs.num_robots) || error("incomplete historical starting states")
     states=[MDMA.MDPState(MDMA.UAVState(Float64(e[2]["state"]["x"]),Float64(e[2]["state"]["y"]),Symbol(e[2]["state"]["heading"])),Int(e[2]["depth"]),Int(e[2]["horizon"])) for e in entries]
@@ -54,12 +57,19 @@ function phase5_configuration(scene)
     configs,states
 end
 
-function phase5_inventory(catalog;workers=4,purpose="published_final")
+function phase5_inventory(catalog;workers=4,purpose="published_final",supplemental=Any[])
     workers>=2 || throw(ArgumentError("paired final inventory requires at least two available threads"))
     catalog["partition_seeds"]==PHASE5_SEEDS || error("the ten predeclared partition seeds must be preserved")
     purpose in ("published_final","ci_functional_validation") || error("unknown purpose")
     if purpose=="published_final"
         [s["name"] for s in catalog["scenarios"]]==PHASE5_SCENARIOS || error("all eight original scenarios are required")
+        # A human paper review may add evidence/status, never redefine historical inputs.
+        audited=_phase5_read(joinpath(PHASE5_ROOT,"docs","phase5","scenario_catalog.json"))
+        fields=("robots","actors","horizon","grid","input_path","input_sha256","input_revision","initial_states",
+            "starting_states_sha256","initial_state_method","initial_state_seed","formation_seed","camera","move_dist","vi")
+        for (scene,source) in zip(catalog["scenarios"],audited["scenarios"]), key in fields
+            scene[key]==source[key] || error("original audited condition changed: $(scene["name"]) $key")
+        end
     end
     jobs=Any[]
     for scene in catalog["scenarios"]
@@ -78,6 +88,17 @@ function phase5_inventory(catalog;workers=4,purpose="published_final")
                         sampling="ten_predeclared_seeds",tag="seed-$(lpad(string(seed),3,'0'))"))
                 end
             end
+        end
+        for extra in supplemental
+            extra["scenario"]==name || continue
+            k=extra["rounds"];1<=k<=5 || throw(ArgumentError("supplemental rounds must be 1 through 5"))
+            seed=get(extra,"seed",nothing);labels=get(extra,"assignments",nothing)
+            (seed===nothing) != (labels===nothing) || throw(ArgumentError("supply either a seed or assignments"))
+            seed===nothing || (labels=rsp_assignments(RSPPlanner(k;seed=seed),n))
+            labels=_rsp_labels(RSPPlanner(k),n,labels)
+            tag="supplemental-"*_phase5_digest(extra)[1:16]
+            push!(configurations,(k=k,labels=labels,method=seed===nothing ? "predetermined" : "random",seed=seed,
+                sampling="supplemental_not_final_matrix",tag=tag))
         end
         function add_job(planner,mode;k=nothing,labels=nothing,method=nothing,seed=nothing,sampling="baseline",tag="baseline")
             qid=k===nothing ? "$name-$planner" : "$name-rsp$k-$tag"
@@ -103,23 +124,26 @@ function phase5_inventory(catalog;workers=4,purpose="published_final")
         end
     end
     length(unique(j["id"] for j in jobs))==length(jobs) || error("duplicate experiment IDs")
-    Dict{String,Any}("schema_version"=>1,"purpose"=>purpose,"workers"=>workers,"seeds"=>copy(PHASE5_SEEDS),
+    result=Dict{String,Any}("schema_version"=>1,"purpose"=>purpose,"workers"=>workers,"seeds"=>copy(PHASE5_SEEDS),
         "catalog_sha256"=>_phase5_digest(catalog),"catalog"=>catalog,"jobs"=>jobs,
         "expected_executions"=>length(jobs),"expected_quality_configurations"=>length(unique(j["quality_id"] for j in jobs)),
         "expected_validation_executions"=>count(j -> j["validation_execution_id"]!==nothing,jobs),
         "expected_planning_vi_calls"=>sum(j["expected_planning_vi_calls"] for j in jobs),
         "expected_validation_vi_calls"=>sum(j["expected_validation_vi_calls"] for j in jobs),
         "expected_vi_calls"=>sum(j["expected_vi_calls"] for j in jobs))
+    all(e -> e["scenario"] in [s["name"] for s in catalog["scenarios"]],supplemental) || throw(ArgumentError("unknown supplemental scenario"))
+    isempty(supplemental) || (result["supplemental"]=supplemental)
+    result
 end
 
 function _phase5_validate_inventory(inventory)
-    expected=phase5_inventory(inventory["catalog"];workers=inventory["workers"],purpose=inventory["purpose"])
+    expected=phase5_inventory(inventory["catalog"];workers=inventory["workers"],purpose=inventory["purpose"],supplemental=get(inventory,"supplemental",Any[]))
     _phase5_digest(expected)==_phase5_digest(inventory) || error("frozen inventory was altered or is incomplete; regenerate from the audited catalog")
     inventory
 end
 
-function initialize_phase5(output,catalog;workers=4,purpose="published_final")
-    inventory=phase5_inventory(catalog;workers=workers,purpose=purpose)
+function initialize_phase5(output,catalog;workers=4,purpose="published_final",supplemental=Any[])
+    inventory=phase5_inventory(catalog;workers=workers,purpose=purpose,supplemental=supplemental)
     path=joinpath(output,"inventory.json")
     if isfile(path)
         _phase5_digest(_phase5_read(path))==_phase5_digest(inventory) || error("inventory already exists with different definitions; preserve it and use a new output directory")

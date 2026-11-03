@@ -1,5 +1,7 @@
 # Phase 5 execution report — original study incomplete
 
+> Historical execution snapshot before the local-execution update. The current Phase 5 deliverable is the completed software framework, not completion of the research matrix. See [PC guide](RUN_EXPERIMENTS_ON_PC.md) and [current readiness/resource inventory](LOCAL_EXECUTION_STATUS.md). Measurements below are preserved historical evidence; their old estimates/statuses do not represent a new run.
+
 **No required original-scenario experiment has been executed: 0 of 2,996 primary configurations.** All 2,988 certification replays also remain unexecuted. Every required assignment and seed is present with status `blocked`; the mandatory paper comparison cannot yet be completed because the live network policy returns HTTP 403 for arXiv. No partial or synthetic data are presented as original-scene research results.
 
 ## Fidelity findings

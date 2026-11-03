@@ -39,7 +39,11 @@ function _phase5_ready(inventory,output,job)
 end
 function _phase5_fidelity(inventory,scene)
     inventory["purpose"]=="ci_functional_validation" && scene["fidelity_status"]=="ci_fixture" && return true
-    scene["fidelity_status"]=="verified" && get(inventory["catalog"]["paper"],"independently_verified",false)
+    paper=inventory["catalog"]["paper"]
+    scene["fidelity_status"]=="verified" && get(paper,"independently_verified",false) &&
+        get(paper,"access_status",nothing)=="locally_supplied_pdf_human_review" &&
+        get(paper,"pdf_sha256",nothing)!==nothing && haskey(paper,"review") &&
+        paper["review"]["paper_pdf_sha256"]==paper["pdf_sha256"]
 end
 
 function execute_phase5_job(inventory,output,job,scene)
@@ -166,16 +170,22 @@ end
 """Run at most max_jobs, checkpoint each attempt, and stop starting jobs after max_seconds.
 The wall budget is checked between jobs; it does not change/interrupt a VI algorithm.
 """
-function run_phase5_batch(output;max_jobs=1,max_seconds=600.0,retry_failed=false,recover_stale=false,warmup=true,executor=execute_phase5_job)
+function run_phase5_batch(output;max_jobs=1,max_seconds=300.0,retry_failed=false,recover_stale=false,warmup=true,executor=execute_phase5_job,
+        selection=nothing,experiment_limit=300.0,run_local=false,only_failed=false)
     max_jobs>0 && max_seconds>0 || throw(ArgumentError("positive batch limits required"))
     inventory=_phase5_validate_inventory(_phase5_read(joinpath(output,"inventory.json")))
     Threads.nthreads()==inventory["workers"] || error("worker count must match the frozen inventory")
     lock=_phase5_lock(output;recover_stale=recover_stale)
     count=0;started=time();warmed=false
     try
-        if all(s -> !_phase5_fidelity(inventory,s),inventory["catalog"]["scenarios"])
-            export_phase5_csv(output,inventory)
-            return (attempted=0,completion=phase5_completion(output,inventory))
+        selected=selection===nothing ? (jobs=inventory["jobs"],requested_ids=Set(j["id"] for j in inventory["jobs"])) : selection
+        definitions=Dict(j["id"]=>j for j in inventory["jobs"])
+        all(j -> get(definitions,j["id"],nothing)==j,selected.jobs) || error("selection differs from frozen inventory")
+        preflight=phase5_preflight(output;selection=selected,experiment_limit=experiment_limit,write_policy=true)
+        admitted=Set(r["id"] for r in preflight["jobs"] if !(r["status"] in ("blocked","skipped_resource_limit","successful")))
+        isempty(admitted) && return (attempted=0,completion=phase5_completion(output,inventory))
+        if inventory["purpose"]=="published_final"
+            run_local || error("Original scenarios require explicit --run-local on your PC; use --dry-run here.")
         end
         if inventory["purpose"]=="published_final"
             warmup || error("compilation warmup is required for final performance measurements")
@@ -192,20 +202,25 @@ function run_phase5_batch(output;max_jobs=1,max_seconds=600.0,retry_failed=false
         else
             _phase5_write(path,manifest)
         end
-        for job in inventory["jobs"]
+        for job in selected.jobs
+            job["id"] in admitted || continue
             count>=max_jobs && break
             time()-started>=max_seconds && break
             scene=only(filter(s -> s["name"]==job["scenario"],inventory["catalog"]["scenarios"]))
             _phase5_fidelity(inventory,scene) || continue
             record=_phase5_record(output,job)
             record!==nothing && record["status"]=="successful" && continue
+            only_failed && !(record!==nothing && record["status"] in ("failed","running")) && continue
             if record!==nothing && record["status"]=="running"
                 record["attempts"][end]["status"]="failed"
                 record["attempts"][end]["error"]="interrupted before an atomic successful checkpoint"
                 record["attempts"][end]["completed_at_utc"]=_phase5_now()
+                record["result"]===nothing || (record["attempts"][end]["partial_primary_result"]=record["result"])
+                get(record,"validation_run",nothing)===nothing || (record["attempts"][end]["partial_validation_run"]=record["validation_run"])
                 record["status"]="pending"
+                _phase5_save_record(_phase5_record_path(output,job["id"]),record)
             end
-            record!==nothing && record["status"]=="failed" && !retry_failed && continue
+            record!==nothing && record["status"]=="failed" && !(retry_failed || only_failed) && continue
             _phase5_ready(inventory,output,job) || continue
             if warmup && !warmed
                 redirect_stdout(_phase5_warm,devnull);warmed=true

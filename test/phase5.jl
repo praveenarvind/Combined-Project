@@ -54,7 +54,7 @@ const D5=DistributedFilming
         bomb=(args...) -> (calls[]+=1;error("must not execute a fidelity-blocked scenario"))
         result=run_phase5_batch(output;max_jobs=1,warmup=false,executor=bomb)
         @test result.attempted==0 && calls[]==0
-        @test result.completion["counts"]["blocked"]==2996
+        @test result.completion["counts"]["skipped_resource_limit"]==2996
         @test isempty(summarize_phase5(output)["summaries"])
     end
 end

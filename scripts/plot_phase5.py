@@ -4,15 +4,18 @@ import numpy as np
 import matplotlib
 matplotlib.use('Agg')
 import matplotlib.pyplot as plt
-p=argparse.ArgumentParser();p.add_argument('input',type=pathlib.Path);p.add_argument('output',type=pathlib.Path);p.add_argument('--allow-fixture',action='store_true');a=p.parse_args()
+p=argparse.ArgumentParser();p.add_argument('input',type=pathlib.Path);p.add_argument('output',type=pathlib.Path);p.add_argument('--allow-fixture',action='store_true');p.add_argument('--completed-scenes',action='store_true');a=p.parse_args()
 summary=json.load(open(a.input/'summary.json'));inv=json.load(open(a.input/'inventory.json'))
 fixture=summary['purpose']=='ci_functional_validation'
 if fixture and not a.allow_fixture:raise SystemExit('Synthetic CI data are not publication results; use --allow-fixture only to test plotting.')
-if not summary['completion']['complete']:raise SystemExit('Final figures require every expected experiment. Incomplete inventory: '+str(summary['completion']['counts']))
+if not summary['completion']['complete'] and not a.completed_scenes:raise SystemExit('Incomplete inventory. Use --completed-scenes to plot only entirely completed scenarios: '+str(summary['completion']['counts']))
+names=[s['name'] for s in inv['catalog']['scenarios'] if summary['completion']['scenarios'][s['name']]['complete']]
+if not names:raise SystemExit('No entirely completed scenarios; no plots generated.')
 a.output.mkdir(parents=True,exist_ok=True)
-records=[json.load(open(a.input/'records'/f'{j["id"]}.json')) for j in inv['jobs']]
+records=[json.load(open(a.input/'records'/f'{j["id"]}.json')) for j in inv['jobs'] if j['scenario'] in names and j['sampling_method']!='supplemental_not_final_matrix']
 assert all(r['status']=='successful' for r in records)
-names=[s['name'] for s in inv['catalog']['scenarios']];prefix='SYNTHETIC CI ONLY — ' if fixture else ''
+prefix='SYNTHETIC CI ONLY — ' if fixture else ''
+if not summary['completion']['complete']:prefix+=f'INCOMPLETE STUDY: {len(names)}/{len(inv["catalog"]["scenarios"])} completed scenes — '
 plt.rcParams.update({'font.size':9,'figure.dpi':180,'savefig.bbox':'tight','pdf.fonttype':42})
 colors=['#426a8c','#559780','#bf873b','#96689c','#bd5e51']
 def panels(title):

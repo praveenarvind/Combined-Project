@@ -160,21 +160,25 @@ Formation remains a separately labeled idealized reference.
 
 See [docs/PHASE4.md](docs/PHASE4.md) for resource estimates, timing boundaries,
 convergence checks, statistics, CI labels and reproduction instructions. Large
-matrices and Phase 5 remain pending review. Actual timings, CSV/JSON artifacts,
+matrices remain pending review. Actual timings, CSV/JSON artifacts,
 plots and the proposed larger matrix are in [docs/PHASE4_RESULTS.md](docs/PHASE4_RESULTS.md).
 The matched RSP-2 study retained 99.83% of greedy SRPPA but was 28.6% slower threaded
 than serial; stage diagnostics place 99.4% of measured allocation inside VI.
 Plotting is optional and separate from
 Julia planning; pinned Python plot dependencies are in requirements-plots.txt.
 
-## Phase 5 final-study runner — fidelity audit incomplete
+## Phase 5 framework — ready for local execution
 
 Phase 4 is merged as `38bafbc`. The final-study infrastructure supports RSP-1
 through RSP-5, exhaustive RSP-2/3 assignments, the ten fixed RSP-4/5 seeds, original
 baselines, resumable per-experiment checkpoints, full validation and conditional
-statistics/plots. **The original-scenario study is not complete.** All eight scenes
-are gated pending the mandatory paper/source fidelity comparison; the paper URL
-is blocked by the live network policy.
+statistics/plots. The infrastructure is prepared for you to execute on your own PC;
+Codex does not run the full original study. **Start with the complete
+[Windows/WSL2 execution guide](docs/phase5/RUN_EXPERIMENTS_ON_PC.md)**. It covers local-PDF
+paper review, installation, lightweight checks, every scenario/planner/partition selection,
+resource estimates, long-run opt-in, checkpoints, recovery and publication exports.
+Native Windows compatibility is untested; WSL2 is recommended. Original scenarios
+stay gated until the documented local paper review and matching resource calibration.
 
 The count discrepancy is traced to an overview camera counted as a robot by the
 exporter. Exact older JSON inputs with the published four/five counts are retained
@@ -193,8 +197,15 @@ The exact inventory contains 1,518 quality configurations, 2,996 paired executio
 and 13,860 primary plus 13,860 certification-replay VI calls (27,720 total),
 before warmup. See the [fidelity audit](docs/phase5/SCENARIO_FIDELITY.md)
 and [methods, gates and commands](docs/phase5/METHODS.md). The
-[incomplete-study report](docs/phase5/EXECUTION_REPORT.md) records the actual
+[historical execution report](docs/phase5/EXECUTION_REPORT.md) records the actual
 full-frame resource probes, the resource model and every outstanding test.
+The default per-experiment estimate limit is **300 seconds**, including validation
+replay. Over-budget or unestimated jobs are `skipped_resource_limit` before planning.
+`--dry-run` and `--assess-resources` never plan; `--scenario`, `--planner`, `--rounds`,
+`--seed`, `--assignment`, `--mode`, and `--job-id` select runs with required prerequisites.
+Only deliberate local execution with `--run-local --experiment-limit=unlimited` permits
+long jobs, while retaining all scientific gates. See the [current readiness and resource
+inventory](docs/phase5/LOCAL_EXECUTION_STATUS.md).
 Current CI uses only K<=5
 and a clearly synthetic fixture, never the full original matrix. Fixture outcomes
 are functional tests, not filming-reproduction results. Large original experiments

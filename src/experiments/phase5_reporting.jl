@@ -1,24 +1,32 @@
 function phase5_completion(output,inventory=_phase5_read(joinpath(output,"inventory.json")))
-    counts=Dict(s=>0 for s in ("successful","failed","pending","blocked"));scenarios=Dict{String,Any}()
+    counts=Dict(s=>0 for s in ("successful","failed","pending","blocked","skipped_resource_limit"));scenarios=Dict{String,Any}()
+    policy=_phase5_policy(output,inventory)
+    required_success=0;required_total=0
     for scene in inventory["catalog"]["scenarios"]
         local_counts=Dict(s=>0 for s in keys(counts))
+        required_local_success=0;required_local_total=0
         for job in filter(j -> j["scenario"]==scene["name"],inventory["jobs"])
             record=_phase5_record(output,job)
-            status=record===nothing ? job["status"] : record["status"]=="running" ? "pending" : record["status"]
+            status=record===nothing ? get(get(policy,job["id"],Dict()),"status",job["status"]) : record["status"]=="running" ? "pending" : record["status"]
             local_counts[status]+=1;counts[status]+=1
+            if job["sampling_method"]!="supplemental_not_final_matrix"
+                required_total+=1;required_local_total+=1
+                if status=="successful";required_success+=1;required_local_success+=1;end
+            end
         end
-        scenarios[scene["name"]]=Dict("counts"=>local_counts,"complete"=>local_counts["successful"]==sum(values(local_counts)))
+        scenarios[scene["name"]]=Dict("counts"=>local_counts,"complete"=>required_local_success==required_local_total)
     end
-    Dict("counts"=>counts,"scenarios"=>scenarios,"complete"=>counts["successful"]==length(inventory["jobs"]))
+    Dict("counts"=>counts,"scenarios"=>scenarios,"complete"=>required_success==required_total,"required_successful"=>required_success,"required_executions"=>required_total)
 end
 
 function export_phase5_csv(output,inventory=_phase5_read(joinpath(output,"inventory.json")))
-    fields=["id","quality_id","scenario","planner","mode","workers","status","error","retry_count","completed_at_utc",
+    fields=["id","quality_id","scenario","planner","mode","workers","status","estimated_total_seconds","resource_reason","error","retry_count","completed_at_utc",
         "robots","actors","horizon","input_revision","input_sha256","initial_states","grid","camera","configured_rounds","occupied_rounds",
         "assignments","round_groups","all_rounds_occupied","partition_method","partition_seed","sampling_method","expected_vi_calls","expected_planning_vi_calls","expected_validation_vi_calls","validation_execution_id",
         "joint_srppa","normalized_srppa","legacy_value","heading_bonus","stationary_bonus","redundancy_per_robot",
         "planning_seconds","solver_seconds","legacy_evaluation_seconds","vi_calls","planning_vi_calls","validation_vi_calls","total_vi_calls","allocated_bytes","gc_seconds","process_cpu_seconds",
         "logical_dependency_depth","serial_speedup","execution_wall_seconds","trajectory_validation","correctness","code_revision","record_path","record_sha256"]
+    policy=_phase5_policy(output,inventory)
     mkpath(output);path=joinpath(output,"results.csv");temp=path*".tmp.$(getpid())"
     open(temp,"w") do io
         println(io,join(fields,","))
@@ -30,6 +38,10 @@ function export_phase5_csv(output,inventory=_phase5_read(joinpath(output,"invent
                 row[key]=scene[key]
             end
             row["error"]=job["blocked_reason"]
+            if haskey(policy,job["id"])
+                assessment=policy[job["id"]];row["estimated_total_seconds"]=assessment["estimated_total_seconds"]
+                row["resource_reason"]=assessment["reason"];row["status"]=assessment["status"]
+            end
             if record!==nothing
                 for key in ("status","error","completed_at_utc","normalized_srppa","serial_speedup","execution_wall_seconds","correctness","record_sha256","planning_vi_calls","validation_vi_calls","total_vi_calls")
                     row[key]=get(record,key,nothing)
@@ -85,7 +97,7 @@ function summarize_phase5(output)
     for scene in inventory["catalog"]["scenarios"]
         name=scene["name"]
         completion["scenarios"][name]["complete"] || continue # Never report partial assignment sets as the final distribution.
-        jobs=filter(j -> j["scenario"]==name,inventory["jobs"])
+        jobs=filter(j -> j["scenario"]==name && j["sampling_method"]!="supplemental_not_final_matrix",inventory["jobs"])
         records=[_phase5_record(output,j) for j in jobs]
         for k in 1:5
             serial=filter(r -> r["definition"]["configured_rounds"]==k && r["definition"]["mode"]=="serial",records)
