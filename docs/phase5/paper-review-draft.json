@@ -1,0 +1,115 @@
+{
+  "schema_version": 1,
+  "paper_pdf_sha256": "5ac86cdbe5f892de733a948cad88b303f4babbbf3c114570fcaf8edf8d106d52",
+  "paper_version": "arXiv:2404.03103v2, 14 September 2024",
+  "reviewer": null,
+  "reviewed_at": null,
+  "source_catalog_sha256": "a1801b36442991e81596ce3f31facce122a7550d67bf7f543288a98be09c864e",
+  "instructions": "Read the local PDF and source audit. Fill observations, page/section references, and any differences. Use not_specified for facts the paper does not report; never invent paper parameters. All unsupported equivalence claims remain blocked.",
+  "sections": {
+    "camera_and_units": {
+      "reviewed": false,
+      "evidence": "Hughes et al. v2, Section III-C, PDF page 3, and Section III-E, PDF page 4. Source: docs/phase5/SCENARIO_FIDELITY.md and scenario_catalog.json camera fields.",
+      "differences": "The paper describes a simplified horizontal viewing angle gamma, with no occlusion or 3D camera frustum during planning. The recovered implementation uses ViewConeSensor with FOV pi/2, cutoff 100 with the cutoff test disabled. The numerical FOV is supported by source code, not established by paper Section III-C. The later source export includes an extra overview camera, which is excluded from historical robot counts. Rendered-image evaluation is distinct from planning."
+    },
+    "motion_and_grid": {
+      "reviewed": false,
+      "evidence": "Hughes et al. v2, Section III-A, PDF page 3. Source: docs/phase5/SCENARIO_FIDELITY.md and scenario_catalog.json grid and move_dist fields.",
+      "differences": "The paper specifies a grid-bounded motion model, eight orientations, rotations of pi/4 per time step, and movement limited by distance D. The historical source specifies move_dist=3 and scenario-specific grid sizes. The numeric D=3 is source-supported, not established by paper Section III-A. No changes to the original movement constraints."
+    },
+    "actor_trajectories_and_priorities": {
+      "reviewed": false,
+      "evidence": null,
+      "differences": null
+    },
+    "vi_and_horizon": {
+      "reviewed": false,
+      "evidence": null,
+      "differences": null
+    },
+    "historical_starting_states": {
+      "reviewed": false,
+      "evidence": null,
+      "differences": null
+    },
+    "formation_and_metric_differences": {
+      "reviewed": false,
+      "evidence": null,
+      "differences": null
+    }
+  },
+  "scenarios": [
+    {
+      "name": "cluster",
+      "paper_robots": 4,
+      "paper_horizon": "not_specified",
+      "paper_actors": 6,
+      "evidence": "Hughes et al., Figure 3, PDF page 7: robot and actor counts. Horizon not established by this figure; see source catalog.",
+      "source_conditions_accepted": false,
+      "unresolved_conflict": true
+    },
+    {
+      "name": "cross_mix",
+      "paper_robots": 4,
+      "paper_horizon": "not_specified",
+      "paper_actors": 6,
+      "evidence": "Hughes et al., Figure 3, PDF page 7: robot and actor counts. Horizon not established by this figure; see source catalog.",
+      "source_conditions_accepted": false,
+      "unresolved_conflict": true
+    },
+    {
+      "name": "four_split",
+      "paper_robots": 4,
+      "paper_horizon": "not_specified",
+      "paper_actors": 4,
+      "evidence": "Hughes et al., Figure 3, PDF page 7: robot and actor counts. Horizon not established by this figure; see source catalog.",
+      "source_conditions_accepted": false,
+      "unresolved_conflict": true
+    },
+    {
+      "name": "priority_runners",
+      "paper_robots": 5,
+      "paper_horizon": "not_specified",
+      "paper_actors": 7,
+      "evidence": "Hughes et al., Figure 3, PDF page 7: robot and actor counts. Horizon not established by this figure; see source catalog.",
+      "source_conditions_accepted": false,
+      "unresolved_conflict": true
+    },
+    {
+      "name": "priority_speaker",
+      "paper_robots": 5,
+      "paper_horizon": "not_specified",
+      "paper_actors": 10,
+      "evidence": "Hughes et al., Figure 3, PDF page 7: robot and actor counts. Horizon not established by this figure; see source catalog.",
+      "source_conditions_accepted": false,
+      "unresolved_conflict": true
+    },
+    {
+      "name": "split_and_join",
+      "paper_robots": 4,
+      "paper_horizon": "not_specified",
+      "paper_actors": 4,
+      "evidence": "Hughes et al., Figure 3, PDF page 7: robot and actor counts. Horizon not established by this figure; see source catalog.",
+      "source_conditions_accepted": false,
+      "unresolved_conflict": true
+    },
+    {
+      "name": "spreadout_group",
+      "paper_robots": 4,
+      "paper_horizon": "not_specified",
+      "paper_actors": 4,
+      "evidence": "Hughes et al., Figure 3, PDF page 7: robot and actor counts. Horizon not established by this figure; see source catalog.",
+      "source_conditions_accepted": false,
+      "unresolved_conflict": true
+    },
+    {
+      "name": "track_runners",
+      "paper_robots": 5,
+      "paper_horizon": "not_specified",
+      "paper_actors": 6,
+      "evidence": "Hughes et al., Figure 3, PDF page 7: robot and actor counts. Horizon not established by this figure; see source catalog.",
+      "source_conditions_accepted": false,
+      "unresolved_conflict": true
+    }
+  ]
+}
