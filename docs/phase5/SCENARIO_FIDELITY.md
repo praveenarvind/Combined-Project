@@ -22,7 +22,7 @@ The only parsed differences between the historical JSON and HEAD are `num_robots
 
 Read-only Blender 4.3.2 inspection, with auto-execution disabled and no rendering/saving, finds N `uav` camera objects plus the active overview camera. The exporter loops over all `bpy.data.cameras`, so it counts that overview camera as a robot. This establishes the extra-camera mechanism. The historical FOV arrays also include the overview FOV; the VI experiment loader explicitly overrides the camera with a π/2 view cone and cutoff 100. The cutoff test is disabled in the unchanged detector. Formation does not use that sensor to construct its trajectories; common quality evaluation uses the authoritative Phase 2 evaluator.
 
-The complete `src/mdma_greedy` source tree is identical between the historical input revision and audited HEAD, verified by an empty Git diff. Thus the older JSON is paired with the same filming model/baseline source used by the foundation.
+The scene Blend files are also unchanged between these revisions. The complete `src/mdma_greedy` source tree is identical between the historical input revision and audited HEAD, verified by an empty Git diff. Thus the older JSON is paired with the same filming model/baseline source used by the foundation.
 
 ## What is and is not established
 

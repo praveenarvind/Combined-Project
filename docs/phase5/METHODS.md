@@ -114,6 +114,10 @@ solver time and outer execution time (including scoring/certification and result
 conversion) are also recorded. Installation, warmup, rendering and checkpoint
 file writes are excluded from planning time. No Blender rendering is performed.
 
+CSV `vi_calls` is the primary solver counter; `planning_vi_calls`,
+`validation_vi_calls` and `total_vi_calls` explicitly distinguish the full cost.
+The inventory expected total includes both passes.
+
 Every successful result preserves full trajectories and initial states, source
 revisions/hashes, settings, partitions, VI calls, wall/CPU/allocation/GC counters,
 separate joint SRPPA/legacy/heading/stationary scores, redundancy, validation and

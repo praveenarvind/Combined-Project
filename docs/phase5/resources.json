@@ -1,0 +1,222 @@
+{
+  "inventory_file_sha256": "a60b3fac0b2f9acd5760b1d10ca97857829e56a29a18c20d52163e69c0ffe3dd",
+  "calibration_file_sha256": "c8e4ae0cd548edcdf8d5b73c75786d22c52ea18aa8a27654ff2de19f345dec7f",
+  "kind": "resource_extrapolation_not_measured_full_study",
+  "calibration_source": {
+    "source_commit": "b11f1208cf576cb84da6d049432d49721aa74aa3",
+    "source_dirty": false,
+    "source_sha256": "0a19bb7969db0bcdd8bb5a8f391d5d77f6d22849e0dcaf4e76160e20c0fe2088",
+    "julia_version": "1.8.5",
+    "julia_threads": 4,
+    "blas_threads": 1,
+    "cpu_quota": "400000 100000",
+    "cpu_allowed": "Cpus_allowed_list:\t0-3",
+    "memory_limit": "34359738368"
+  },
+  "calibration_input_sha256": "2093ae376880df18f1e48ebb630136348946b112ced3caa73f1f476a5568bb16",
+  "calibration_peak_rss_bytes": 629321728,
+  "calibration_grid_storage_bytes": 19940896,
+  "scenarios": [
+    {
+      "scenario": "cluster",
+      "robots": 4,
+      "horizon": 60,
+      "executions": 241,
+      "validation_executions": 240,
+      "total_planner_passes": 481,
+      "vi_calls": 1944,
+      "planning_vi_calls": 972,
+      "validation_vi_calls": 972,
+      "estimated_planning_hours": 28.63842088149,
+      "estimated_replay_planning_hours": 28.63842088149,
+      "estimated_legacy_hours": 40.594086368,
+      "estimated_certification_hours": 15.91598543454,
+      "estimated_execution_hours": 114.46348167165333,
+      "illustrative_half_to_double_hours": [
+        57.23174083582666,
+        228.92696334330665
+      ],
+      "estimated_raw_bytes": 45854000,
+      "grid_state_count": 192000,
+      "grid_storage_scale_to_calibration": 1.0
+    },
+    {
+      "scenario": "cross_mix",
+      "robots": 4,
+      "horizon": 100,
+      "executions": 241,
+      "validation_executions": 240,
+      "total_planner_passes": 481,
+      "vi_calls": 1944,
+      "planning_vi_calls": 972,
+      "validation_vi_calls": 972,
+      "estimated_planning_hours": 101.0260274903454,
+      "estimated_replay_planning_hours": 101.0260274903454,
+      "estimated_legacy_hours": 237.08074052422222,
+      "estimated_certification_hours": 56.15038268196465,
+      "estimated_execution_hours": 497.6539855921199,
+      "illustrative_half_to_double_hours": [
+        248.82699279605995,
+        995.3079711842398
+      ],
+      "estimated_raw_bytes": 65134000,
+      "grid_state_count": 672800,
+      "grid_storage_scale_to_calibration": 3.504166666666667
+    },
+    {
+      "scenario": "four_split",
+      "robots": 4,
+      "horizon": 100,
+      "executions": 241,
+      "validation_executions": 240,
+      "total_planner_passes": 481,
+      "vi_calls": 1944,
+      "planning_vi_calls": 972,
+      "validation_vi_calls": 972,
+      "estimated_planning_hours": 100.62595374071077,
+      "estimated_replay_planning_hours": 100.62595374071077,
+      "estimated_legacy_hours": 158.05382701614818,
+      "estimated_certification_hours": 56.15038268196465,
+      "estimated_execution_hours": 417.03665544969584,
+      "illustrative_half_to_double_hours": [
+        208.51832772484792,
+        834.0733108993917
+      ],
+      "estimated_raw_bytes": 65134000,
+      "grid_state_count": 672800,
+      "grid_storage_scale_to_calibration": 3.504166666666667
+    },
+    {
+      "scenario": "priority_runners",
+      "robots": 5,
+      "horizon": 150,
+      "executions": 597,
+      "validation_executions": 596,
+      "total_planner_passes": 1193,
+      "vi_calls": 6000,
+      "planning_vi_calls": 3000,
+      "validation_vi_calls": 3000,
+      "estimated_planning_hours": 608.8497602604969,
+      "estimated_replay_planning_hours": 608.8497602604969,
+      "estimated_legacy_hours": 2501.511465771828,
+      "estimated_certification_hours": 337.74635287114126,
+      "estimated_execution_hours": 4073.634082269108,
+      "illustrative_half_to_double_hours": [
+        2036.817041134554,
+        8147.268164538216
+      ],
+      "estimated_raw_bytes": 270561000,
+      "grid_state_count": 1306800,
+      "grid_storage_scale_to_calibration": 6.80625
+    },
+    {
+      "scenario": "priority_speaker",
+      "robots": 5,
+      "horizon": 60,
+      "executions": 597,
+      "validation_executions": 596,
+      "total_planner_passes": 1193,
+      "vi_calls": 6000,
+      "planning_vi_calls": 3000,
+      "validation_vi_calls": 3000,
+      "estimated_planning_hours": 139.21085367144096,
+      "estimated_replay_planning_hours": 139.21085367144096,
+      "estimated_legacy_hours": 328.15315043576385,
+      "estimated_certification_hours": 76.75533099218751,
+      "estimated_execution_hours": 688.7994079447627,
+      "illustrative_half_to_double_hours": [
+        344.39970397238136,
+        1377.5988158895254
+      ],
+      "estimated_raw_bytes": 136236000,
+      "grid_state_count": 300000,
+      "grid_storage_scale_to_calibration": 1.5625
+    },
+    {
+      "scenario": "split_and_join",
+      "robots": 4,
+      "horizon": 80,
+      "executions": 241,
+      "validation_executions": 240,
+      "total_planner_passes": 481,
+      "vi_calls": 1944,
+      "planning_vi_calls": 972,
+      "validation_vi_calls": 972,
+      "estimated_planning_hours": 80.29909469713135,
+      "estimated_replay_planning_hours": 80.29909469713135,
+      "estimated_legacy_hours": 101.15444929033482,
+      "estimated_certification_hours": 44.8068710290425,
+      "estimated_execution_hours": 307.8239403297692,
+      "illustrative_half_to_double_hours": [
+        153.9119701648846,
+        615.6478806595384
+      ],
+      "estimated_raw_bytes": 55494000,
+      "grid_state_count": 538240,
+      "grid_storage_scale_to_calibration": 2.8033333333333332
+    },
+    {
+      "scenario": "spreadout_group",
+      "robots": 4,
+      "horizon": 80,
+      "executions": 241,
+      "validation_executions": 240,
+      "total_planner_passes": 481,
+      "vi_calls": 1944,
+      "planning_vi_calls": 972,
+      "validation_vi_calls": 972,
+      "estimated_planning_hours": 80.29909469713135,
+      "estimated_replay_planning_hours": 80.29909469713135,
+      "estimated_legacy_hours": 101.15444929033482,
+      "estimated_certification_hours": 44.8068710290425,
+      "estimated_execution_hours": 307.8239403297692,
+      "illustrative_half_to_double_hours": [
+        153.9119701648846,
+        615.6478806595384
+      ],
+      "estimated_raw_bytes": 55494000,
+      "grid_state_count": 538240,
+      "grid_storage_scale_to_calibration": 2.8033333333333332
+    },
+    {
+      "scenario": "track_runners",
+      "robots": 5,
+      "horizon": 150,
+      "executions": 597,
+      "validation_executions": 596,
+      "total_planner_passes": 1193,
+      "vi_calls": 6000,
+      "planning_vi_calls": 3000,
+      "validation_vi_calls": 3000,
+      "estimated_planning_hours": 607.6505697208171,
+      "estimated_replay_planning_hours": 607.6505697208171,
+      "estimated_legacy_hours": 2144.152684947281,
+      "estimated_certification_hours": 337.74635287114126,
+      "estimated_execution_hours": 3711.494528493038,
+      "illustrative_half_to_double_hours": [
+        1855.747264246519,
+        7422.989056986076
+      ],
+      "estimated_raw_bytes": 270561000,
+      "grid_state_count": 1306800,
+      "grid_storage_scale_to_calibration": 6.80625
+    }
+  ],
+  "totals": {
+    "executions": 2996,
+    "validation_executions": 2988,
+    "total_planner_passes": 5984,
+    "vi_calls": 27720,
+    "estimated_execution_hours": 10118.730022079917,
+    "estimated_raw_bytes": 964468000
+  },
+  "assumptions": [
+    "Comparable VI sweep counts to the validated calibration, not a convergence guarantee.",
+    "Serial kernel costs extrapolated by state count; no assumed threaded speedup.",
+    "Cache cost scaled by grid, frames and actor count; assignment may differ.",
+    "Unprofiled primary pass and separate certification replay; both keep original legacy scoring. Independent Bellman checks follow the replay.",
+    "Half/double is an illustrative cost envelope, not a statistical confidence interval.",
+    "Peak RSS is measured only for the calibration; live memory of larger cases requires measurement.",
+    "Warmups, filesystem/checkpoint costs, retries and host contention add overhead."
+  ]
+}

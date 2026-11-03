@@ -1,0 +1,695 @@
+{
+    "grid_storage_bytes": 19940896,
+    "completed_at_utc": "2026-11-03T02:45:33.942Z",
+    "gc_seconds": 14.04738221,
+    "horizon": 60,
+    "full_team_solution": false,
+    "process_peak_rss_bytes": 629321728,
+    "completed_vi_calls": 1,
+    "allocated_bytes": 249312689540,
+    "process_cpu_seconds": 106.109141,
+    "certificate": {
+        "bellman_residual": 0,
+        "converged": true,
+        "tolerance": 1.0e-6,
+        "states_checked": 192000,
+        "method": "independent_all_state_backup",
+        "iterations": null
+    },
+    "scenario": "cluster",
+    "certificate_seconds": 58.948094202,
+    "limitations": "One serial block, no legacy objective evaluation and no team reward. All 4 historical states/60 actor frames remain in the input. Paper fidelity is blocked. Runtime extrapolation is not a full-scenario measurement.",
+    "status": "successful",
+    "settings": {
+        "horizon": 60,
+        "num_robots": 4,
+        "grid": {
+            "width": 20,
+            "height": 20,
+            "headings": 8
+        },
+        "camera": {
+            "model": "DistributedFilming.MDMA.ViewConeSensor",
+            "fov": 1.5707963267948966,
+            "cutoff": 100
+        },
+        "move_dist": 3,
+        "vi": {
+            "max_iterations": 90,
+            "belres": 1.0e-6,
+            "include_Q": false,
+            "discount": 1,
+            "verbose": true
+        }
+    },
+    "actor_count": 6,
+    "id": "calibration-cluster-robot1-full60-serial-t4-25074618259751",
+    "planning_block_seconds": 106.071458886,
+    "purpose": "not_a_full_team_experiment",
+    "stages": [
+        {
+            "stage": "prior_coverage",
+            "started_ns": 24908062254279,
+            "finished_ns": 24908062603233,
+            "wall_seconds": 0.000345299,
+            "allocated_bytes": 314080,
+            "gc_seconds": 0
+        },
+        {
+            "stage": "reward_cache",
+            "started_ns": 24908062605727,
+            "finished_ns": 24909331175122,
+            "wall_seconds": 1.268565199,
+            "allocated_bytes": 993897712,
+            "gc_seconds": 0.10345151
+        },
+        {
+            "stage": "value_iteration",
+            "started_ns": 24909331182994,
+            "finished_ns": 25014130849781,
+            "wall_seconds": 104.799660288,
+            "allocated_bytes": 248318357888,
+            "gc_seconds": 13.9439307
+        },
+        {
+            "stage": "path_extraction",
+            "started_ns": 25014130872235,
+            "finished_ns": 25014131223512,
+            "wall_seconds": 0.000349114,
+            "allocated_bytes": 18688,
+            "gc_seconds": 0
+        }
+    ],
+    "max_marginal_error": 7.105427357601002e-14,
+    "input_sha256": "2093ae376880df18f1e48ebb630136348946b112ced3caa73f1f476a5568bb16",
+    "manifest_sha256": "cb083b09cc2ab37ffbf6c8a02919cd7432e5c09359c83ea5c694a542fa9a3f20",
+    "trajectory": [
+        1,
+        [
+            {
+                "state": {
+                    "x": 1,
+                    "y": 7,
+                    "heading": "SW"
+                },
+                "depth": 1,
+                "horizon": 60
+            },
+            {
+                "state": {
+                    "x": 2,
+                    "y": 8,
+                    "heading": "S"
+                },
+                "depth": 2,
+                "horizon": 60
+            },
+            {
+                "state": {
+                    "x": 4,
+                    "y": 10,
+                    "heading": "SE"
+                },
+                "depth": 3,
+                "horizon": 60
+            },
+            {
+                "state": {
+                    "x": 4,
+                    "y": 9,
+                    "heading": "E"
+                },
+                "depth": 4,
+                "horizon": 60
+            },
+            {
+                "state": {
+                    "x": 4,
+                    "y": 9,
+                    "heading": "E"
+                },
+                "depth": 5,
+                "horizon": 60
+            },
+            {
+                "state": {
+                    "x": 4,
+                    "y": 9,
+                    "heading": "E"
+                },
+                "depth": 6,
+                "horizon": 60
+            },
+            {
+                "state": {
+                    "x": 4,
+                    "y": 9,
+                    "heading": "E"
+                },
+                "depth": 7,
+                "horizon": 60
+            },
+            {
+                "state": {
+                    "x": 4,
+                    "y": 9,
+                    "heading": "E"
+                },
+                "depth": 8,
+                "horizon": 60
+            },
+            {
+                "state": {
+                    "x": 4,
+                    "y": 9,
+                    "heading": "E"
+                },
+                "depth": 9,
+                "horizon": 60
+            },
+            {
+                "state": {
+                    "x": 4,
+                    "y": 9,
+                    "heading": "E"
+                },
+                "depth": 10,
+                "horizon": 60
+            },
+            {
+                "state": {
+                    "x": 4,
+                    "y": 9,
+                    "heading": "E"
+                },
+                "depth": 11,
+                "horizon": 60
+            },
+            {
+                "state": {
+                    "x": 4,
+                    "y": 9,
+                    "heading": "E"
+                },
+                "depth": 12,
+                "horizon": 60
+            },
+            {
+                "state": {
+                    "x": 4,
+                    "y": 9,
+                    "heading": "E"
+                },
+                "depth": 13,
+                "horizon": 60
+            },
+            {
+                "state": {
+                    "x": 4,
+                    "y": 9,
+                    "heading": "E"
+                },
+                "depth": 14,
+                "horizon": 60
+            },
+            {
+                "state": {
+                    "x": 4,
+                    "y": 9,
+                    "heading": "E"
+                },
+                "depth": 15,
+                "horizon": 60
+            },
+            {
+                "state": {
+                    "x": 4,
+                    "y": 9,
+                    "heading": "E"
+                },
+                "depth": 16,
+                "horizon": 60
+            },
+            {
+                "state": {
+                    "x": 4,
+                    "y": 9,
+                    "heading": "E"
+                },
+                "depth": 17,
+                "horizon": 60
+            },
+            {
+                "state": {
+                    "x": 4,
+                    "y": 9,
+                    "heading": "E"
+                },
+                "depth": 18,
+                "horizon": 60
+            },
+            {
+                "state": {
+                    "x": 4,
+                    "y": 9,
+                    "heading": "E"
+                },
+                "depth": 19,
+                "horizon": 60
+            },
+            {
+                "state": {
+                    "x": 4,
+                    "y": 9,
+                    "heading": "E"
+                },
+                "depth": 20,
+                "horizon": 60
+            },
+            {
+                "state": {
+                    "x": 4,
+                    "y": 9,
+                    "heading": "E"
+                },
+                "depth": 21,
+                "horizon": 60
+            },
+            {
+                "state": {
+                    "x": 4,
+                    "y": 9,
+                    "heading": "E"
+                },
+                "depth": 22,
+                "horizon": 60
+            },
+            {
+                "state": {
+                    "x": 4,
+                    "y": 9,
+                    "heading": "E"
+                },
+                "depth": 23,
+                "horizon": 60
+            },
+            {
+                "state": {
+                    "x": 4,
+                    "y": 9,
+                    "heading": "E"
+                },
+                "depth": 24,
+                "horizon": 60
+            },
+            {
+                "state": {
+                    "x": 4,
+                    "y": 9,
+                    "heading": "E"
+                },
+                "depth": 25,
+                "horizon": 60
+            },
+            {
+                "state": {
+                    "x": 4,
+                    "y": 9,
+                    "heading": "E"
+                },
+                "depth": 26,
+                "horizon": 60
+            },
+            {
+                "state": {
+                    "x": 4,
+                    "y": 9,
+                    "heading": "E"
+                },
+                "depth": 27,
+                "horizon": 60
+            },
+            {
+                "state": {
+                    "x": 4,
+                    "y": 9,
+                    "heading": "E"
+                },
+                "depth": 28,
+                "horizon": 60
+            },
+            {
+                "state": {
+                    "x": 4,
+                    "y": 9,
+                    "heading": "E"
+                },
+                "depth": 29,
+                "horizon": 60
+            },
+            {
+                "state": {
+                    "x": 4,
+                    "y": 9,
+                    "heading": "E"
+                },
+                "depth": 30,
+                "horizon": 60
+            },
+            {
+                "state": {
+                    "x": 4,
+                    "y": 9,
+                    "heading": "E"
+                },
+                "depth": 31,
+                "horizon": 60
+            },
+            {
+                "state": {
+                    "x": 4,
+                    "y": 9,
+                    "heading": "E"
+                },
+                "depth": 32,
+                "horizon": 60
+            },
+            {
+                "state": {
+                    "x": 4,
+                    "y": 9,
+                    "heading": "E"
+                },
+                "depth": 33,
+                "horizon": 60
+            },
+            {
+                "state": {
+                    "x": 4,
+                    "y": 9,
+                    "heading": "E"
+                },
+                "depth": 34,
+                "horizon": 60
+            },
+            {
+                "state": {
+                    "x": 4,
+                    "y": 9,
+                    "heading": "E"
+                },
+                "depth": 35,
+                "horizon": 60
+            },
+            {
+                "state": {
+                    "x": 4,
+                    "y": 9,
+                    "heading": "E"
+                },
+                "depth": 36,
+                "horizon": 60
+            },
+            {
+                "state": {
+                    "x": 4,
+                    "y": 9,
+                    "heading": "E"
+                },
+                "depth": 37,
+                "horizon": 60
+            },
+            {
+                "state": {
+                    "x": 4,
+                    "y": 9,
+                    "heading": "E"
+                },
+                "depth": 38,
+                "horizon": 60
+            },
+            {
+                "state": {
+                    "x": 4,
+                    "y": 9,
+                    "heading": "E"
+                },
+                "depth": 39,
+                "horizon": 60
+            },
+            {
+                "state": {
+                    "x": 4,
+                    "y": 9,
+                    "heading": "E"
+                },
+                "depth": 40,
+                "horizon": 60
+            },
+            {
+                "state": {
+                    "x": 4,
+                    "y": 9,
+                    "heading": "E"
+                },
+                "depth": 41,
+                "horizon": 60
+            },
+            {
+                "state": {
+                    "x": 4,
+                    "y": 9,
+                    "heading": "E"
+                },
+                "depth": 42,
+                "horizon": 60
+            },
+            {
+                "state": {
+                    "x": 4,
+                    "y": 9,
+                    "heading": "E"
+                },
+                "depth": 43,
+                "horizon": 60
+            },
+            {
+                "state": {
+                    "x": 4,
+                    "y": 9,
+                    "heading": "E"
+                },
+                "depth": 44,
+                "horizon": 60
+            },
+            {
+                "state": {
+                    "x": 4,
+                    "y": 9,
+                    "heading": "E"
+                },
+                "depth": 45,
+                "horizon": 60
+            },
+            {
+                "state": {
+                    "x": 4,
+                    "y": 9,
+                    "heading": "E"
+                },
+                "depth": 46,
+                "horizon": 60
+            },
+            {
+                "state": {
+                    "x": 4,
+                    "y": 9,
+                    "heading": "E"
+                },
+                "depth": 47,
+                "horizon": 60
+            },
+            {
+                "state": {
+                    "x": 4,
+                    "y": 9,
+                    "heading": "E"
+                },
+                "depth": 48,
+                "horizon": 60
+            },
+            {
+                "state": {
+                    "x": 4,
+                    "y": 9,
+                    "heading": "E"
+                },
+                "depth": 49,
+                "horizon": 60
+            },
+            {
+                "state": {
+                    "x": 4,
+                    "y": 9,
+                    "heading": "E"
+                },
+                "depth": 50,
+                "horizon": 60
+            },
+            {
+                "state": {
+                    "x": 4,
+                    "y": 9,
+                    "heading": "E"
+                },
+                "depth": 51,
+                "horizon": 60
+            },
+            {
+                "state": {
+                    "x": 4,
+                    "y": 9,
+                    "heading": "E"
+                },
+                "depth": 52,
+                "horizon": 60
+            },
+            {
+                "state": {
+                    "x": 4,
+                    "y": 9,
+                    "heading": "E"
+                },
+                "depth": 53,
+                "horizon": 60
+            },
+            {
+                "state": {
+                    "x": 4,
+                    "y": 9,
+                    "heading": "E"
+                },
+                "depth": 54,
+                "horizon": 60
+            },
+            {
+                "state": {
+                    "x": 4,
+                    "y": 9,
+                    "heading": "E"
+                },
+                "depth": 55,
+                "horizon": 60
+            },
+            {
+                "state": {
+                    "x": 4,
+                    "y": 9,
+                    "heading": "E"
+                },
+                "depth": 56,
+                "horizon": 60
+            },
+            {
+                "state": {
+                    "x": 4,
+                    "y": 9,
+                    "heading": "E"
+                },
+                "depth": 57,
+                "horizon": 60
+            },
+            {
+                "state": {
+                    "x": 4,
+                    "y": 9,
+                    "heading": "E"
+                },
+                "depth": 58,
+                "horizon": 60
+            },
+            {
+                "state": {
+                    "x": 4,
+                    "y": 9,
+                    "heading": "E"
+                },
+                "depth": 59,
+                "horizon": 60
+            },
+            {
+                "state": {
+                    "x": 4,
+                    "y": 9,
+                    "heading": "E"
+                },
+                "depth": 60,
+                "horizon": 60
+            }
+        ]
+    ],
+    "completed_robot_blocks": 1,
+    "kind": "single_block_full_input_resource_calibration",
+    "historical_initial_states": [
+        [
+            1,
+            {
+                "depth": 1,
+                "horizon": 60,
+                "state": {
+                    "heading": "SW",
+                    "x": 1,
+                    "y": 7
+                }
+            }
+        ],
+        [
+            2,
+            {
+                "depth": 1,
+                "horizon": 60,
+                "state": {
+                    "heading": "NW",
+                    "x": 9,
+                    "y": 17
+                }
+            }
+        ],
+        [
+            3,
+            {
+                "depth": 1,
+                "horizon": 60,
+                "state": {
+                    "heading": "S",
+                    "x": 3,
+                    "y": 19
+                }
+            }
+        ],
+        [
+            4,
+            {
+                "depth": 1,
+                "horizon": 60,
+                "state": {
+                    "heading": "W",
+                    "x": 3,
+                    "y": 17
+                }
+            }
+        ]
+    ],
+    "context": {
+        "source_commit": "b11f1208cf576cb84da6d049432d49721aa74aa3",
+        "source_dirty": false,
+        "source_sha256": "0a19bb7969db0bcdd8bb5a8f391d5d77f6d22849e0dcaf4e76160e20c0fe2088",
+        "julia_version": "1.8.5",
+        "julia_threads": 4,
+        "blas_threads": 1,
+        "cpu_quota": "400000 100000",
+        "cpu_allowed": "Cpus_allowed_list:\t0-3",
+        "memory_limit": "34359738368"
+    },
+    "robots_in_configuration": 4
+}
