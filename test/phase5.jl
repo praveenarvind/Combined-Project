@@ -20,7 +20,9 @@ const D5=DistributedFilming
     inv=phase5_inventory(catalog)
     @test inv["expected_executions"]==2996
     @test inv["expected_quality_configurations"]==1518
-    @test inv["expected_vi_calls"]==13860
+    @test inv["expected_vi_calls"]==27720
+    @test inv["expected_planning_vi_calls"]==inv["expected_validation_vi_calls"]==13860
+    @test inv["expected_validation_executions"]==2988
     @test length(unique(j["id"] for j in inv["jobs"]))==2996
     @test all(j -> j["configured_rounds"]===nothing || 1<=j["configured_rounds"]<=5,inv["jobs"])
     altered=deepcopy(inv);pop!(altered["jobs"])
@@ -68,7 +70,7 @@ end
         D5._phase5_write(joinpath(output,"number.json"),value)
         @test D5._phase5_digest(D5._phase5_read(joinpath(output,"number.json")))==D5._phase5_digest(value)
         inv=initialize_phase5(output,phase5_fixture_catalog();purpose="ci_functional_validation")
-        @test (inv["expected_executions"],inv["expected_quality_configurations"],inv["expected_vi_calls"])==(73,39,146)
+        @test (inv["expected_executions"],inv["expected_quality_configurations"],inv["expected_vi_calls"])==(73,39,292)
         first_batch=run_phase5_batch(output;max_jobs=1)
         @test first_batch.attempted==1
         greedy=first(inv["jobs"]);path=D5._phase5_record_path(output,greedy["id"]);original=read(path)
@@ -85,10 +87,13 @@ end
         @test all(s -> s["normalized_srppa"]["confidence_interval"]===nothing,report["summaries"])
         records=[D5._phase5_record(output,j) for j in inv["jobs"]]
         @test sum(r["result"]["metrics"]["vi_calls"] for r in records)==146
+        @test sum(r["total_vi_calls"] for r in records)==292
+        @test all(r -> isempty(r["result"]["stages"]) && isempty(r["result"]["convergence"]),records)
+        @test all(r -> r["validation_run"]===nothing || r["correctness"]["validation_replay_equal"]===true,records)
         @test all(r -> r["result"]["validation"]["max_marginal_error"]<=1e-10,records)
         @test all(r -> r["correctness"]["rsp1_myopic_equal"]===true,filter(r -> r["definition"]["configured_rounds"]==1,records))
         @test all(r -> r["correctness"]["serial_threaded_equal"]===true,filter(r -> r["definition"]["mode"]=="threaded",records))
-        @test all(r -> all(c -> c["converged"],r["result"]["convergence"]),records)
+        @test all(r -> r["validation_run"]===nothing || all(c -> c["converged"],r["validation_run"]["result"]["convergence"]),records)
         # The checksum must fail on edited content; completed files are preserved.
         corrupt=replace(String(original),"\"successful\""=>"\"changed\"";count=1);write(path,corrupt)
         @test_throws ErrorException D5._phase5_record(output,greedy)

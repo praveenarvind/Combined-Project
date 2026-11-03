@@ -84,12 +84,15 @@ function phase5_inventory(catalog;workers=4,purpose="published_final")
             id="$qid-$mode-t$workers"
             groups=labels===nothing ? nothing : [findall(==(r),labels) for r in 1:k]
             blocked=scene["fidelity_status"]!="verified" && !(purpose=="ci_functional_validation" && scene["fidelity_status"]=="ci_fixture")
+            planning_calls=planner=="formation_idealized" ? 0 : planner=="multiround" ? n^2 : n
             push!(jobs,Dict{String,Any}("id"=>id,"quality_id"=>qid,"scenario"=>name,"planner"=>planner,
                 "mode"=>mode,"workers"=>workers,"replicate"=>1,"configured_rounds"=>k,"assignments"=>labels,
                 "occupied_rounds"=>labels===nothing ? nothing : length(unique(labels)),"round_groups"=>groups,
                 "all_rounds_occupied"=>labels===nothing ? nothing : length(unique(labels))==k,
                 "partition_method"=>method,"partition_seed"=>seed,"sampling_method"=>sampling,
-                "expected_vi_calls"=>planner=="formation_idealized" ? 0 : planner=="multiround" ? n^2 : n,
+                "expected_planning_vi_calls"=>planning_calls,"expected_validation_vi_calls"=>planning_calls,
+                "expected_vi_calls"=>2*planning_calls,
+                "validation_execution_id"=>planning_calls==0 ? nothing : "$id-validation",
                 "status"=>blocked ? "blocked" : "pending","blocked_reason"=>blocked ? join(scene["blockers"],"; ") : nothing))
         end
         for baseline in ("greedy","myopic","multiround","assignment","formation_idealized")
@@ -103,6 +106,9 @@ function phase5_inventory(catalog;workers=4,purpose="published_final")
     Dict{String,Any}("schema_version"=>1,"purpose"=>purpose,"workers"=>workers,"seeds"=>copy(PHASE5_SEEDS),
         "catalog_sha256"=>_phase5_digest(catalog),"catalog"=>catalog,"jobs"=>jobs,
         "expected_executions"=>length(jobs),"expected_quality_configurations"=>length(unique(j["quality_id"] for j in jobs)),
+        "expected_validation_executions"=>count(j -> j["validation_execution_id"]!==nothing,jobs),
+        "expected_planning_vi_calls"=>sum(j["expected_planning_vi_calls"] for j in jobs),
+        "expected_validation_vi_calls"=>sum(j["expected_validation_vi_calls"] for j in jobs),
         "expected_vi_calls"=>sum(j["expected_vi_calls"] for j in jobs))
 end
 

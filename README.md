@@ -190,8 +190,12 @@ julia --threads=4 --project=. scripts/phase5.jl --summarize --output=results/pha
 ```
 
 The exact inventory contains 1,518 quality configurations, 2,996 paired executions
-and 13,860 VI calls before warmups/validation. See the [fidelity audit](docs/phase5/SCENARIO_FIDELITY.md)
-and [methods, gates and commands](docs/phase5/METHODS.md). Current CI uses only K<=5
+and 13,860 primary plus 13,860 certification-replay VI calls (27,720 total),
+before warmup. See the [fidelity audit](docs/phase5/SCENARIO_FIDELITY.md)
+and [methods, gates and commands](docs/phase5/METHODS.md). The
+[incomplete-study report](docs/phase5/EXECUTION_REPORT.md) records the actual
+full-frame resource probes, the resource model and every outstanding test.
+Current CI uses only K<=5
 and a clearly synthetic fixture, never the full original matrix. Fixture outcomes
 are functional tests, not filming-reproduction results. Large original experiments
 start only after fidelity and resource checks are resolved.

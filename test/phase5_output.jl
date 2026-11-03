@@ -10,13 +10,16 @@ inv=D._phase5_validate_inventory(D._phase5_read(joinpath(output,"inventory.json"
     records=[D._phase5_record(output,j) for j in inv["jobs"]]
     reference=only(filter(r -> r["definition"]["planner"]=="greedy",records))["result"]["scores"]["joint_srppa"]
     @test sum(r["result"]["metrics"]["vi_calls"] for r in records)==146
+    @test sum(r["total_vi_calls"] for r in records)==292
     for r in records
         job=r["definition"];z=r["result"]
         @test r["status"]=="successful" && r["completed_at_utc"]!==nothing
         @test r["warmup_enabled"]
         @test r["scenario_info"]["initial_states"]==only(inv["catalog"]["scenarios"])["initial_states"]
         @test r["normalized_srppa"] ≈ z["scores"]["joint_srppa"]/reference
-        @test z["metrics"]["vi_calls"]==job["expected_vi_calls"]
+        @test z["metrics"]["vi_calls"]==job["expected_planning_vi_calls"]
+        @test r["total_vi_calls"]==job["expected_vi_calls"]
+        @test isempty(z["stages"]) && isempty(z["convergence"])
         @test z["validation"]["max_marginal_error"]<=1e-10
         @test z["metrics"]["allocated_bytes"]>=0 && z["metrics"]["gc_seconds"]>=0
         elements=D._phase5_states(z["solution"]["elements"])

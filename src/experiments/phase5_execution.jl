@@ -52,17 +52,39 @@ function execute_phase5_job(inventory,output,job,scene)
             rsp_assignments(RSPPlanner(k;seed=job["partition_seed"]),cfg.num_robots)==labels || error("seeded assignment replay mismatch")
         end
     end
-    result=benchmark_plan(cfg,states,job["planner"];assignments=labels,
-        partition_seed=something(job["partition_seed"],11),initial_seed=scene["formation_seed"],detailed=true)
+    plan(detailed)=benchmark_plan(cfg,states,job["planner"];assignments=labels,
+        partition_seed=something(job["partition_seed"],11),initial_seed=scene["formation_seed"],detailed=detailed)
+    result=plan(false) # Primary timing retains no policies or per-stage diagnostic contexts.
     sort(first.(result.solution.elements))==collect(1:cfg.num_robots) || error("missing/duplicate planned robot")
-    result.metrics.vi_calls==job["expected_vi_calls"] || error("unexpected VI call count")
+    result.metrics.vi_calls==job["expected_planning_vi_calls"] || error("unexpected planning VI call count")
+    primary=_phase5_plain(JSON3.read(JSON3.write(result)))
+    checkpoint=_phase5_record(output,job)
+    checkpoint["result"]=primary;checkpoint["primary_completed_at_utc"]=_phase5_now()
+    checkpoint["planning_vi_calls"]=result.metrics.vi_calls
+    checkpoint["validation_run"]=job["validation_execution_id"]===nothing ? nothing : Dict("id"=>job["validation_execution_id"],"status"=>"running","result"=>nothing)
+    _phase5_save_record(_phase5_record_path(output,job["id"]),checkpoint)
+    validation_run=nothing
+    if job["validation_execution_id"]!==nothing
+        GC.gc() # Outside the primary timing; certification replay cannot perturb that timing.
+        validation=plan(true)
+        validation.solution==result.solution && validation.scores==result.scores || error("primary/certification replay mismatch")
+        validation.metrics.vi_calls==job["expected_validation_vi_calls"] || error("unexpected certification VI call count")
+        length(validation.convergence)==job["expected_validation_vi_calls"] || error("missing VI convergence certificates")
+        validation_run=Dict("id"=>job["validation_execution_id"],"status"=>"successful","completed_at_utc"=>_phase5_now(),
+            "purpose"=>"certification_replay_excluded_from_primary_timing",
+            "result"=>_phase5_plain(JSON3.read(JSON3.write(validation))))
+    end
+    checkpoint=_phase5_record(output,job);checkpoint["validation_run"]=validation_run
+    checkpoint["validation_vi_calls"]=validation_run===nothing ? 0 : validation_run["result"]["metrics"]["vi_calls"]
+    checkpoint["total_vi_calls"]=checkpoint["planning_vi_calls"]+checkpoint["validation_vi_calls"]
+    _phase5_save_record(_phase5_record_path(output,job["id"]),checkpoint)
     if labels!==nothing
         result.assignments==labels || error("explicit assignment was not preserved")
         for trace in result.traces
             sort(trace.conditioned_on)==findall(x -> x<labels[trace.robot_id],labels) || error("incorrect partition conditioning")
         end
     end
-    equality=Dict{String,Any}("rsp1_myopic_equal"=>nothing,"serial_threaded_equal"=>nothing)
+    equality=Dict{String,Any}("rsp1_myopic_equal"=>nothing,"serial_threaded_equal"=>nothing,"validation_replay_equal"=>validation_run===nothing ? nothing : true)
     if job["configured_rounds"]==1
         other=only(filter(j -> j["scenario"]==job["scenario"] && j["planner"]=="myopic",inventory["jobs"]))
         baseline=_phase5_record(output,other)
@@ -87,17 +109,22 @@ function execute_phase5_job(inventory,output,job,scene)
         _phase5_record(output,other)["result"]["scores"]["joint_srppa"]
     end
     reference>0 || error("zero greedy reference cannot be normalized")
-    (result=_phase5_plain(JSON3.read(JSON3.write(result))),normalized_srppa=result.scores.joint_srppa/reference,
-        serial_speedup=speedup,correctness=equality)
+    (result=primary,normalized_srppa=result.scores.joint_srppa/reference,
+        serial_speedup=speedup,correctness=equality,validation_run=validation_run,
+        planning_vi_calls=result.metrics.vi_calls,validation_vi_calls=validation_run===nothing ? 0 : validation_run["result"]["metrics"]["vi_calls"])
 end
 
 # A synthetic fixture warms code paths only; it is never a substitute for a full original scene.
 function _phase5_warm()
     scene=only(phase5_fixture_catalog()["scenarios"]);cfg,states=phase5_configuration(scene)
     for planner in ("greedy","myopic","multiround","assignment","formation_idealized","rsp1_serial","rsp2_serial","rsp2_threaded")
-        benchmark_plan(cfg,states,planner;detailed=true,assignments=startswith(planner,"rsp1") ? [1,1] : startswith(planner,"rsp2") ? [1,2] : nothing)
+        for detailed in (false,true)
+            benchmark_plan(cfg,states,planner;detailed=detailed,assignments=startswith(planner,"rsp1") ? [1,1] : startswith(planner,"rsp2") ? [1,2] : nothing)
+        end
     end
-    benchmark_plan(cfg,states,"rsp2_threaded";detailed=true,assignments=[1,1])
+    for detailed in (false,true)
+        benchmark_plan(cfg,states,"rsp2_threaded";detailed=detailed,assignments=[1,1])
+    end
     nothing
 end
 
@@ -196,13 +223,24 @@ function run_phase5_batch(output;max_jobs=1,max_seconds=600.0,retry_failed=false
                 value=redirect_stdout(devnull) do
                     executor(inventory,output,job,scene)
                 end
+                record=_phase5_record(output,job)
                 record["execution_wall_seconds"]=(time_ns()-execution_start)/1e9
                 record["result"]=value.result;record["normalized_srppa"]=value.normalized_srppa
                 record["serial_speedup"]=value.serial_speedup;record["correctness"]=value.correctness
+                record["validation_run"]=value.validation_run
+                record["planning_vi_calls"]=value.planning_vi_calls;record["validation_vi_calls"]=value.validation_vi_calls
+                record["total_vi_calls"]=value.planning_vi_calls+value.validation_vi_calls
                 record["status"]="successful"
             catch err
+                record=_phase5_record(output,job)
                 record["status"]="failed";record["error"]=sprint(showerror,err,catch_backtrace())
+                if get(record,"validation_run",nothing)!==nothing && record["validation_run"]["status"]=="running"
+                    record["validation_run"]["status"]="failed"
+                    record["validation_run"]["error"]=record["error"]
+                end
             end
+            attempts=record["attempts"]
+            record["status"]=="failed" && record["result"]!==nothing && (attempts[end]["partial_primary_result"]=record["result"])
             record["completed_at_utc"]=_phase5_now()
             merge!(attempts[end],Dict("status"=>record["status"],"completed_at_utc"=>record["completed_at_utc"],"error"=>record["error"]))
             _phase5_save_record(recordpath,record);count+=1

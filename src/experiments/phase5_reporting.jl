@@ -15,9 +15,9 @@ end
 function export_phase5_csv(output,inventory=_phase5_read(joinpath(output,"inventory.json")))
     fields=["id","quality_id","scenario","planner","mode","workers","status","error","retry_count","completed_at_utc",
         "robots","actors","horizon","input_revision","input_sha256","initial_states","grid","camera","configured_rounds","occupied_rounds",
-        "assignments","round_groups","all_rounds_occupied","partition_method","partition_seed","sampling_method","expected_vi_calls",
+        "assignments","round_groups","all_rounds_occupied","partition_method","partition_seed","sampling_method","expected_vi_calls","expected_planning_vi_calls","expected_validation_vi_calls","validation_execution_id",
         "joint_srppa","normalized_srppa","legacy_value","heading_bonus","stationary_bonus","redundancy_per_robot",
-        "planning_seconds","solver_seconds","legacy_evaluation_seconds","vi_calls","allocated_bytes","gc_seconds","process_cpu_seconds",
+        "planning_seconds","solver_seconds","legacy_evaluation_seconds","vi_calls","planning_vi_calls","validation_vi_calls","total_vi_calls","allocated_bytes","gc_seconds","process_cpu_seconds",
         "logical_dependency_depth","serial_speedup","execution_wall_seconds","trajectory_validation","correctness","code_revision","record_path","record_sha256"]
     mkpath(output);path=joinpath(output,"results.csv");temp=path*".tmp.$(getpid())"
     open(temp,"w") do io
@@ -31,7 +31,7 @@ function export_phase5_csv(output,inventory=_phase5_read(joinpath(output,"invent
             end
             row["error"]=job["blocked_reason"]
             if record!==nothing
-                for key in ("status","error","completed_at_utc","normalized_srppa","serial_speedup","execution_wall_seconds","correctness","record_sha256")
+                for key in ("status","error","completed_at_utc","normalized_srppa","serial_speedup","execution_wall_seconds","correctness","record_sha256","planning_vi_calls","validation_vi_calls","total_vi_calls")
                     row[key]=get(record,key,nothing)
                 end
                 row["retry_count"]=max(0,length(record["attempts"])-1)

@@ -35,13 +35,14 @@ Five four-robot scenarios and three five-robot scenarios yield:
 
 | Team | Baselines | RSP-1 | RSP-2 exhaustive | RSP-3 exhaustive | RSP-4 seeds | RSP-5 seeds | Distinct quality configurations | Executions, paired modes | VI calls |
 | --- | --- | --- | --- | --- | --- | --- | --- | --- | --- |
-| N=4, per scenario | 5 | 1 | 16 | 81 | 10 | 10 | 123 | 241 | 972 |
-| N=5, per scenario | 5 | 1 | 32 | 243 | 10 | 10 | 301 | 597 | 3,000 |
-| All eight | 40 | 8 | 176 | 1,134 | 80 | 80 | **1,518** | **2,996** | **13,860** |
+| N=4, per scenario | 5 | 1 | 16 | 81 | 10 | 10 | 123 | 241 | 1,944 |
+| N=5, per scenario | 5 | 1 | 32 | 243 | 10 | 10 | 301 | 597 | 6,000 |
+| All eight | 40 | 8 | 176 | 1,134 | 80 | 80 | **1,518** | **2,996** | **27,720** |
 
 Baselines run once per scenario. Each RSP configuration runs serial and threaded
-in a four-thread Julia process, with one timing observation per mode. Compilation
-warmup and convergence validation add cost beyond these VI counts. No matrix of
+in a four-thread Julia process, with one timing observation per mode. There are 13,860 primary and 13,860 certification-replay VI calls, with 2,988
+separately identified replays (5,984 total planner invocations). Compilation
+warmup adds cost beyond those counts. No matrix of
 extra initial states, horizons or team sizes is introduced.
 
 Seeds are exactly **11,22,33,44,55,66,77,88,99,110**, shared across all scenes and
@@ -99,6 +100,13 @@ to compile identical model/scheduler/diagnostic types for K<=5; it does not repl
 an original-scenario experiment. Final batches cannot disable warmup or replace
 the validating executor. Full GC occurs before each timed execution outside the
 planning timer, with GC left enabled during planning.
+
+Primary timing runs with detailed profiling disabled and does not retain VI
+policies. A separate replay on identical inputs collects policies for independent
+Bellman checks and must reproduce the complete primary solution and all scores.
+Its ID, status, VI calls and metrics are stored in `validation_run`; its timing is
+excluded from primary performance comparisons. Partial primary results are
+checkpointed before certification, and failed attempts retain those results.
 
 Planning metrics retain the Phase 4 boundary: cache/prior/VI/path and scheduler
 work are timed; final legacy evaluation is separately timed/subtracted. Full
@@ -158,7 +166,7 @@ MPLCONFIGDIR=/tmp/filming-mpl python scripts/plot_phase5.py results/phase5-ci re
 ```
 
 The fixture is a synthetic 3×3, two-robot/two-frame model with one actor. It runs
-all 73 required fixture executions (146 VI calls), tests serialization and resume,
+all 73 required fixture executions (146 primary + 146 certification VI calls), tests serialization and resume,
 and explicitly watermarks its plots. It is not a reduced reproduction of any
 original scene, nor evidence of published-scene quality or speedup. CI also
 checks enumeration counts, provenance, failures/retries, live locks, corruption,
