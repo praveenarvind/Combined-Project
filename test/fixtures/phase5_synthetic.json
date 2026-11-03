@@ -1,0 +1,1 @@
+{"scene":{"scale":{"x":3.0,"y":3.0,"z":3.0}},"filename":"synthetic_ci_only.blend","robot_fovs":[1.5707963267948966,1.5707963267948966],"sense_dist":100.0,"num_targets":1,"num_robots":2,"num_frames":2,"actor_positions":[[{"location":[2.5,2.5,0.0],"rotation":[0.0,0.0,0.0],"weight":1.0}],[{"location":[2.6,2.5,0.0],"rotation":[0.0,0.0,0.1],"weight":1.0}]]}

@@ -1,0 +1,83 @@
+{
+    "scenarios": {
+        "priority_runners": {
+            "complete": false,
+            "counts": {
+                "blocked": 597,
+                "successful": 0,
+                "pending": 0,
+                "failed": 0
+            }
+        },
+        "cross_mix": {
+            "complete": false,
+            "counts": {
+                "blocked": 241,
+                "successful": 0,
+                "pending": 0,
+                "failed": 0
+            }
+        },
+        "spreadout_group": {
+            "complete": false,
+            "counts": {
+                "blocked": 241,
+                "successful": 0,
+                "pending": 0,
+                "failed": 0
+            }
+        },
+        "four_split": {
+            "complete": false,
+            "counts": {
+                "blocked": 241,
+                "successful": 0,
+                "pending": 0,
+                "failed": 0
+            }
+        },
+        "split_and_join": {
+            "complete": false,
+            "counts": {
+                "blocked": 241,
+                "successful": 0,
+                "pending": 0,
+                "failed": 0
+            }
+        },
+        "priority_speaker": {
+            "complete": false,
+            "counts": {
+                "blocked": 597,
+                "successful": 0,
+                "pending": 0,
+                "failed": 0
+            }
+        },
+        "track_runners": {
+            "complete": false,
+            "counts": {
+                "blocked": 597,
+                "successful": 0,
+                "pending": 0,
+                "failed": 0
+            }
+        },
+        "cluster": {
+            "complete": false,
+            "counts": {
+                "blocked": 241,
+                "successful": 0,
+                "pending": 0,
+                "failed": 0
+            }
+        }
+    },
+    "complete": false,
+    "counts": {
+        "blocked": 2996,
+        "successful": 0,
+        "pending": 0,
+        "failed": 0
+    }
+}

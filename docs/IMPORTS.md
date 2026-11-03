@@ -43,3 +43,15 @@ construction, VI and path extraction in imported C source. The delegated calls,
 settings and mathematical kernels are unchanged; profiling equivalence and
 regression tests cover this boundary. See PHASE4.md. Additional scenario JSON
 inputs retain original hashes/revision in SOURCES.toml; A/B remain untouched.
+
+
+Phase 5 imports the eight scenario JSON files byte-for-byte from filming commit
+`0f12ff66597df791fa3840b7b1f7bb4fe724c088`, before `70d12ca` added the overview
+camera to the robot count. They live under `data/scenarios/published/`; existing
+inputs are retained. Per-file `source_commit` overrides the HEAD reference in
+SOURCES.toml. The entire upstream `src/mdma_greedy` tree is identical between that
+input revision and foundation HEAD `42f9754`. Forty original saved result files
+are inspected only to recover/corroborate starting states; their hashes and states
+are evidence in docs/phase5/scenario_catalog.json. Old scores are not imported as
+new results. A read-only Blender inspection records the overview camera without
+rendering or saving any source scene. Paper fidelity remains explicitly blocked.

@@ -1,0 +1,3815 @@
+{
+  "schema_version": 1,
+  "purpose": "published_scenario_audit",
+  "source_repository": "https://github.com/praveenarvind/MultiDroneMultiActorFilming",
+  "source_revision": "42f97540ff002651822a9bbd617bff3d68ab93e2",
+  "historical_input_revision": "0f12ff66597df791fa3840b7b1f7bb4fe724c088",
+  "count_change_revision": "70d12ca86f9ea840f251617a4ea31f54012dfa2b",
+  "paper": {
+    "url": "https://arxiv.org/abs/2404.03103",
+    "access_status": "blocked_live_network_HTTP_403",
+    "independently_verified": false,
+    "user_reported_counts": {
+      "cluster": 4,
+      "cross_mix": 4,
+      "four_split": 4,
+      "priority_runners": 5,
+      "priority_speaker": 5,
+      "split_and_join": 4,
+      "spreadout_group": 4,
+      "track_runners": 5
+    }
+  },
+  "partition_seeds": [
+    11,
+    22,
+    33,
+    44,
+    55,
+    66,
+    77,
+    88,
+    99,
+    110
+  ],
+  "allowed_partition_counts": [
+    1,
+    2,
+    3,
+    4,
+    5
+  ],
+  "scenarios": [
+    {
+      "name": "cluster",
+      "robots": 4,
+      "actors": 6,
+      "horizon": 60,
+      "grid": {
+        "width": 20,
+        "height": 20,
+        "headings": 8
+      },
+      "input_path": "data/scenarios/published/cluster/cluster_data.json",
+      "input_sha256": "2093ae376880df18f1e48ebb630136348946b112ced3caa73f1f476a5568bb16",
+      "source_path": "experiments/cluster/cluster_data.json",
+      "input_revision": "0f12ff66597df791fa3840b7b1f7bb4fe724c088",
+      "upstream_head": "42f97540ff002651822a9bbd617bff3d68ab93e2",
+      "head_input_sha256": "67b4c1b3aea58758c7ccf888b58aa9b6bc36728871b9eb3f8b175df4205992a7",
+      "head_json_robots": 5,
+      "changed_keys_since_input_revision": [
+        "num_robots",
+        "robot_fovs"
+      ],
+      "initial_states": [
+        [
+          1,
+          {
+            "state": {
+              "x": 1,
+              "y": 7,
+              "heading": "SW"
+            },
+            "depth": 1,
+            "horizon": 60
+          }
+        ],
+        [
+          2,
+          {
+            "state": {
+              "x": 9,
+              "y": 17,
+              "heading": "NW"
+            },
+            "depth": 1,
+            "horizon": 60
+          }
+        ],
+        [
+          3,
+          {
+            "state": {
+              "x": 3,
+              "y": 19,
+              "heading": "S"
+            },
+            "depth": 1,
+            "horizon": 60
+          }
+        ],
+        [
+          4,
+          {
+            "state": {
+              "x": 3,
+              "y": 17,
+              "heading": "W"
+            },
+            "depth": 1,
+            "horizon": 60
+          }
+        ]
+      ],
+      "initial_state_method": "recovered_from_all_four_feasible_upstream_baselines",
+      "initial_state_seed": null,
+      "starting_states_sha256": "4189508a4d23859eb006d83cecd51072089851f89f6aee7fd082359c3eb0ca3d",
+      "formation_seed": 2026,
+      "camera": {
+        "model": "ViewConeSensor",
+        "fov": 1.5707963267948966,
+        "cutoff": 100.0,
+        "cutoff_test_enabled": false,
+        "source": "MDMA_Experiment.init_discrete_problem override"
+      },
+      "move_dist": 3,
+      "vi": {
+        "max_iterations": 90,
+        "belres": 1e-06,
+        "discount": 1,
+        "include_Q": false
+      },
+      "original_artifacts": [
+        {
+          "planner": "greedy",
+          "path": "experiments/cluster/greedy/solution.json",
+          "source_revision": "42f97540ff002651822a9bbd617bff3d68ab93e2",
+          "sha256": "8b42d427040733c35eadc71ca76ef1fe97800968edef03ac923e49b0e8cb1494",
+          "robots": 4,
+          "horizon": 60,
+          "initial_states": [
+            [
+              1,
+              {
+                "state": {
+                  "x": 1,
+                  "y": 7,
+                  "heading": "SW"
+                },
+                "depth": 1,
+                "horizon": 60
+              }
+            ],
+            [
+              2,
+              {
+                "state": {
+                  "x": 9,
+                  "y": 17,
+                  "heading": "NW"
+                },
+                "depth": 1,
+                "horizon": 60
+              }
+            ],
+            [
+              3,
+              {
+                "state": {
+                  "x": 3,
+                  "y": 19,
+                  "heading": "S"
+                },
+                "depth": 1,
+                "horizon": 60
+              }
+            ],
+            [
+              4,
+              {
+                "state": {
+                  "x": 3,
+                  "y": 17,
+                  "heading": "W"
+                },
+                "depth": 1,
+                "horizon": 60
+              }
+            ]
+          ]
+        },
+        {
+          "planner": "multipleroundsgreedy",
+          "path": "experiments/cluster/multipleroundsgreedy/solution.json",
+          "source_revision": "42f97540ff002651822a9bbd617bff3d68ab93e2",
+          "sha256": "14573dea8f5470bcd3f0374f0dee3bac80a3e139c6d54a39adb5c50b0ac0ad2a",
+          "robots": 4,
+          "horizon": 60,
+          "initial_states": [
+            [
+              1,
+              {
+                "state": {
+                  "x": 1,
+                  "y": 7,
+                  "heading": "SW"
+                },
+                "depth": 1,
+                "horizon": 60
+              }
+            ],
+            [
+              2,
+              {
+                "state": {
+                  "x": 9,
+                  "y": 17,
+                  "heading": "NW"
+                },
+                "depth": 1,
+                "horizon": 60
+              }
+            ],
+            [
+              3,
+              {
+                "state": {
+                  "x": 3,
+                  "y": 19,
+                  "heading": "S"
+                },
+                "depth": 1,
+                "horizon": 60
+              }
+            ],
+            [
+              4,
+              {
+                "state": {
+                  "x": 3,
+                  "y": 17,
+                  "heading": "W"
+                },
+                "depth": 1,
+                "horizon": 60
+              }
+            ]
+          ]
+        },
+        {
+          "planner": "myopic",
+          "path": "experiments/cluster/myopic/solution.json",
+          "source_revision": "42f97540ff002651822a9bbd617bff3d68ab93e2",
+          "sha256": "623b18a134f54b65306c4365eef3a272c6bc58c79c6c351fd098d0b5cfaadfd6",
+          "robots": 4,
+          "horizon": 60,
+          "initial_states": [
+            [
+              1,
+              {
+                "state": {
+                  "x": 1,
+                  "y": 7,
+                  "heading": "SW"
+                },
+                "depth": 1,
+                "horizon": 60
+              }
+            ],
+            [
+              2,
+              {
+                "state": {
+                  "x": 9,
+                  "y": 17,
+                  "heading": "NW"
+                },
+                "depth": 1,
+                "horizon": 60
+              }
+            ],
+            [
+              3,
+              {
+                "state": {
+                  "x": 3,
+                  "y": 19,
+                  "heading": "S"
+                },
+                "depth": 1,
+                "horizon": 60
+              }
+            ],
+            [
+              4,
+              {
+                "state": {
+                  "x": 3,
+                  "y": 17,
+                  "heading": "W"
+                },
+                "depth": 1,
+                "horizon": 60
+              }
+            ]
+          ]
+        },
+        {
+          "planner": "assignment",
+          "path": "experiments/cluster/assignment/solution.json",
+          "source_revision": "42f97540ff002651822a9bbd617bff3d68ab93e2",
+          "sha256": "4657f2e86c1fa9dc174e252ae08b36f0becb377d2620b787a7cb0b64452d2936",
+          "robots": 4,
+          "horizon": 60,
+          "initial_states": [
+            [
+              1,
+              {
+                "state": {
+                  "x": 1,
+                  "y": 7,
+                  "heading": "SW"
+                },
+                "depth": 1,
+                "horizon": 60
+              }
+            ],
+            [
+              2,
+              {
+                "state": {
+                  "x": 9,
+                  "y": 17,
+                  "heading": "NW"
+                },
+                "depth": 1,
+                "horizon": 60
+              }
+            ],
+            [
+              3,
+              {
+                "state": {
+                  "x": 3,
+                  "y": 19,
+                  "heading": "S"
+                },
+                "depth": 1,
+                "horizon": 60
+              }
+            ],
+            [
+              4,
+              {
+                "state": {
+                  "x": 3,
+                  "y": 17,
+                  "heading": "W"
+                },
+                "depth": 1,
+                "horizon": 60
+              }
+            ]
+          ]
+        },
+        {
+          "planner": "formation",
+          "path": "experiments/cluster/formation/solution.json",
+          "source_revision": "42f97540ff002651822a9bbd617bff3d68ab93e2",
+          "sha256": "80e3942d6a53f91e61c5970273ed1c79e8341405282e6126bbd96c85b433853d",
+          "robots": 4,
+          "horizon": 60,
+          "initial_states": [
+            [
+              1,
+              {
+                "state": {
+                  "x": 14.89661177495675,
+                  "y": 6.323031990341072,
+                  "heading": "NW"
+                },
+                "depth": 1,
+                "horizon": 60
+              }
+            ],
+            [
+              2,
+              {
+                "state": {
+                  "x": 11.87384628394075,
+                  "y": 14.633628611758914,
+                  "heading": "S"
+                },
+                "depth": 1,
+                "horizon": 60
+              }
+            ],
+            [
+              3,
+              {
+                "state": {
+                  "x": 3.5632496625229066,
+                  "y": 11.610863120742914,
+                  "heading": "SE"
+                },
+                "depth": 1,
+                "horizon": 60
+              }
+            ],
+            [
+              4,
+              {
+                "state": {
+                  "x": 6.5860151535389075,
+                  "y": 3.30026649932507,
+                  "heading": "NE"
+                },
+                "depth": 1,
+                "horizon": 60
+              }
+            ]
+          ]
+        }
+      ],
+      "blend": {
+        "sha256": "871459ccb81bad3c1978a5a6b208dcd088d2b6e47bbde98b22b4f02f91a3da59",
+        "scenario": "cluster",
+        "camera_data": [
+          {
+            "name": "Camera",
+            "users": 1,
+            "angle": 0.6911112070083618
+          },
+          {
+            "name": "Camera.001",
+            "users": 1,
+            "angle": 1.4660766124725342
+          },
+          {
+            "name": "Camera.005",
+            "users": 1,
+            "angle": 1.4660766124725342
+          },
+          {
+            "name": "Camera.007",
+            "users": 1,
+            "angle": 1.4660766124725342
+          },
+          {
+            "name": "Camera.008",
+            "users": 1,
+            "angle": 1.4660766124725342
+          }
+        ],
+        "camera_objects": [
+          {
+            "name": "Camera",
+            "data": "Camera"
+          },
+          {
+            "name": "uav1",
+            "data": "Camera.005"
+          },
+          {
+            "name": "uav2",
+            "data": "Camera.008"
+          },
+          {
+            "name": "uav3",
+            "data": "Camera.007"
+          },
+          {
+            "name": "uav4",
+            "data": "Camera.001"
+          }
+        ],
+        "active_camera": "Camera"
+      },
+      "fidelity_status": "blocked",
+      "blockers": [
+        "paper_not_independently_accessible_for_required_fidelity_comparison"
+      ],
+      "fidelity_note": "Historical inputs/counts/starts corroborated; source-paper equivalence remains unverified. Old scores/paths are audit evidence only."
+    },
+    {
+      "name": "cross_mix",
+      "robots": 4,
+      "actors": 6,
+      "horizon": 100,
+      "grid": {
+        "width": 29,
+        "height": 29,
+        "headings": 8
+      },
+      "input_path": "data/scenarios/published/cross_mix/cross_mix_data.json",
+      "input_sha256": "e58be661532a7f5bb9fb2439d65ca818baf8ecbb318a820eb1a9ab73a20a7c0f",
+      "source_path": "experiments/cross_mix/cross_mix_data.json",
+      "input_revision": "0f12ff66597df791fa3840b7b1f7bb4fe724c088",
+      "upstream_head": "42f97540ff002651822a9bbd617bff3d68ab93e2",
+      "head_input_sha256": "44c346ef5b332bdad1cfd8a608aa9c464c63e3842f640235bfa8b4c7200e33a5",
+      "head_json_robots": 5,
+      "changed_keys_since_input_revision": [
+        "num_robots",
+        "robot_fovs"
+      ],
+      "initial_states": [
+        [
+          1,
+          {
+            "state": {
+              "x": 27,
+              "y": 26,
+              "heading": "SE"
+            },
+            "depth": 1,
+            "horizon": 100
+          }
+        ],
+        [
+          2,
+          {
+            "state": {
+              "x": 15,
+              "y": 1,
+              "heading": "NE"
+            },
+            "depth": 1,
+            "horizon": 100
+          }
+        ],
+        [
+          3,
+          {
+            "state": {
+              "x": 3,
+              "y": 14,
+              "heading": "NE"
+            },
+            "depth": 1,
+            "horizon": 100
+          }
+        ],
+        [
+          4,
+          {
+            "state": {
+              "x": 17,
+              "y": 21,
+              "heading": "SE"
+            },
+            "depth": 1,
+            "horizon": 100
+          }
+        ]
+      ],
+      "initial_state_method": "recovered_from_all_four_feasible_upstream_baselines",
+      "initial_state_seed": null,
+      "starting_states_sha256": "6f9b680976523eeb11f5e435c6558a333672877bf1f2fd81c58d0e9ff1cb1293",
+      "formation_seed": 2026,
+      "camera": {
+        "model": "ViewConeSensor",
+        "fov": 1.5707963267948966,
+        "cutoff": 100.0,
+        "cutoff_test_enabled": false,
+        "source": "MDMA_Experiment.init_discrete_problem override"
+      },
+      "move_dist": 3,
+      "vi": {
+        "max_iterations": 90,
+        "belres": 1e-06,
+        "discount": 1,
+        "include_Q": false
+      },
+      "original_artifacts": [
+        {
+          "planner": "greedy",
+          "path": "experiments/cross_mix/greedy/solution.json",
+          "source_revision": "42f97540ff002651822a9bbd617bff3d68ab93e2",
+          "sha256": "4d5941a726525a6342fb8bf78321a0dfb9b3de97b9d8a592c54ea19e9f0e95af",
+          "robots": 4,
+          "horizon": 100,
+          "initial_states": [
+            [
+              1,
+              {
+                "state": {
+                  "x": 27,
+                  "y": 26,
+                  "heading": "SE"
+                },
+                "depth": 1,
+                "horizon": 100
+              }
+            ],
+            [
+              2,
+              {
+                "state": {
+                  "x": 15,
+                  "y": 1,
+                  "heading": "NE"
+                },
+                "depth": 1,
+                "horizon": 100
+              }
+            ],
+            [
+              3,
+              {
+                "state": {
+                  "x": 3,
+                  "y": 14,
+                  "heading": "NE"
+                },
+                "depth": 1,
+                "horizon": 100
+              }
+            ],
+            [
+              4,
+              {
+                "state": {
+                  "x": 17,
+                  "y": 21,
+                  "heading": "SE"
+                },
+                "depth": 1,
+                "horizon": 100
+              }
+            ]
+          ]
+        },
+        {
+          "planner": "multipleroundsgreedy",
+          "path": "experiments/cross_mix/multipleroundsgreedy/solution.json",
+          "source_revision": "42f97540ff002651822a9bbd617bff3d68ab93e2",
+          "sha256": "57e4f4841984fe9599fcb024ba7181eb4b0a80f86b59d6a3c1fd68613431ee1a",
+          "robots": 4,
+          "horizon": 100,
+          "initial_states": [
+            [
+              1,
+              {
+                "state": {
+                  "x": 27,
+                  "y": 26,
+                  "heading": "SE"
+                },
+                "depth": 1,
+                "horizon": 100
+              }
+            ],
+            [
+              2,
+              {
+                "state": {
+                  "x": 15,
+                  "y": 1,
+                  "heading": "NE"
+                },
+                "depth": 1,
+                "horizon": 100
+              }
+            ],
+            [
+              3,
+              {
+                "state": {
+                  "x": 3,
+                  "y": 14,
+                  "heading": "NE"
+                },
+                "depth": 1,
+                "horizon": 100
+              }
+            ],
+            [
+              4,
+              {
+                "state": {
+                  "x": 17,
+                  "y": 21,
+                  "heading": "SE"
+                },
+                "depth": 1,
+                "horizon": 100
+              }
+            ]
+          ]
+        },
+        {
+          "planner": "myopic",
+          "path": "experiments/cross_mix/myopic/solution.json",
+          "source_revision": "42f97540ff002651822a9bbd617bff3d68ab93e2",
+          "sha256": "c38f994fe9d97e94ce7d54178a1f8d16373c60a236303bde4986cfed7b94810b",
+          "robots": 4,
+          "horizon": 100,
+          "initial_states": [
+            [
+              1,
+              {
+                "state": {
+                  "x": 27,
+                  "y": 26,
+                  "heading": "SE"
+                },
+                "depth": 1,
+                "horizon": 100
+              }
+            ],
+            [
+              2,
+              {
+                "state": {
+                  "x": 15,
+                  "y": 1,
+                  "heading": "NE"
+                },
+                "depth": 1,
+                "horizon": 100
+              }
+            ],
+            [
+              3,
+              {
+                "state": {
+                  "x": 3,
+                  "y": 14,
+                  "heading": "NE"
+                },
+                "depth": 1,
+                "horizon": 100
+              }
+            ],
+            [
+              4,
+              {
+                "state": {
+                  "x": 17,
+                  "y": 21,
+                  "heading": "SE"
+                },
+                "depth": 1,
+                "horizon": 100
+              }
+            ]
+          ]
+        },
+        {
+          "planner": "assignment",
+          "path": "experiments/cross_mix/assignment/solution.json",
+          "source_revision": "42f97540ff002651822a9bbd617bff3d68ab93e2",
+          "sha256": "b7836f3d0fdb1e7d252fbf98ba252c88c8aa2567e0e624bfd020779bd09fde05",
+          "robots": 4,
+          "horizon": 100,
+          "initial_states": [
+            [
+              1,
+              {
+                "state": {
+                  "x": 27,
+                  "y": 26,
+                  "heading": "SE"
+                },
+                "depth": 1,
+                "horizon": 100
+              }
+            ],
+            [
+              2,
+              {
+                "state": {
+                  "x": 15,
+                  "y": 1,
+                  "heading": "NE"
+                },
+                "depth": 1,
+                "horizon": 100
+              }
+            ],
+            [
+              3,
+              {
+                "state": {
+                  "x": 3,
+                  "y": 14,
+                  "heading": "NE"
+                },
+                "depth": 1,
+                "horizon": 100
+              }
+            ],
+            [
+              4,
+              {
+                "state": {
+                  "x": 17,
+                  "y": 21,
+                  "heading": "SE"
+                },
+                "depth": 1,
+                "horizon": 100
+              }
+            ]
+          ]
+        },
+        {
+          "planner": "formation",
+          "path": "experiments/cross_mix/formation/solution.json",
+          "source_revision": "42f97540ff002651822a9bbd617bff3d68ab93e2",
+          "sha256": "d0b74bdb82ded9328ff2202b7b170f755445a83727bb5d3ac957e008c42359e9",
+          "robots": 4,
+          "horizon": 100,
+          "initial_states": [
+            [
+              1,
+              {
+                "state": {
+                  "x": 27.832365530947648,
+                  "y": 9.888461187849003,
+                  "heading": "N"
+                },
+                "depth": 1,
+                "horizon": 100
+              }
+            ],
+            [
+              2,
+              {
+                "state": {
+                  "x": 20.768312379350704,
+                  "y": 34.62423215132932,
+                  "heading": "S"
+                },
+                "depth": 1,
+                "horizon": 100
+              }
+            ],
+            [
+              3,
+              {
+                "state": {
+                  "x": -3.9674585841296164,
+                  "y": 27.56017899973238,
+                  "heading": "E"
+                },
+                "depth": 1,
+                "horizon": 100
+              }
+            ],
+            [
+              4,
+              {
+                "state": {
+                  "x": 3.0965945674673314,
+                  "y": 2.8244080362520574,
+                  "heading": "NE"
+                },
+                "depth": 1,
+                "horizon": 100
+              }
+            ]
+          ]
+        }
+      ],
+      "blend": {
+        "sha256": "6f28073aab7ccef1d8644d9d9b86dbfb36c396d8ea2f21b736fbc75b89bd15de",
+        "scenario": "cross_mix",
+        "camera_data": [
+          {
+            "name": "Camera.001",
+            "users": 1,
+            "angle": 1.4660766124725342
+          },
+          {
+            "name": "Camera.002",
+            "users": 1,
+            "angle": 0.6911112070083618
+          },
+          {
+            "name": "Camera.003",
+            "users": 1,
+            "angle": 1.4660766124725342
+          },
+          {
+            "name": "Camera.010",
+            "users": 1,
+            "angle": 1.4660766124725342
+          },
+          {
+            "name": "Camera.011",
+            "users": 1,
+            "angle": 1.4660766124725342
+          }
+        ],
+        "camera_objects": [
+          {
+            "name": "Camera.002",
+            "data": "Camera.002"
+          },
+          {
+            "name": "uav1",
+            "data": "Camera.010"
+          },
+          {
+            "name": "uav2",
+            "data": "Camera.001"
+          },
+          {
+            "name": "uav3",
+            "data": "Camera.011"
+          },
+          {
+            "name": "uav4",
+            "data": "Camera.003"
+          }
+        ],
+        "active_camera": "Camera.002"
+      },
+      "fidelity_status": "blocked",
+      "blockers": [
+        "paper_not_independently_accessible_for_required_fidelity_comparison"
+      ],
+      "fidelity_note": "Historical inputs/counts/starts corroborated; source-paper equivalence remains unverified. Old scores/paths are audit evidence only."
+    },
+    {
+      "name": "four_split",
+      "robots": 4,
+      "actors": 4,
+      "horizon": 100,
+      "grid": {
+        "width": 29,
+        "height": 29,
+        "headings": 8
+      },
+      "input_path": "data/scenarios/published/four_split/four_split_data.json",
+      "input_sha256": "0f060602755fcf497c377cec32a0b6666e94e072f069fe8939da75bc30dbdbbb",
+      "source_path": "experiments/four_split/four_split_data.json",
+      "input_revision": "0f12ff66597df791fa3840b7b1f7bb4fe724c088",
+      "upstream_head": "42f97540ff002651822a9bbd617bff3d68ab93e2",
+      "head_input_sha256": "2b525ecb62c6da9a569f514721569bbde2062f4299473063bed0ea015d602b0c",
+      "head_json_robots": 5,
+      "changed_keys_since_input_revision": [
+        "num_robots",
+        "robot_fovs"
+      ],
+      "initial_states": [
+        [
+          1,
+          {
+            "state": {
+              "x": 4,
+              "y": 27,
+              "heading": "E"
+            },
+            "depth": 1,
+            "horizon": 100
+          }
+        ],
+        [
+          2,
+          {
+            "state": {
+              "x": 16,
+              "y": 29,
+              "heading": "SE"
+            },
+            "depth": 1,
+            "horizon": 100
+          }
+        ],
+        [
+          3,
+          {
+            "state": {
+              "x": 22,
+              "y": 21,
+              "heading": "SW"
+            },
+            "depth": 1,
+            "horizon": 100
+          }
+        ],
+        [
+          4,
+          {
+            "state": {
+              "x": 8,
+              "y": 22,
+              "heading": "W"
+            },
+            "depth": 1,
+            "horizon": 100
+          }
+        ]
+      ],
+      "initial_state_method": "recovered_from_all_four_feasible_upstream_baselines",
+      "initial_state_seed": null,
+      "starting_states_sha256": "60e1812c8ba5db28e1e329375bc8f1b6789bc8861dba1413253cb757fec587b7",
+      "formation_seed": 2026,
+      "camera": {
+        "model": "ViewConeSensor",
+        "fov": 1.5707963267948966,
+        "cutoff": 100.0,
+        "cutoff_test_enabled": false,
+        "source": "MDMA_Experiment.init_discrete_problem override"
+      },
+      "move_dist": 3,
+      "vi": {
+        "max_iterations": 90,
+        "belres": 1e-06,
+        "discount": 1,
+        "include_Q": false
+      },
+      "original_artifacts": [
+        {
+          "planner": "greedy",
+          "path": "experiments/four_split/greedy/solution.json",
+          "source_revision": "42f97540ff002651822a9bbd617bff3d68ab93e2",
+          "sha256": "adc1053bb5d8739041c279b4fa1b775406ba5352ffd02b05bcda927c81e7f0ad",
+          "robots": 4,
+          "horizon": 100,
+          "initial_states": [
+            [
+              1,
+              {
+                "state": {
+                  "x": 4,
+                  "y": 27,
+                  "heading": "E"
+                },
+                "depth": 1,
+                "horizon": 100
+              }
+            ],
+            [
+              2,
+              {
+                "state": {
+                  "x": 16,
+                  "y": 29,
+                  "heading": "SE"
+                },
+                "depth": 1,
+                "horizon": 100
+              }
+            ],
+            [
+              3,
+              {
+                "state": {
+                  "x": 22,
+                  "y": 21,
+                  "heading": "SW"
+                },
+                "depth": 1,
+                "horizon": 100
+              }
+            ],
+            [
+              4,
+              {
+                "state": {
+                  "x": 8,
+                  "y": 22,
+                  "heading": "W"
+                },
+                "depth": 1,
+                "horizon": 100
+              }
+            ]
+          ]
+        },
+        {
+          "planner": "multipleroundsgreedy",
+          "path": "experiments/four_split/multipleroundsgreedy/solution.json",
+          "source_revision": "42f97540ff002651822a9bbd617bff3d68ab93e2",
+          "sha256": "c924da0a1a5431d3bae93c26b3035ceccf126c9ad302ad352e31d6e1ee60cb5f",
+          "robots": 4,
+          "horizon": 100,
+          "initial_states": [
+            [
+              1,
+              {
+                "state": {
+                  "x": 4,
+                  "y": 27,
+                  "heading": "E"
+                },
+                "depth": 1,
+                "horizon": 100
+              }
+            ],
+            [
+              2,
+              {
+                "state": {
+                  "x": 16,
+                  "y": 29,
+                  "heading": "SE"
+                },
+                "depth": 1,
+                "horizon": 100
+              }
+            ],
+            [
+              3,
+              {
+                "state": {
+                  "x": 22,
+                  "y": 21,
+                  "heading": "SW"
+                },
+                "depth": 1,
+                "horizon": 100
+              }
+            ],
+            [
+              4,
+              {
+                "state": {
+                  "x": 8,
+                  "y": 22,
+                  "heading": "W"
+                },
+                "depth": 1,
+                "horizon": 100
+              }
+            ]
+          ]
+        },
+        {
+          "planner": "myopic",
+          "path": "experiments/four_split/myopic/solution.json",
+          "source_revision": "42f97540ff002651822a9bbd617bff3d68ab93e2",
+          "sha256": "da76db7ff497bf70de653969eaa81402e1a6fa5248d01b7684ee99b3ac4ddb2c",
+          "robots": 4,
+          "horizon": 100,
+          "initial_states": [
+            [
+              1,
+              {
+                "state": {
+                  "x": 4,
+                  "y": 27,
+                  "heading": "E"
+                },
+                "depth": 1,
+                "horizon": 100
+              }
+            ],
+            [
+              2,
+              {
+                "state": {
+                  "x": 16,
+                  "y": 29,
+                  "heading": "SE"
+                },
+                "depth": 1,
+                "horizon": 100
+              }
+            ],
+            [
+              3,
+              {
+                "state": {
+                  "x": 22,
+                  "y": 21,
+                  "heading": "SW"
+                },
+                "depth": 1,
+                "horizon": 100
+              }
+            ],
+            [
+              4,
+              {
+                "state": {
+                  "x": 8,
+                  "y": 22,
+                  "heading": "W"
+                },
+                "depth": 1,
+                "horizon": 100
+              }
+            ]
+          ]
+        },
+        {
+          "planner": "assignment",
+          "path": "experiments/four_split/assignment/solution.json",
+          "source_revision": "42f97540ff002651822a9bbd617bff3d68ab93e2",
+          "sha256": "68cf892668095d9164b354abf8f8b6187cc01606e7a6eeb7de784c2e2afe1d46",
+          "robots": 4,
+          "horizon": 100,
+          "initial_states": [
+            [
+              1,
+              {
+                "state": {
+                  "x": 4,
+                  "y": 27,
+                  "heading": "E"
+                },
+                "depth": 1,
+                "horizon": 100
+              }
+            ],
+            [
+              2,
+              {
+                "state": {
+                  "x": 16,
+                  "y": 29,
+                  "heading": "SE"
+                },
+                "depth": 1,
+                "horizon": 100
+              }
+            ],
+            [
+              3,
+              {
+                "state": {
+                  "x": 22,
+                  "y": 21,
+                  "heading": "SW"
+                },
+                "depth": 1,
+                "horizon": 100
+              }
+            ],
+            [
+              4,
+              {
+                "state": {
+                  "x": 8,
+                  "y": 22,
+                  "heading": "W"
+                },
+                "depth": 1,
+                "horizon": 100
+              }
+            ]
+          ]
+        },
+        {
+          "planner": "formation",
+          "path": "experiments/four_split/formation/solution.json",
+          "source_revision": "42f97540ff002651822a9bbd617bff3d68ab93e2",
+          "sha256": "c41e321dc0dedc86279018b7319304174f129c81c721154142ba2c5de26825f2",
+          "robots": 4,
+          "horizon": 100,
+          "initial_states": [
+            [
+              1,
+              {
+                "state": {
+                  "x": 15.354635866516144,
+                  "y": 7.01806322466161,
+                  "heading": "W"
+                },
+                "depth": 1,
+                "horizon": 100
+              }
+            ],
+            [
+              2,
+              {
+                "state": {
+                  "x": 12.295475565087536,
+                  "y": 15.044585617416413,
+                  "heading": "SW"
+                },
+                "depth": 1,
+                "horizon": 100
+              }
+            ],
+            [
+              3,
+              {
+                "state": {
+                  "x": 4.268953172332733,
+                  "y": 11.985425315987806,
+                  "heading": "E"
+                },
+                "depth": 1,
+                "horizon": 100
+              }
+            ],
+            [
+              4,
+              {
+                "state": {
+                  "x": 7.32811347376134,
+                  "y": 3.958902923233002,
+                  "heading": "N"
+                },
+                "depth": 1,
+                "horizon": 100
+              }
+            ]
+          ]
+        }
+      ],
+      "blend": {
+        "sha256": "1b11a47846b7d1a9c6b36648111174a6533a39d3642de9d5ea135a7871d5b96d",
+        "scenario": "four_split",
+        "camera_data": [
+          {
+            "name": "Camera",
+            "users": 1,
+            "angle": 0.6911112070083618
+          },
+          {
+            "name": "Camera.001",
+            "users": 1,
+            "angle": 1.4660766124725342
+          },
+          {
+            "name": "Camera.002",
+            "users": 1,
+            "angle": 1.4660766124725342
+          },
+          {
+            "name": "Camera.010",
+            "users": 1,
+            "angle": 1.4660766124725342
+          },
+          {
+            "name": "Camera.011",
+            "users": 1,
+            "angle": 1.4660766124725342
+          }
+        ],
+        "camera_objects": [
+          {
+            "name": "Camera",
+            "data": "Camera"
+          },
+          {
+            "name": "uav1",
+            "data": "Camera.010"
+          },
+          {
+            "name": "uav2",
+            "data": "Camera.001"
+          },
+          {
+            "name": "uav3",
+            "data": "Camera.011"
+          },
+          {
+            "name": "uav4",
+            "data": "Camera.002"
+          }
+        ],
+        "active_camera": "Camera"
+      },
+      "fidelity_status": "blocked",
+      "blockers": [
+        "paper_not_independently_accessible_for_required_fidelity_comparison"
+      ],
+      "fidelity_note": "Historical inputs/counts/starts corroborated; source-paper equivalence remains unverified. Old scores/paths are audit evidence only."
+    },
+    {
+      "name": "priority_runners",
+      "robots": 5,
+      "actors": 7,
+      "horizon": 150,
+      "grid": {
+        "width": 33,
+        "height": 33,
+        "headings": 8
+      },
+      "input_path": "data/scenarios/published/priority_runners/priority_runners_data.json",
+      "input_sha256": "271cf05e74ff8448eb8b3cce4eecb3608077c453a3ff216bcc82e241ece2aa2b",
+      "source_path": "experiments/priority_runners/priority_runners_data.json",
+      "input_revision": "0f12ff66597df791fa3840b7b1f7bb4fe724c088",
+      "upstream_head": "42f97540ff002651822a9bbd617bff3d68ab93e2",
+      "head_input_sha256": "2536ddaa21234107ce6436007e8aa7f7afb1609a32ba0f08ff2de8cb95c94854",
+      "head_json_robots": 6,
+      "changed_keys_since_input_revision": [
+        "num_robots",
+        "robot_fovs"
+      ],
+      "initial_states": [
+        [
+          1,
+          {
+            "state": {
+              "x": 2,
+              "y": 9,
+              "heading": "SW"
+            },
+            "depth": 1,
+            "horizon": 150
+          }
+        ],
+        [
+          2,
+          {
+            "state": {
+              "x": 22,
+              "y": 5,
+              "heading": "NW"
+            },
+            "depth": 1,
+            "horizon": 150
+          }
+        ],
+        [
+          3,
+          {
+            "state": {
+              "x": 32,
+              "y": 2,
+              "heading": "W"
+            },
+            "depth": 1,
+            "horizon": 150
+          }
+        ],
+        [
+          4,
+          {
+            "state": {
+              "x": 23,
+              "y": 13,
+              "heading": "SE"
+            },
+            "depth": 1,
+            "horizon": 150
+          }
+        ],
+        [
+          5,
+          {
+            "state": {
+              "x": 13,
+              "y": 20,
+              "heading": "SE"
+            },
+            "depth": 1,
+            "horizon": 150
+          }
+        ]
+      ],
+      "initial_state_method": "recovered_from_all_four_feasible_upstream_baselines",
+      "initial_state_seed": null,
+      "starting_states_sha256": "82b02977309e4e4b63471e7ead6bd7eb6f5aa5183880378fbb7b4dd762f3734f",
+      "formation_seed": 2026,
+      "camera": {
+        "model": "ViewConeSensor",
+        "fov": 1.5707963267948966,
+        "cutoff": 100.0,
+        "cutoff_test_enabled": false,
+        "source": "MDMA_Experiment.init_discrete_problem override"
+      },
+      "move_dist": 3,
+      "vi": {
+        "max_iterations": 90,
+        "belres": 1e-06,
+        "discount": 1,
+        "include_Q": false
+      },
+      "original_artifacts": [
+        {
+          "planner": "greedy",
+          "path": "experiments/priority_runners/greedy/solution.json",
+          "source_revision": "42f97540ff002651822a9bbd617bff3d68ab93e2",
+          "sha256": "83bc4df6c62207d1b4bf8bd329aaa81665a62c089b111622daece2dad9032e7e",
+          "robots": 5,
+          "horizon": 150,
+          "initial_states": [
+            [
+              1,
+              {
+                "state": {
+                  "x": 2,
+                  "y": 9,
+                  "heading": "SW"
+                },
+                "depth": 1,
+                "horizon": 150
+              }
+            ],
+            [
+              2,
+              {
+                "state": {
+                  "x": 22,
+                  "y": 5,
+                  "heading": "NW"
+                },
+                "depth": 1,
+                "horizon": 150
+              }
+            ],
+            [
+              3,
+              {
+                "state": {
+                  "x": 32,
+                  "y": 2,
+                  "heading": "W"
+                },
+                "depth": 1,
+                "horizon": 150
+              }
+            ],
+            [
+              4,
+              {
+                "state": {
+                  "x": 23,
+                  "y": 13,
+                  "heading": "SE"
+                },
+                "depth": 1,
+                "horizon": 150
+              }
+            ],
+            [
+              5,
+              {
+                "state": {
+                  "x": 13,
+                  "y": 20,
+                  "heading": "SE"
+                },
+                "depth": 1,
+                "horizon": 150
+              }
+            ]
+          ]
+        },
+        {
+          "planner": "multipleroundsgreedy",
+          "path": "experiments/priority_runners/multipleroundsgreedy/solution.json",
+          "source_revision": "42f97540ff002651822a9bbd617bff3d68ab93e2",
+          "sha256": "90f13365ac194ba288573f451160792d22dbe9188bd82ec76ecfaa17a5eb203a",
+          "robots": 5,
+          "horizon": 150,
+          "initial_states": [
+            [
+              1,
+              {
+                "state": {
+                  "x": 2,
+                  "y": 9,
+                  "heading": "SW"
+                },
+                "depth": 1,
+                "horizon": 150
+              }
+            ],
+            [
+              2,
+              {
+                "state": {
+                  "x": 22,
+                  "y": 5,
+                  "heading": "NW"
+                },
+                "depth": 1,
+                "horizon": 150
+              }
+            ],
+            [
+              3,
+              {
+                "state": {
+                  "x": 32,
+                  "y": 2,
+                  "heading": "W"
+                },
+                "depth": 1,
+                "horizon": 150
+              }
+            ],
+            [
+              4,
+              {
+                "state": {
+                  "x": 23,
+                  "y": 13,
+                  "heading": "SE"
+                },
+                "depth": 1,
+                "horizon": 150
+              }
+            ],
+            [
+              5,
+              {
+                "state": {
+                  "x": 13,
+                  "y": 20,
+                  "heading": "SE"
+                },
+                "depth": 1,
+                "horizon": 150
+              }
+            ]
+          ]
+        },
+        {
+          "planner": "myopic",
+          "path": "experiments/priority_runners/myopic/solution.json",
+          "source_revision": "42f97540ff002651822a9bbd617bff3d68ab93e2",
+          "sha256": "d244dbcf9118bb36eb6d498bd7bcc0a75933b3aa1953e3f4db10b84dd3a5d13a",
+          "robots": 5,
+          "horizon": 150,
+          "initial_states": [
+            [
+              1,
+              {
+                "state": {
+                  "x": 2,
+                  "y": 9,
+                  "heading": "SW"
+                },
+                "depth": 1,
+                "horizon": 150
+              }
+            ],
+            [
+              2,
+              {
+                "state": {
+                  "x": 22,
+                  "y": 5,
+                  "heading": "NW"
+                },
+                "depth": 1,
+                "horizon": 150
+              }
+            ],
+            [
+              3,
+              {
+                "state": {
+                  "x": 32,
+                  "y": 2,
+                  "heading": "W"
+                },
+                "depth": 1,
+                "horizon": 150
+              }
+            ],
+            [
+              4,
+              {
+                "state": {
+                  "x": 23,
+                  "y": 13,
+                  "heading": "SE"
+                },
+                "depth": 1,
+                "horizon": 150
+              }
+            ],
+            [
+              5,
+              {
+                "state": {
+                  "x": 13,
+                  "y": 20,
+                  "heading": "SE"
+                },
+                "depth": 1,
+                "horizon": 150
+              }
+            ]
+          ]
+        },
+        {
+          "planner": "assignment",
+          "path": "experiments/priority_runners/assignment/solution.json",
+          "source_revision": "42f97540ff002651822a9bbd617bff3d68ab93e2",
+          "sha256": "199de5c56b5dd95d7660f2188513ab67785aa47efea0889e9a889cd8a32cfa5d",
+          "robots": 5,
+          "horizon": 150,
+          "initial_states": [
+            [
+              1,
+              {
+                "state": {
+                  "x": 2,
+                  "y": 9,
+                  "heading": "SW"
+                },
+                "depth": 1,
+                "horizon": 150
+              }
+            ],
+            [
+              2,
+              {
+                "state": {
+                  "x": 22,
+                  "y": 5,
+                  "heading": "NW"
+                },
+                "depth": 1,
+                "horizon": 150
+              }
+            ],
+            [
+              3,
+              {
+                "state": {
+                  "x": 32,
+                  "y": 2,
+                  "heading": "W"
+                },
+                "depth": 1,
+                "horizon": 150
+              }
+            ],
+            [
+              4,
+              {
+                "state": {
+                  "x": 23,
+                  "y": 13,
+                  "heading": "SE"
+                },
+                "depth": 1,
+                "horizon": 150
+              }
+            ],
+            [
+              5,
+              {
+                "state": {
+                  "x": 13,
+                  "y": 20,
+                  "heading": "SE"
+                },
+                "depth": 1,
+                "horizon": 150
+              }
+            ]
+          ]
+        },
+        {
+          "planner": "formation",
+          "path": "experiments/priority_runners/formation/solution.json",
+          "source_revision": "42f97540ff002651822a9bbd617bff3d68ab93e2",
+          "sha256": "03a4ce13f53051a2d6348dec13b07283070d26dbbb9bccd78a30d7b0624e1e81",
+          "robots": 5,
+          "horizon": 150,
+          "initial_states": [
+            [
+              1,
+              {
+                "state": {
+                  "x": 28.47715698196733,
+                  "y": 23.96223523642328,
+                  "heading": "W"
+                },
+                "depth": 1,
+                "horizon": 150
+              }
+            ],
+            [
+              2,
+              {
+                "state": {
+                  "x": 22.068840043992108,
+                  "y": 28.49291842000015,
+                  "heading": "S"
+                },
+                "depth": 1,
+                "horizon": 150
+              }
+            ],
+            [
+              3,
+              {
+                "state": {
+                  "x": 15.77962543980728,
+                  "y": 23.798304937508256,
+                  "heading": "E"
+                },
+                "depth": 1,
+                "horizon": 150
+              }
+            ],
+            [
+              4,
+              {
+                "state": {
+                  "x": 18.30099398985406,
+                  "y": 16.36619105770788,
+                  "heading": "NE"
+                },
+                "depth": 1,
+                "horizon": 150
+              }
+            ],
+            [
+              5,
+              {
+                "state": {
+                  "x": 26.14850005613284,
+                  "y": 16.467505554223294,
+                  "heading": "NW"
+                },
+                "depth": 1,
+                "horizon": 150
+              }
+            ]
+          ]
+        }
+      ],
+      "blend": {
+        "sha256": "1a116a2c3fac7544d9940d89700cd7509cf88a868348993d73df907819d533ed",
+        "scenario": "priority_runners",
+        "camera_data": [
+          {
+            "name": "Camera",
+            "users": 1,
+            "angle": 0.6911112070083618
+          },
+          {
+            "name": "Camera.001",
+            "users": 1,
+            "angle": 1.4660766124725342
+          },
+          {
+            "name": "Camera.002",
+            "users": 1,
+            "angle": 1.4660766124725342
+          },
+          {
+            "name": "Camera.003",
+            "users": 1,
+            "angle": 1.4660766124725342
+          },
+          {
+            "name": "Camera.010",
+            "users": 1,
+            "angle": 1.4660766124725342
+          },
+          {
+            "name": "Camera.011",
+            "users": 1,
+            "angle": 1.4660766124725342
+          }
+        ],
+        "camera_objects": [
+          {
+            "name": "Camera",
+            "data": "Camera"
+          },
+          {
+            "name": "uav1",
+            "data": "Camera.010"
+          },
+          {
+            "name": "uav2",
+            "data": "Camera.001"
+          },
+          {
+            "name": "uav3",
+            "data": "Camera.011"
+          },
+          {
+            "name": "uav4",
+            "data": "Camera.002"
+          },
+          {
+            "name": "uav5",
+            "data": "Camera.003"
+          }
+        ],
+        "active_camera": "Camera"
+      },
+      "fidelity_status": "blocked",
+      "blockers": [
+        "paper_not_independently_accessible_for_required_fidelity_comparison"
+      ],
+      "fidelity_note": "Historical inputs/counts/starts corroborated; source-paper equivalence remains unverified. Old scores/paths are audit evidence only."
+    },
+    {
+      "name": "priority_speaker",
+      "robots": 5,
+      "actors": 10,
+      "horizon": 60,
+      "grid": {
+        "width": 25,
+        "height": 25,
+        "headings": 8
+      },
+      "input_path": "data/scenarios/published/priority_speaker/priority_speaker_data.json",
+      "input_sha256": "1044ad29f0d6e4da873ca1424a622528dd7b1af009d05ccdb4fb825848482cad",
+      "source_path": "experiments/priority_speaker/priority_speaker_data.json",
+      "input_revision": "0f12ff66597df791fa3840b7b1f7bb4fe724c088",
+      "upstream_head": "42f97540ff002651822a9bbd617bff3d68ab93e2",
+      "head_input_sha256": "b1aaba4604b8990fcac522e255aba8ba1a2502e2a3dd6d2206504cda4d141100",
+      "head_json_robots": 6,
+      "changed_keys_since_input_revision": [
+        "num_robots",
+        "robot_fovs"
+      ],
+      "initial_states": [
+        [
+          1,
+          {
+            "state": {
+              "x": 3,
+              "y": 17,
+              "heading": "SW"
+            },
+            "depth": 1,
+            "horizon": 60
+          }
+        ],
+        [
+          2,
+          {
+            "state": {
+              "x": 21,
+              "y": 25,
+              "heading": "E"
+            },
+            "depth": 1,
+            "horizon": 60
+          }
+        ],
+        [
+          3,
+          {
+            "state": {
+              "x": 3,
+              "y": 15,
+              "heading": "E"
+            },
+            "depth": 1,
+            "horizon": 60
+          }
+        ],
+        [
+          4,
+          {
+            "state": {
+              "x": 22,
+              "y": 15,
+              "heading": "S"
+            },
+            "depth": 1,
+            "horizon": 60
+          }
+        ],
+        [
+          5,
+          {
+            "state": {
+              "x": 10,
+              "y": 5,
+              "heading": "W"
+            },
+            "depth": 1,
+            "horizon": 60
+          }
+        ]
+      ],
+      "initial_state_method": "recovered_from_all_four_feasible_upstream_baselines",
+      "initial_state_seed": null,
+      "starting_states_sha256": "09f2feccb46d542a5a1928a46169d6a504b5264eb7b50fda56951ddd21930bc4",
+      "formation_seed": 2026,
+      "camera": {
+        "model": "ViewConeSensor",
+        "fov": 1.5707963267948966,
+        "cutoff": 100.0,
+        "cutoff_test_enabled": false,
+        "source": "MDMA_Experiment.init_discrete_problem override"
+      },
+      "move_dist": 3,
+      "vi": {
+        "max_iterations": 90,
+        "belres": 1e-06,
+        "discount": 1,
+        "include_Q": false
+      },
+      "original_artifacts": [
+        {
+          "planner": "greedy",
+          "path": "experiments/priority_speaker/greedy/solution.json",
+          "source_revision": "42f97540ff002651822a9bbd617bff3d68ab93e2",
+          "sha256": "4022d193b4138b3cbe0aaad08acbae0e1a5f2ee0a60406d6c17758c7d6c809fd",
+          "robots": 5,
+          "horizon": 60,
+          "initial_states": [
+            [
+              1,
+              {
+                "state": {
+                  "x": 3,
+                  "y": 17,
+                  "heading": "SW"
+                },
+                "depth": 1,
+                "horizon": 60
+              }
+            ],
+            [
+              2,
+              {
+                "state": {
+                  "x": 21,
+                  "y": 25,
+                  "heading": "E"
+                },
+                "depth": 1,
+                "horizon": 60
+              }
+            ],
+            [
+              3,
+              {
+                "state": {
+                  "x": 3,
+                  "y": 15,
+                  "heading": "E"
+                },
+                "depth": 1,
+                "horizon": 60
+              }
+            ],
+            [
+              4,
+              {
+                "state": {
+                  "x": 22,
+                  "y": 15,
+                  "heading": "S"
+                },
+                "depth": 1,
+                "horizon": 60
+              }
+            ],
+            [
+              5,
+              {
+                "state": {
+                  "x": 10,
+                  "y": 5,
+                  "heading": "W"
+                },
+                "depth": 1,
+                "horizon": 60
+              }
+            ]
+          ]
+        },
+        {
+          "planner": "multipleroundsgreedy",
+          "path": "experiments/priority_speaker/multipleroundsgreedy/solution.json",
+          "source_revision": "42f97540ff002651822a9bbd617bff3d68ab93e2",
+          "sha256": "fb1103517219f6cd0dc536560519deb0e7ab08cc313be6fda6be50e39cae712f",
+          "robots": 5,
+          "horizon": 60,
+          "initial_states": [
+            [
+              1,
+              {
+                "state": {
+                  "x": 3,
+                  "y": 17,
+                  "heading": "SW"
+                },
+                "depth": 1,
+                "horizon": 60
+              }
+            ],
+            [
+              2,
+              {
+                "state": {
+                  "x": 21,
+                  "y": 25,
+                  "heading": "E"
+                },
+                "depth": 1,
+                "horizon": 60
+              }
+            ],
+            [
+              3,
+              {
+                "state": {
+                  "x": 3,
+                  "y": 15,
+                  "heading": "E"
+                },
+                "depth": 1,
+                "horizon": 60
+              }
+            ],
+            [
+              4,
+              {
+                "state": {
+                  "x": 22,
+                  "y": 15,
+                  "heading": "S"
+                },
+                "depth": 1,
+                "horizon": 60
+              }
+            ],
+            [
+              5,
+              {
+                "state": {
+                  "x": 10,
+                  "y": 5,
+                  "heading": "W"
+                },
+                "depth": 1,
+                "horizon": 60
+              }
+            ]
+          ]
+        },
+        {
+          "planner": "myopic",
+          "path": "experiments/priority_speaker/myopic/solution.json",
+          "source_revision": "42f97540ff002651822a9bbd617bff3d68ab93e2",
+          "sha256": "7af2a5af3fc2047767ef5aa7708839d2346f32e61ea73a2348595c0c994866c0",
+          "robots": 5,
+          "horizon": 60,
+          "initial_states": [
+            [
+              1,
+              {
+                "state": {
+                  "x": 3,
+                  "y": 17,
+                  "heading": "SW"
+                },
+                "depth": 1,
+                "horizon": 60
+              }
+            ],
+            [
+              2,
+              {
+                "state": {
+                  "x": 21,
+                  "y": 25,
+                  "heading": "E"
+                },
+                "depth": 1,
+                "horizon": 60
+              }
+            ],
+            [
+              3,
+              {
+                "state": {
+                  "x": 3,
+                  "y": 15,
+                  "heading": "E"
+                },
+                "depth": 1,
+                "horizon": 60
+              }
+            ],
+            [
+              4,
+              {
+                "state": {
+                  "x": 22,
+                  "y": 15,
+                  "heading": "S"
+                },
+                "depth": 1,
+                "horizon": 60
+              }
+            ],
+            [
+              5,
+              {
+                "state": {
+                  "x": 10,
+                  "y": 5,
+                  "heading": "W"
+                },
+                "depth": 1,
+                "horizon": 60
+              }
+            ]
+          ]
+        },
+        {
+          "planner": "assignment",
+          "path": "experiments/priority_speaker/assignment/solution.json",
+          "source_revision": "42f97540ff002651822a9bbd617bff3d68ab93e2",
+          "sha256": "d1de33d32cab07bca1d66d714c1a66f94d0e16ca30558976cfde5156798f8d53",
+          "robots": 5,
+          "horizon": 60,
+          "initial_states": [
+            [
+              1,
+              {
+                "state": {
+                  "x": 3,
+                  "y": 17,
+                  "heading": "SW"
+                },
+                "depth": 1,
+                "horizon": 60
+              }
+            ],
+            [
+              2,
+              {
+                "state": {
+                  "x": 21,
+                  "y": 25,
+                  "heading": "E"
+                },
+                "depth": 1,
+                "horizon": 60
+              }
+            ],
+            [
+              3,
+              {
+                "state": {
+                  "x": 3,
+                  "y": 15,
+                  "heading": "E"
+                },
+                "depth": 1,
+                "horizon": 60
+              }
+            ],
+            [
+              4,
+              {
+                "state": {
+                  "x": 22,
+                  "y": 15,
+                  "heading": "S"
+                },
+                "depth": 1,
+                "horizon": 60
+              }
+            ],
+            [
+              5,
+              {
+                "state": {
+                  "x": 10,
+                  "y": 5,
+                  "heading": "W"
+                },
+                "depth": 1,
+                "horizon": 60
+              }
+            ]
+          ]
+        },
+        {
+          "planner": "formation",
+          "path": "experiments/priority_speaker/formation/solution.json",
+          "source_revision": "42f97540ff002651822a9bbd617bff3d68ab93e2",
+          "sha256": "5ac9a17ab17d4e07c462ebea61786c5b8f64d337ea3b29621a21f1d6defae628",
+          "robots": 5,
+          "horizon": 60,
+          "initial_states": [
+            [
+              1,
+              {
+                "state": {
+                  "x": 25.95349170867251,
+                  "y": 8.283703768379665,
+                  "heading": "NW"
+                },
+                "depth": 1,
+                "horizon": 60
+              }
+            ],
+            [
+              2,
+              {
+                "state": {
+                  "x": 19.82879728726316,
+                  "y": 22.305723988267708,
+                  "heading": "SW"
+                },
+                "depth": 1,
+                "horizon": 60
+              }
+            ],
+            [
+              3,
+              {
+                "state": {
+                  "x": 4.600428923947307,
+                  "y": 20.81383599188431,
+                  "heading": "S"
+                },
+                "depth": 1,
+                "horizon": 60
+              }
+            ],
+            [
+              4,
+              {
+                "state": {
+                  "x": 1.3134741036238573,
+                  "y": 5.869778282823347,
+                  "heading": "NE"
+                },
+                "depth": 1,
+                "horizon": 60
+              }
+            ],
+            [
+              5,
+              {
+                "state": {
+                  "x": 14.51039266849451,
+                  "y": -1.8742693148328176,
+                  "heading": "N"
+                },
+                "depth": 1,
+                "horizon": 60
+              }
+            ]
+          ]
+        }
+      ],
+      "blend": {
+        "sha256": "9cefea5e75888baba7f6c1d1c0d745fdc6c07eb5b285c37397d687438ca8a235",
+        "scenario": "priority_speaker",
+        "camera_data": [
+          {
+            "name": "Camera",
+            "users": 1,
+            "angle": 0.6911112070083618
+          },
+          {
+            "name": "Camera.001",
+            "users": 1,
+            "angle": 1.4660766124725342
+          },
+          {
+            "name": "Camera.002",
+            "users": 1,
+            "angle": 1.4660766124725342
+          },
+          {
+            "name": "Camera.003",
+            "users": 1,
+            "angle": 1.4660766124725342
+          },
+          {
+            "name": "Camera.010",
+            "users": 1,
+            "angle": 1.4660766124725342
+          },
+          {
+            "name": "Camera.011",
+            "users": 1,
+            "angle": 1.4660766124725342
+          }
+        ],
+        "camera_objects": [
+          {
+            "name": "Camera",
+            "data": "Camera"
+          },
+          {
+            "name": "uav1",
+            "data": "Camera.010"
+          },
+          {
+            "name": "uav2",
+            "data": "Camera.001"
+          },
+          {
+            "name": "uav3",
+            "data": "Camera.011"
+          },
+          {
+            "name": "uav4",
+            "data": "Camera.002"
+          },
+          {
+            "name": "uav5",
+            "data": "Camera.003"
+          }
+        ],
+        "active_camera": "Camera"
+      },
+      "fidelity_status": "blocked",
+      "blockers": [
+        "paper_not_independently_accessible_for_required_fidelity_comparison"
+      ],
+      "fidelity_note": "Historical inputs/counts/starts corroborated; source-paper equivalence remains unverified. Old scores/paths are audit evidence only."
+    },
+    {
+      "name": "split_and_join",
+      "robots": 4,
+      "actors": 4,
+      "horizon": 80,
+      "grid": {
+        "width": 29,
+        "height": 29,
+        "headings": 8
+      },
+      "input_path": "data/scenarios/published/split_and_join/split_and_join_data.json",
+      "input_sha256": "e73d649187d0f95217559b1f8f744c71546ae778585a37c5721a9c25598193fc",
+      "source_path": "experiments/split_and_join/split_and_join_data.json",
+      "input_revision": "0f12ff66597df791fa3840b7b1f7bb4fe724c088",
+      "upstream_head": "42f97540ff002651822a9bbd617bff3d68ab93e2",
+      "head_input_sha256": "48a4d6e2675f013c15aeb22b20fd8f70482688f8fff9d5442a7693a394b3b154",
+      "head_json_robots": 5,
+      "changed_keys_since_input_revision": [
+        "num_robots",
+        "robot_fovs"
+      ],
+      "initial_states": [
+        [
+          1,
+          {
+            "state": {
+              "x": 14,
+              "y": 16,
+              "heading": "E"
+            },
+            "depth": 1,
+            "horizon": 80
+          }
+        ],
+        [
+          2,
+          {
+            "state": {
+              "x": 27,
+              "y": 17,
+              "heading": "NE"
+            },
+            "depth": 1,
+            "horizon": 80
+          }
+        ],
+        [
+          3,
+          {
+            "state": {
+              "x": 27,
+              "y": 20,
+              "heading": "SW"
+            },
+            "depth": 1,
+            "horizon": 80
+          }
+        ],
+        [
+          4,
+          {
+            "state": {
+              "x": 25,
+              "y": 16,
+              "heading": "S"
+            },
+            "depth": 1,
+            "horizon": 80
+          }
+        ]
+      ],
+      "initial_state_method": "recovered_from_all_four_feasible_upstream_baselines",
+      "initial_state_seed": null,
+      "starting_states_sha256": "d765d41873e3180f73a5ed826e953eb4f78ed3e6d0e2442d92c0b1b36bb3092e",
+      "formation_seed": 2026,
+      "camera": {
+        "model": "ViewConeSensor",
+        "fov": 1.5707963267948966,
+        "cutoff": 100.0,
+        "cutoff_test_enabled": false,
+        "source": "MDMA_Experiment.init_discrete_problem override"
+      },
+      "move_dist": 3,
+      "vi": {
+        "max_iterations": 90,
+        "belres": 1e-06,
+        "discount": 1,
+        "include_Q": false
+      },
+      "original_artifacts": [
+        {
+          "planner": "greedy",
+          "path": "experiments/split_and_join/greedy/solution.json",
+          "source_revision": "42f97540ff002651822a9bbd617bff3d68ab93e2",
+          "sha256": "f6c9a609b0ea60ab61ab61c44e6f06e2576604cbc824f64f40e7e7fd72b49417",
+          "robots": 4,
+          "horizon": 80,
+          "initial_states": [
+            [
+              1,
+              {
+                "state": {
+                  "x": 14,
+                  "y": 16,
+                  "heading": "E"
+                },
+                "depth": 1,
+                "horizon": 80
+              }
+            ],
+            [
+              2,
+              {
+                "state": {
+                  "x": 27,
+                  "y": 17,
+                  "heading": "NE"
+                },
+                "depth": 1,
+                "horizon": 80
+              }
+            ],
+            [
+              3,
+              {
+                "state": {
+                  "x": 27,
+                  "y": 20,
+                  "heading": "SW"
+                },
+                "depth": 1,
+                "horizon": 80
+              }
+            ],
+            [
+              4,
+              {
+                "state": {
+                  "x": 25,
+                  "y": 16,
+                  "heading": "S"
+                },
+                "depth": 1,
+                "horizon": 80
+              }
+            ]
+          ]
+        },
+        {
+          "planner": "multipleroundsgreedy",
+          "path": "experiments/split_and_join/multipleroundsgreedy/solution.json",
+          "source_revision": "42f97540ff002651822a9bbd617bff3d68ab93e2",
+          "sha256": "26265c0117c6d83a4ad10ba9775993effba7b68f82266a596e6c7b80cb015cc0",
+          "robots": 4,
+          "horizon": 80,
+          "initial_states": [
+            [
+              1,
+              {
+                "state": {
+                  "x": 14,
+                  "y": 16,
+                  "heading": "E"
+                },
+                "depth": 1,
+                "horizon": 80
+              }
+            ],
+            [
+              2,
+              {
+                "state": {
+                  "x": 27,
+                  "y": 17,
+                  "heading": "NE"
+                },
+                "depth": 1,
+                "horizon": 80
+              }
+            ],
+            [
+              3,
+              {
+                "state": {
+                  "x": 27,
+                  "y": 20,
+                  "heading": "SW"
+                },
+                "depth": 1,
+                "horizon": 80
+              }
+            ],
+            [
+              4,
+              {
+                "state": {
+                  "x": 25,
+                  "y": 16,
+                  "heading": "S"
+                },
+                "depth": 1,
+                "horizon": 80
+              }
+            ]
+          ]
+        },
+        {
+          "planner": "myopic",
+          "path": "experiments/split_and_join/myopic/solution.json",
+          "source_revision": "42f97540ff002651822a9bbd617bff3d68ab93e2",
+          "sha256": "0c80797f2110ef7124c7af8ea71d0ccf753656d1fc6df9920015514dd315e735",
+          "robots": 4,
+          "horizon": 80,
+          "initial_states": [
+            [
+              1,
+              {
+                "state": {
+                  "x": 14,
+                  "y": 16,
+                  "heading": "E"
+                },
+                "depth": 1,
+                "horizon": 80
+              }
+            ],
+            [
+              2,
+              {
+                "state": {
+                  "x": 27,
+                  "y": 17,
+                  "heading": "NE"
+                },
+                "depth": 1,
+                "horizon": 80
+              }
+            ],
+            [
+              3,
+              {
+                "state": {
+                  "x": 27,
+                  "y": 20,
+                  "heading": "SW"
+                },
+                "depth": 1,
+                "horizon": 80
+              }
+            ],
+            [
+              4,
+              {
+                "state": {
+                  "x": 25,
+                  "y": 16,
+                  "heading": "S"
+                },
+                "depth": 1,
+                "horizon": 80
+              }
+            ]
+          ]
+        },
+        {
+          "planner": "assignment",
+          "path": "experiments/split_and_join/assignment/solution.json",
+          "source_revision": "42f97540ff002651822a9bbd617bff3d68ab93e2",
+          "sha256": "87ef2a305a8669c390ddaa6c8fd6d8e94848cf8e7e392a7a78ff276b054c7289",
+          "robots": 4,
+          "horizon": 80,
+          "initial_states": [
+            [
+              1,
+              {
+                "state": {
+                  "x": 14,
+                  "y": 16,
+                  "heading": "E"
+                },
+                "depth": 1,
+                "horizon": 80
+              }
+            ],
+            [
+              2,
+              {
+                "state": {
+                  "x": 27,
+                  "y": 17,
+                  "heading": "NE"
+                },
+                "depth": 1,
+                "horizon": 80
+              }
+            ],
+            [
+              3,
+              {
+                "state": {
+                  "x": 27,
+                  "y": 20,
+                  "heading": "SW"
+                },
+                "depth": 1,
+                "horizon": 80
+              }
+            ],
+            [
+              4,
+              {
+                "state": {
+                  "x": 25,
+                  "y": 16,
+                  "heading": "S"
+                },
+                "depth": 1,
+                "horizon": 80
+              }
+            ]
+          ]
+        },
+        {
+          "planner": "formation",
+          "path": "experiments/split_and_join/formation/solution.json",
+          "source_revision": "42f97540ff002651822a9bbd617bff3d68ab93e2",
+          "sha256": "ab714e1a8c3b612934c5efeff2c49cab573d3f944e2dcbd45509fc8d26593ccc",
+          "robots": 4,
+          "horizon": 80,
+          "initial_states": [
+            [
+              1,
+              {
+                "state": {
+                  "x": 19.47732440913618,
+                  "y": 8.089252712634906,
+                  "heading": "SW"
+                },
+                "depth": 1,
+                "horizon": 80
+              }
+            ],
+            [
+              2,
+              {
+                "state": {
+                  "x": 11.043280122371808,
+                  "y": 7.997450990328198,
+                  "heading": "SE"
+                },
+                "depth": 1,
+                "horizon": 80
+              }
+            ],
+            [
+              3,
+              {
+                "state": {
+                  "x": 11.135081844678517,
+                  "y": -0.4365932964361745,
+                  "heading": "NE"
+                },
+                "depth": 1,
+                "horizon": 80
+              }
+            ],
+            [
+              4,
+              {
+                "state": {
+                  "x": 19.56912613144289,
+                  "y": -0.34479157412946737,
+                  "heading": "NW"
+                },
+                "depth": 1,
+                "horizon": 80
+              }
+            ]
+          ]
+        }
+      ],
+      "blend": {
+        "sha256": "a1399d4acf1e4ae9818e9a67aebf1b4f0cb103f742f81e10a83a77bc46f4e4a9",
+        "scenario": "split_and_join",
+        "camera_data": [
+          {
+            "name": "Camera",
+            "users": 1,
+            "angle": 0.6911112070083618
+          },
+          {
+            "name": "Camera.001",
+            "users": 1,
+            "angle": 1.4660766124725342
+          },
+          {
+            "name": "Camera.002",
+            "users": 1,
+            "angle": 1.4660766124725342
+          },
+          {
+            "name": "Camera.010",
+            "users": 1,
+            "angle": 1.4660766124725342
+          },
+          {
+            "name": "Camera.011",
+            "users": 1,
+            "angle": 1.4660766124725342
+          }
+        ],
+        "camera_objects": [
+          {
+            "name": "Camera",
+            "data": "Camera"
+          },
+          {
+            "name": "uav1",
+            "data": "Camera.010"
+          },
+          {
+            "name": "uav2",
+            "data": "Camera.001"
+          },
+          {
+            "name": "uav3",
+            "data": "Camera.011"
+          },
+          {
+            "name": "uav4",
+            "data": "Camera.002"
+          }
+        ],
+        "active_camera": "Camera"
+      },
+      "fidelity_status": "blocked",
+      "blockers": [
+        "paper_not_independently_accessible_for_required_fidelity_comparison"
+      ],
+      "fidelity_note": "Historical inputs/counts/starts corroborated; source-paper equivalence remains unverified. Old scores/paths are audit evidence only."
+    },
+    {
+      "name": "spreadout_group",
+      "robots": 4,
+      "actors": 4,
+      "horizon": 80,
+      "grid": {
+        "width": 29,
+        "height": 29,
+        "headings": 8
+      },
+      "input_path": "data/scenarios/published/spreadout_group/spreadout_group_data.json",
+      "input_sha256": "a8b61f4f23a9ce846343b480ef44e99d970cdac1bd7f9ce7c9a3553e73612c61",
+      "source_path": "experiments/spreadout_group/spreadout_group_data.json",
+      "input_revision": "0f12ff66597df791fa3840b7b1f7bb4fe724c088",
+      "upstream_head": "42f97540ff002651822a9bbd617bff3d68ab93e2",
+      "head_input_sha256": "33b6ef41d69bd72db97f2a1c88da2a97a8b7c9473156cbabb7796ee8bad08b2a",
+      "head_json_robots": 5,
+      "changed_keys_since_input_revision": [
+        "num_robots",
+        "robot_fovs"
+      ],
+      "initial_states": [
+        [
+          1,
+          {
+            "state": {
+              "x": 6,
+              "y": 13,
+              "heading": "W"
+            },
+            "depth": 1,
+            "horizon": 80
+          }
+        ],
+        [
+          2,
+          {
+            "state": {
+              "x": 17,
+              "y": 2,
+              "heading": "N"
+            },
+            "depth": 1,
+            "horizon": 80
+          }
+        ],
+        [
+          3,
+          {
+            "state": {
+              "x": 21,
+              "y": 3,
+              "heading": "NW"
+            },
+            "depth": 1,
+            "horizon": 80
+          }
+        ],
+        [
+          4,
+          {
+            "state": {
+              "x": 14,
+              "y": 27,
+              "heading": "S"
+            },
+            "depth": 1,
+            "horizon": 80
+          }
+        ]
+      ],
+      "initial_state_method": "recovered_from_all_four_feasible_upstream_baselines",
+      "initial_state_seed": null,
+      "starting_states_sha256": "2860e18571facb4ea346e31b8d3a74c92fdcfaaa8ec8a2c3f366594839b66f14",
+      "formation_seed": 2026,
+      "camera": {
+        "model": "ViewConeSensor",
+        "fov": 1.5707963267948966,
+        "cutoff": 100.0,
+        "cutoff_test_enabled": false,
+        "source": "MDMA_Experiment.init_discrete_problem override"
+      },
+      "move_dist": 3,
+      "vi": {
+        "max_iterations": 90,
+        "belres": 1e-06,
+        "discount": 1,
+        "include_Q": false
+      },
+      "original_artifacts": [
+        {
+          "planner": "greedy",
+          "path": "experiments/spreadout_group/greedy/solution.json",
+          "source_revision": "42f97540ff002651822a9bbd617bff3d68ab93e2",
+          "sha256": "f6a4760c34d9cda75d15ad6c3f9709bb7963349634239c6283b55a56f2803ef6",
+          "robots": 4,
+          "horizon": 80,
+          "initial_states": [
+            [
+              1,
+              {
+                "state": {
+                  "x": 6,
+                  "y": 13,
+                  "heading": "W"
+                },
+                "depth": 1,
+                "horizon": 80
+              }
+            ],
+            [
+              2,
+              {
+                "state": {
+                  "x": 17,
+                  "y": 2,
+                  "heading": "N"
+                },
+                "depth": 1,
+                "horizon": 80
+              }
+            ],
+            [
+              3,
+              {
+                "state": {
+                  "x": 21,
+                  "y": 3,
+                  "heading": "NW"
+                },
+                "depth": 1,
+                "horizon": 80
+              }
+            ],
+            [
+              4,
+              {
+                "state": {
+                  "x": 14,
+                  "y": 27,
+                  "heading": "S"
+                },
+                "depth": 1,
+                "horizon": 80
+              }
+            ]
+          ]
+        },
+        {
+          "planner": "multipleroundsgreedy",
+          "path": "experiments/spreadout_group/multipleroundsgreedy/solution.json",
+          "source_revision": "42f97540ff002651822a9bbd617bff3d68ab93e2",
+          "sha256": "8d32f46940f3a8498039c03cff527d8931fe1a03f12c8926f996398a198f8ed4",
+          "robots": 4,
+          "horizon": 80,
+          "initial_states": [
+            [
+              1,
+              {
+                "state": {
+                  "x": 6,
+                  "y": 13,
+                  "heading": "W"
+                },
+                "depth": 1,
+                "horizon": 80
+              }
+            ],
+            [
+              2,
+              {
+                "state": {
+                  "x": 17,
+                  "y": 2,
+                  "heading": "N"
+                },
+                "depth": 1,
+                "horizon": 80
+              }
+            ],
+            [
+              3,
+              {
+                "state": {
+                  "x": 21,
+                  "y": 3,
+                  "heading": "NW"
+                },
+                "depth": 1,
+                "horizon": 80
+              }
+            ],
+            [
+              4,
+              {
+                "state": {
+                  "x": 14,
+                  "y": 27,
+                  "heading": "S"
+                },
+                "depth": 1,
+                "horizon": 80
+              }
+            ]
+          ]
+        },
+        {
+          "planner": "myopic",
+          "path": "experiments/spreadout_group/myopic/solution.json",
+          "source_revision": "42f97540ff002651822a9bbd617bff3d68ab93e2",
+          "sha256": "ac0e9f8883465ce8a5c080e698606f0a4e677c71aa5ca3c800953e7f2a9522e8",
+          "robots": 4,
+          "horizon": 80,
+          "initial_states": [
+            [
+              1,
+              {
+                "state": {
+                  "x": 6,
+                  "y": 13,
+                  "heading": "W"
+                },
+                "depth": 1,
+                "horizon": 80
+              }
+            ],
+            [
+              2,
+              {
+                "state": {
+                  "x": 17,
+                  "y": 2,
+                  "heading": "N"
+                },
+                "depth": 1,
+                "horizon": 80
+              }
+            ],
+            [
+              3,
+              {
+                "state": {
+                  "x": 21,
+                  "y": 3,
+                  "heading": "NW"
+                },
+                "depth": 1,
+                "horizon": 80
+              }
+            ],
+            [
+              4,
+              {
+                "state": {
+                  "x": 14,
+                  "y": 27,
+                  "heading": "S"
+                },
+                "depth": 1,
+                "horizon": 80
+              }
+            ]
+          ]
+        },
+        {
+          "planner": "assignment",
+          "path": "experiments/spreadout_group/assignment/solution.json",
+          "source_revision": "42f97540ff002651822a9bbd617bff3d68ab93e2",
+          "sha256": "12770c989ffb30d25fddb650157ad2f24982cbc7afbd9d1cb35962451ac9e1b4",
+          "robots": 4,
+          "horizon": 80,
+          "initial_states": [
+            [
+              1,
+              {
+                "state": {
+                  "x": 6,
+                  "y": 13,
+                  "heading": "W"
+                },
+                "depth": 1,
+                "horizon": 80
+              }
+            ],
+            [
+              2,
+              {
+                "state": {
+                  "x": 17,
+                  "y": 2,
+                  "heading": "N"
+                },
+                "depth": 1,
+                "horizon": 80
+              }
+            ],
+            [
+              3,
+              {
+                "state": {
+                  "x": 21,
+                  "y": 3,
+                  "heading": "NW"
+                },
+                "depth": 1,
+                "horizon": 80
+              }
+            ],
+            [
+              4,
+              {
+                "state": {
+                  "x": 14,
+                  "y": 27,
+                  "heading": "S"
+                },
+                "depth": 1,
+                "horizon": 80
+              }
+            ]
+          ]
+        },
+        {
+          "planner": "formation",
+          "path": "experiments/spreadout_group/formation/solution.json",
+          "source_revision": "42f97540ff002651822a9bbd617bff3d68ab93e2",
+          "sha256": "188e4786fdace4ae03a669d13241a9303984c7d4aced7262bb854725ae57aee4",
+          "robots": 4,
+          "horizon": 80,
+          "initial_states": [
+            [
+              1,
+              {
+                "state": {
+                  "x": 19.395267730683628,
+                  "y": 10.371700446871015,
+                  "heading": "NW"
+                },
+                "depth": 1,
+                "horizon": 80
+              }
+            ],
+            [
+              2,
+              {
+                "state": {
+                  "x": 21.07914598676851,
+                  "y": 18.68704128834659,
+                  "heading": "SW"
+                },
+                "depth": 1,
+                "horizon": 80
+              }
+            ],
+            [
+              3,
+              {
+                "state": {
+                  "x": 12.763805145292936,
+                  "y": 20.370919544431473,
+                  "heading": "SE"
+                },
+                "depth": 1,
+                "horizon": 80
+              }
+            ],
+            [
+              4,
+              {
+                "state": {
+                  "x": 11.079926889208052,
+                  "y": 12.0555787029559,
+                  "heading": "NE"
+                },
+                "depth": 1,
+                "horizon": 80
+              }
+            ]
+          ]
+        }
+      ],
+      "blend": {
+        "sha256": "e98de37abe914f16e259564cc35635a12b40a1f3968015c5453a43611c31a407",
+        "scenario": "spreadout_group",
+        "camera_data": [
+          {
+            "name": "Camera",
+            "users": 1,
+            "angle": 0.6911112070083618
+          },
+          {
+            "name": "Camera.001",
+            "users": 1,
+            "angle": 1.4660766124725342
+          },
+          {
+            "name": "Camera.002",
+            "users": 1,
+            "angle": 1.4660766124725342
+          },
+          {
+            "name": "Camera.010",
+            "users": 1,
+            "angle": 1.4660766124725342
+          },
+          {
+            "name": "Camera.011",
+            "users": 1,
+            "angle": 1.4660766124725342
+          }
+        ],
+        "camera_objects": [
+          {
+            "name": "Camera",
+            "data": "Camera"
+          },
+          {
+            "name": "uav1",
+            "data": "Camera.010"
+          },
+          {
+            "name": "uav2",
+            "data": "Camera.001"
+          },
+          {
+            "name": "uav3",
+            "data": "Camera.011"
+          },
+          {
+            "name": "uav4",
+            "data": "Camera.002"
+          }
+        ],
+        "active_camera": "Camera"
+      },
+      "fidelity_status": "blocked",
+      "blockers": [
+        "paper_not_independently_accessible_for_required_fidelity_comparison"
+      ],
+      "fidelity_note": "Historical inputs/counts/starts corroborated; source-paper equivalence remains unverified. Old scores/paths are audit evidence only."
+    },
+    {
+      "name": "track_runners",
+      "robots": 5,
+      "actors": 6,
+      "horizon": 150,
+      "grid": {
+        "width": 33,
+        "height": 33,
+        "headings": 8
+      },
+      "input_path": "data/scenarios/published/track_runners/track_runners_data.json",
+      "input_sha256": "8a57e42c966f0a6edfc79eb05f76826b02434b0edc50484202497f1717ffbe9d",
+      "source_path": "experiments/track_runners/track_runners_data.json",
+      "input_revision": "0f12ff66597df791fa3840b7b1f7bb4fe724c088",
+      "upstream_head": "42f97540ff002651822a9bbd617bff3d68ab93e2",
+      "head_input_sha256": "4b95417782490bb8eba6a5aadeb8f8d58b80c9e3cdd899d184b772e9ea6627fc",
+      "head_json_robots": 6,
+      "changed_keys_since_input_revision": [
+        "num_robots",
+        "robot_fovs"
+      ],
+      "initial_states": [
+        [
+          1,
+          {
+            "state": {
+              "x": 18,
+              "y": 18,
+              "heading": "E"
+            },
+            "depth": 1,
+            "horizon": 150
+          }
+        ],
+        [
+          2,
+          {
+            "state": {
+              "x": 2,
+              "y": 2,
+              "heading": "NW"
+            },
+            "depth": 1,
+            "horizon": 150
+          }
+        ],
+        [
+          3,
+          {
+            "state": {
+              "x": 33,
+              "y": 20,
+              "heading": "NW"
+            },
+            "depth": 1,
+            "horizon": 150
+          }
+        ],
+        [
+          4,
+          {
+            "state": {
+              "x": 4,
+              "y": 17,
+              "heading": "E"
+            },
+            "depth": 1,
+            "horizon": 150
+          }
+        ],
+        [
+          5,
+          {
+            "state": {
+              "x": 4,
+              "y": 7,
+              "heading": "NW"
+            },
+            "depth": 1,
+            "horizon": 150
+          }
+        ]
+      ],
+      "initial_state_method": "recovered_from_all_four_feasible_upstream_baselines",
+      "initial_state_seed": null,
+      "starting_states_sha256": "d1aafd40c2f9a9cf4936306f7e9c86a4c200a4200fea798dfdd07af286053dd0",
+      "formation_seed": 2026,
+      "camera": {
+        "model": "ViewConeSensor",
+        "fov": 1.5707963267948966,
+        "cutoff": 100.0,
+        "cutoff_test_enabled": false,
+        "source": "MDMA_Experiment.init_discrete_problem override"
+      },
+      "move_dist": 3,
+      "vi": {
+        "max_iterations": 90,
+        "belres": 1e-06,
+        "discount": 1,
+        "include_Q": false
+      },
+      "original_artifacts": [
+        {
+          "planner": "greedy",
+          "path": "experiments/track_runners/greedy/solution.json",
+          "source_revision": "42f97540ff002651822a9bbd617bff3d68ab93e2",
+          "sha256": "0c0741e5a6b02b175cd9cb7d799c4bd972699b42232de5c59c013e054a1af88c",
+          "robots": 5,
+          "horizon": 150,
+          "initial_states": [
+            [
+              1,
+              {
+                "state": {
+                  "x": 18,
+                  "y": 18,
+                  "heading": "E"
+                },
+                "depth": 1,
+                "horizon": 150
+              }
+            ],
+            [
+              2,
+              {
+                "state": {
+                  "x": 2,
+                  "y": 2,
+                  "heading": "NW"
+                },
+                "depth": 1,
+                "horizon": 150
+              }
+            ],
+            [
+              3,
+              {
+                "state": {
+                  "x": 33,
+                  "y": 20,
+                  "heading": "NW"
+                },
+                "depth": 1,
+                "horizon": 150
+              }
+            ],
+            [
+              4,
+              {
+                "state": {
+                  "x": 4,
+                  "y": 17,
+                  "heading": "E"
+                },
+                "depth": 1,
+                "horizon": 150
+              }
+            ],
+            [
+              5,
+              {
+                "state": {
+                  "x": 4,
+                  "y": 7,
+                  "heading": "NW"
+                },
+                "depth": 1,
+                "horizon": 150
+              }
+            ]
+          ]
+        },
+        {
+          "planner": "multipleroundsgreedy",
+          "path": "experiments/track_runners/multipleroundsgreedy/solution.json",
+          "source_revision": "42f97540ff002651822a9bbd617bff3d68ab93e2",
+          "sha256": "78480a2f1dfc938d6effe9aafeb80be606177617e22348220085b11796706956",
+          "robots": 5,
+          "horizon": 150,
+          "initial_states": [
+            [
+              1,
+              {
+                "state": {
+                  "x": 18,
+                  "y": 18,
+                  "heading": "E"
+                },
+                "depth": 1,
+                "horizon": 150
+              }
+            ],
+            [
+              2,
+              {
+                "state": {
+                  "x": 2,
+                  "y": 2,
+                  "heading": "NW"
+                },
+                "depth": 1,
+                "horizon": 150
+              }
+            ],
+            [
+              3,
+              {
+                "state": {
+                  "x": 33,
+                  "y": 20,
+                  "heading": "NW"
+                },
+                "depth": 1,
+                "horizon": 150
+              }
+            ],
+            [
+              4,
+              {
+                "state": {
+                  "x": 4,
+                  "y": 17,
+                  "heading": "E"
+                },
+                "depth": 1,
+                "horizon": 150
+              }
+            ],
+            [
+              5,
+              {
+                "state": {
+                  "x": 4,
+                  "y": 7,
+                  "heading": "NW"
+                },
+                "depth": 1,
+                "horizon": 150
+              }
+            ]
+          ]
+        },
+        {
+          "planner": "myopic",
+          "path": "experiments/track_runners/myopic/solution.json",
+          "source_revision": "42f97540ff002651822a9bbd617bff3d68ab93e2",
+          "sha256": "b2875052f571c2b7fe6f2cdd95bcf204fcc2042b5708d6fafaf1753f3589262f",
+          "robots": 5,
+          "horizon": 150,
+          "initial_states": [
+            [
+              1,
+              {
+                "state": {
+                  "x": 18,
+                  "y": 18,
+                  "heading": "E"
+                },
+                "depth": 1,
+                "horizon": 150
+              }
+            ],
+            [
+              2,
+              {
+                "state": {
+                  "x": 2,
+                  "y": 2,
+                  "heading": "NW"
+                },
+                "depth": 1,
+                "horizon": 150
+              }
+            ],
+            [
+              3,
+              {
+                "state": {
+                  "x": 33,
+                  "y": 20,
+                  "heading": "NW"
+                },
+                "depth": 1,
+                "horizon": 150
+              }
+            ],
+            [
+              4,
+              {
+                "state": {
+                  "x": 4,
+                  "y": 17,
+                  "heading": "E"
+                },
+                "depth": 1,
+                "horizon": 150
+              }
+            ],
+            [
+              5,
+              {
+                "state": {
+                  "x": 4,
+                  "y": 7,
+                  "heading": "NW"
+                },
+                "depth": 1,
+                "horizon": 150
+              }
+            ]
+          ]
+        },
+        {
+          "planner": "assignment",
+          "path": "experiments/track_runners/assignment/solution.json",
+          "source_revision": "42f97540ff002651822a9bbd617bff3d68ab93e2",
+          "sha256": "bc2828299ae93f710702b69f4d80cc7180fbca54523d325d45d4094b50af4b09",
+          "robots": 5,
+          "horizon": 150,
+          "initial_states": [
+            [
+              1,
+              {
+                "state": {
+                  "x": 18,
+                  "y": 18,
+                  "heading": "E"
+                },
+                "depth": 1,
+                "horizon": 150
+              }
+            ],
+            [
+              2,
+              {
+                "state": {
+                  "x": 2,
+                  "y": 2,
+                  "heading": "NW"
+                },
+                "depth": 1,
+                "horizon": 150
+              }
+            ],
+            [
+              3,
+              {
+                "state": {
+                  "x": 33,
+                  "y": 20,
+                  "heading": "NW"
+                },
+                "depth": 1,
+                "horizon": 150
+              }
+            ],
+            [
+              4,
+              {
+                "state": {
+                  "x": 4,
+                  "y": 17,
+                  "heading": "E"
+                },
+                "depth": 1,
+                "horizon": 150
+              }
+            ],
+            [
+              5,
+              {
+                "state": {
+                  "x": 4,
+                  "y": 7,
+                  "heading": "NW"
+                },
+                "depth": 1,
+                "horizon": 150
+              }
+            ]
+          ]
+        },
+        {
+          "planner": "formation",
+          "path": "experiments/track_runners/formation/solution.json",
+          "source_revision": "42f97540ff002651822a9bbd617bff3d68ab93e2",
+          "sha256": "c92ae45114cc053671013d3c6b4281fd7ca40289fcd04743f39a73ef9fd3bbad",
+          "robots": 5,
+          "horizon": 150,
+          "initial_states": [
+            [
+              1,
+              {
+                "state": {
+                  "x": 37.060219937710876,
+                  "y": 18.622393178191203,
+                  "heading": "W"
+                },
+                "depth": 1,
+                "horizon": 150
+              }
+            ],
+            [
+              2,
+              {
+                "state": {
+                  "x": 28.886286329334418,
+                  "y": 32.23786286982073,
+                  "heading": "S"
+                },
+                "depth": 1,
+                "horizon": 150
+              }
+            ],
+            [
+              3,
+              {
+                "state": {
+                  "x": 13.411320760810128,
+                  "y": 28.671401568920896,
+                  "heading": "SE"
+                },
+                "depth": 1,
+                "horizon": 150
+              }
+            ],
+            [
+              4,
+              {
+                "state": {
+                  "x": 12.02119967310423,
+                  "y": 12.851737573774098,
+                  "heading": "NE"
+                },
+                "depth": 1,
+                "horizon": 150
+              }
+            ],
+            [
+              5,
+              {
+                "state": {
+                  "x": 26.637023160948303,
+                  "y": 6.641108835070261,
+                  "heading": "N"
+                },
+                "depth": 1,
+                "horizon": 150
+              }
+            ]
+          ]
+        }
+      ],
+      "blend": {
+        "sha256": "0459b7034e34dcf7d69148b9b65d14458d595f79674dde09eb51765ef6014f22",
+        "scenario": "track_runners",
+        "camera_data": [
+          {
+            "name": "Camera",
+            "users": 1,
+            "angle": 0.6911112070083618
+          },
+          {
+            "name": "Camera.001",
+            "users": 1,
+            "angle": 1.4660766124725342
+          },
+          {
+            "name": "Camera.002",
+            "users": 1,
+            "angle": 1.4660766124725342
+          },
+          {
+            "name": "Camera.003",
+            "users": 1,
+            "angle": 1.4660766124725342
+          },
+          {
+            "name": "Camera.010",
+            "users": 1,
+            "angle": 1.4660766124725342
+          },
+          {
+            "name": "Camera.011",
+            "users": 1,
+            "angle": 1.4660766124725342
+          }
+        ],
+        "camera_objects": [
+          {
+            "name": "Camera",
+            "data": "Camera"
+          },
+          {
+            "name": "uav1",
+            "data": "Camera.010"
+          },
+          {
+            "name": "uav2",
+            "data": "Camera.001"
+          },
+          {
+            "name": "uav3",
+            "data": "Camera.011"
+          },
+          {
+            "name": "uav4",
+            "data": "Camera.002"
+          },
+          {
+            "name": "uav5",
+            "data": "Camera.003"
+          }
+        ],
+        "active_camera": "Camera"
+      },
+      "fidelity_status": "blocked",
+      "blockers": [
+        "paper_not_independently_accessible_for_required_fidelity_comparison"
+      ],
+      "fidelity_note": "Historical inputs/counts/starts corroborated; source-paper equivalence remains unverified. Old scores/paths are audit evidence only."
+    }
+  ]
+}

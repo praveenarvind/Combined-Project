@@ -10,6 +10,13 @@ include("planners/rsp.jl")
 include("benchmarking/runner.jl")
 include("benchmarking/io.jl")
 include("benchmarking/controls.jl")
+include("experiments/phase5_inventory.jl")
+include("experiments/phase5_execution.jl")
+include("experiments/phase5_reporting.jl")
+include("experiments/phase5_fixture.jl")
+
+export ordered_rsp_assignments, phase5_configuration, phase5_inventory, initialize_phase5
+export run_phase5_batch, phase5_completion, summarize_phase5, phase5_fixture_catalog
 
 export scheduling_control
 export run_benchmarks, summarize_benchmarks

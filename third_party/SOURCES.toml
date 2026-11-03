@@ -110,3 +110,59 @@ source = "experiments/priority_speaker/priority_speaker_data.json"
 destination = "data/scenarios/priority_speaker/priority_speaker_data.json"
 sha256 = "b1aaba4604b8990fcac522e255aba8ba1a2502e2a3dd6d2206504cda4d141100"
 adaptations = "None. Phase 4 imports scenario JSON input only; no solutions, rendered outputs or Blender execution."
+
+[[files]]
+source = "experiments/cluster/cluster_data.json"
+destination = "data/scenarios/published/cluster/cluster_data.json"
+source_commit = "0f12ff66597df791fa3840b7b1f7bb4fe724c088"
+sha256 = "2093ae376880df18f1e48ebb630136348946b112ced3caa73f1f476a5568bb16"
+adaptations = "None. Exact historical input, before the extra overview-camera count. Paper fidelity remains blocked pending audit; Phase 4 inputs are retained."
+
+[[files]]
+source = "experiments/cross_mix/cross_mix_data.json"
+destination = "data/scenarios/published/cross_mix/cross_mix_data.json"
+source_commit = "0f12ff66597df791fa3840b7b1f7bb4fe724c088"
+sha256 = "e58be661532a7f5bb9fb2439d65ca818baf8ecbb318a820eb1a9ab73a20a7c0f"
+adaptations = "None. Exact historical input, before the extra overview-camera count. Paper fidelity remains blocked pending audit; Phase 4 inputs are retained."
+
+[[files]]
+source = "experiments/four_split/four_split_data.json"
+destination = "data/scenarios/published/four_split/four_split_data.json"
+source_commit = "0f12ff66597df791fa3840b7b1f7bb4fe724c088"
+sha256 = "0f060602755fcf497c377cec32a0b6666e94e072f069fe8939da75bc30dbdbbb"
+adaptations = "None. Exact historical input, before the extra overview-camera count. Paper fidelity remains blocked pending audit; Phase 4 inputs are retained."
+
+[[files]]
+source = "experiments/priority_runners/priority_runners_data.json"
+destination = "data/scenarios/published/priority_runners/priority_runners_data.json"
+source_commit = "0f12ff66597df791fa3840b7b1f7bb4fe724c088"
+sha256 = "271cf05e74ff8448eb8b3cce4eecb3608077c453a3ff216bcc82e241ece2aa2b"
+adaptations = "None. Exact historical input, before the extra overview-camera count. Paper fidelity remains blocked pending audit; Phase 4 inputs are retained."
+
+[[files]]
+source = "experiments/priority_speaker/priority_speaker_data.json"
+destination = "data/scenarios/published/priority_speaker/priority_speaker_data.json"
+source_commit = "0f12ff66597df791fa3840b7b1f7bb4fe724c088"
+sha256 = "1044ad29f0d6e4da873ca1424a622528dd7b1af009d05ccdb4fb825848482cad"
+adaptations = "None. Exact historical input, before the extra overview-camera count. Paper fidelity remains blocked pending audit; Phase 4 inputs are retained."
+
+[[files]]
+source = "experiments/split_and_join/split_and_join_data.json"
+destination = "data/scenarios/published/split_and_join/split_and_join_data.json"
+source_commit = "0f12ff66597df791fa3840b7b1f7bb4fe724c088"
+sha256 = "e73d649187d0f95217559b1f8f744c71546ae778585a37c5721a9c25598193fc"
+adaptations = "None. Exact historical input, before the extra overview-camera count. Paper fidelity remains blocked pending audit; Phase 4 inputs are retained."
+
+[[files]]
+source = "experiments/spreadout_group/spreadout_group_data.json"
+destination = "data/scenarios/published/spreadout_group/spreadout_group_data.json"
+source_commit = "0f12ff66597df791fa3840b7b1f7bb4fe724c088"
+sha256 = "a8b61f4f23a9ce846343b480ef44e99d970cdac1bd7f9ce7c9a3553e73612c61"
+adaptations = "None. Exact historical input, before the extra overview-camera count. Paper fidelity remains blocked pending audit; Phase 4 inputs are retained."
+
+[[files]]
+source = "experiments/track_runners/track_runners_data.json"
+destination = "data/scenarios/published/track_runners/track_runners_data.json"
+source_commit = "0f12ff66597df791fa3840b7b1f7bb4fe724c088"
+sha256 = "8a57e42c966f0a6edfc79eb05f76826b02434b0edc50484202497f1717ffbe9d"
+adaptations = "None. Exact historical input, before the extra overview-camera count. Paper fidelity remains blocked pending audit; Phase 4 inputs are retained."

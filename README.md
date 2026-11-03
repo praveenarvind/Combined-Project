@@ -1,12 +1,13 @@
-# Distributed Multi-Drone Filming — Controlled RSP benchmarking
+# Distributed Multi-Drone Filming — RSP evaluation
 
 A Julia package based on Hughes et al.'s multi-drone filming implementation.
 The foundation imports the existing filming model, value iteration, baseline
 planners, and a **single copy** of the upstream submodular/RSP scheduling framework.
 Phase 2 adds one authoritative analytical joint SRPPA evaluator, separate legacy
-values and transition bonuses. Phase 3 adds seeded serial/threaded RSP adapters and small pilots. R-IRSP,
-full-scale experiments and theory remain out of scope. Phase 4 adds explicit-case
-benchmarking and separate task-local diagnostics; original algorithms are retained.
+values and transition bonuses. Phase 3 adds seeded serial/threaded RSP adapters and small pilots. Phase 4 adds
+controlled benchmarking and task-local diagnostics. Phase 5 adds the final-study
+runner and fidelity/resource gates; full original-scene evaluation is pending.
+R-IRSP and theoretical guarantees remain out of scope. Original algorithms are retained.
 
 ## Sources and attribution
 
@@ -47,7 +48,7 @@ Direct external dependencies are:
 | POMDPPolicies | 0.4.3 |
 | JSON3 | 1.12.0 |
 
-LinearAlgebra, Random, SparseArrays, Profile, SHA, Statistics and TOML are Julia
+Dates, LinearAlgebra, Random, SparseArrays, Profile, SHA, Statistics and TOML are Julia
 standard libraries; tests also use Test. Python, PyCall, Cairo, matplotlib, Jupyter, HistogramFilters
 and Blender are not needed for this headless foundation. Rendering is outside this
 phase; the original Dockerfile's Python/Blender compatibility issues are avoided
@@ -166,6 +167,35 @@ than serial; stage diagnostics place 99.4% of measured allocation inside VI.
 Plotting is optional and separate from
 Julia planning; pinned Python plot dependencies are in requirements-plots.txt.
 
+## Phase 5 final-study runner — fidelity audit incomplete
+
+Phase 4 is merged as `38bafbc`. The final-study infrastructure supports RSP-1
+through RSP-5, exhaustive RSP-2/3 assignments, the ten fixed RSP-4/5 seeds, original
+baselines, resumable per-experiment checkpoints, full validation and conditional
+statistics/plots. **The original-scenario study is not complete.** All eight scenes
+are gated pending the mandatory paper/source fidelity comparison; the paper URL
+is blocked by the live network policy.
+
+The count discrepancy is traced to an overview camera counted as a robot by the
+exporter. Exact older JSON inputs with the published four/five counts are retained
+separately in `data/scenarios/published/`, with source hashes and full original
+horizons. All four feasible saved baselines agree on each scene's historical
+starting states, which are recovered with provenance. No robot subset, edited JSON,
+truncated final horizon or old result score substitutes for a fresh experiment.
+
+```sh
+julia --threads=4 --project=. scripts/phase5.jl --inventory --output=results/phase5-final
+# Summarizes statuses; no partial scene becomes a final quality distribution.
+julia --threads=4 --project=. scripts/phase5.jl --summarize --output=results/phase5-final
+```
+
+The exact inventory contains 1,518 quality configurations, 2,996 paired executions
+and 13,860 VI calls before warmups/validation. See the [fidelity audit](docs/phase5/SCENARIO_FIDELITY.md)
+and [methods, gates and commands](docs/phase5/METHODS.md). Current CI uses only K<=5
+and a clearly synthetic fixture, never the full original matrix. Fixture outcomes
+are functional tests, not filming-reproduction results. Large original experiments
+start only after fidelity and resource checks are resolved.
+
 ## Docker
 
 ```sh
@@ -256,7 +286,8 @@ The empty upstream import-time testset is omitted; executable tests are in `test
 
 The analytical joint evaluator is implemented and tested in Phase 2. Rendered
 metrics remain unweighted and have not been reconciled with weighted analytical
-SRPPA. Phase 3 provides the RSP adapter and small pilots; Full-scale experiments, R-IRSP and Phase 5 remain pending review.
+SRPPA. Phase 5 provides the final-study runner; original-scene experiments remain pending
+fidelity and resource checks. R-IRSP and theoretical guarantees are not implemented.
 
 Actual executed checks are recorded in [docs/VALIDATION.md](docs/VALIDATION.md).
 
@@ -271,11 +302,13 @@ src/planners/rsp.jl              upstream-scheduler adapter and execution metada
 src/evaluation/srppa.jl          common joint objective, marginals and separate bonuses
 src/profiling/                  opt-in task-local stage hooks
 src/benchmarking/               explicit cases, metrics, controls and statistics
+src/experiments/                final inventory, checkpoint execution and statistics
 scripts/baseline.jl              one fresh baseline at a time
 scripts/rsp_pilot.jl             controlled serial/threaded small pilots
-scripts/benchmark.jl             bounded configurable benchmark runner
+scripts/benchmark.jl             Phase 4 benchmark runner (archival K=8 options)
+scripts/phase5.jl                final K=1:5 inventory/batches/summaries
 configs/benchmarks/              explicit study and CI cases
-data/scenarios/                 exact cluster, split_and_join and priority_speaker inputs
+data/scenarios/                 retained Phase 4 inputs and exact historical published/ inputs
 third_party/                    source references, hashes and BSD notices
 test/                           integration, compatibility and SRPPA unit checks
 docs/                           import notes, validation and evaluator conventions

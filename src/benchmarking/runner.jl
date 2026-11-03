@@ -1,7 +1,7 @@
 using TOML, SHA, Statistics, LinearAlgebra, Profile, JSON3
 
 const BENCHMARK_PLANNERS = Set(["greedy","multiround","myopic","myopic_threaded","assignment","formation_idealized",
-                               "rsp2_serial","rsp2_threaded","rsp4_serial","rsp4_threaded","rsp8_serial","rsp8_threaded"])
+                               ["rsp$(k)_$(mode)" for k in (1,2,3,4,5,8) for mode in ("serial","threaded")]...])
 
 function benchmark_configuration(scenario::AbstractString; num_robots::Integer, horizon::Integer, start_frame::Integer=1)
     scenario in ("cluster","split_and_join","priority_speaker") || throw(ArgumentError("unsupported scenario"))
@@ -136,18 +136,19 @@ function _validate_benchmark_solution(configs,states,solution;idealized=false)
      feasibility=idealized ? "idealized_reference_unconstrained" : "original_grid_and_motion")
 end
 
-function benchmark_plan(configs,states,planner::String;partition_seed=11,initial_seed=2026,detailed=false,sampling=false)
+function benchmark_plan(configs,states,planner::String;partition_seed=11,initial_seed=2026,detailed=false,sampling=false,assignments=nothing)
     planner in BENCHMARK_PLANNERS || throw(ArgumentError("unknown planner"))
     check_states(configs,states)
     threaded=endswith(planner,"_threaded")
     threaded && Threads.nthreads()<2 && throw(ArgumentError("threaded benchmark needs at least two Julia threads"))
     idealized=planner=="formation_idealized"
+    assignments!==nothing && !startswith(planner,"rsp") && throw(ArgumentError("assignments apply only to RSP"))
     labels=nothing
     configured=occupied=nothing
     depth=0
     if startswith(planner,"rsp")
         rounds=parse(Int,match(r"^rsp(\d+)_",planner).captures[1])
-        labels=rsp_assignments(RSPPlanner(rounds;seed=partition_seed),configs.num_robots)
+        labels=_rsp_labels(RSPPlanner(rounds;seed=partition_seed),configs.num_robots,assignments)
         dag=SubmodularMaximization.PartitionSolver(labels)
         solve=p -> SubmodularMaximization.solve_dag(dag,p;threaded=threaded)
         problem=MDMA.MultiRobotTargetCoverageProblem(copy(states),configs)

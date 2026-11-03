@@ -13,7 +13,7 @@ S.objective(::ConditioningProblem, selections) = 0.0
 
 @testset "Seeded RSP assignment and original DAG conditioning" begin
     @test Threads.nthreads() >= 2 # CI explicitly launches a multithreaded test worker.
-    for rounds in (1,2,4,8)
+    for rounds in (1,2,4,5)
         planner = RSPPlanner(rounds; seed=11)
         labels = rsp_assignments(planner,5)
         @test labels == rsp_assignments(planner,5)
@@ -26,7 +26,7 @@ S.objective(::ConditioningProblem, selections) = 0.0
     first_draw = rand(); second_draw = rand()
     Random.seed!(812)
     @test rand() == first_draw
-    rsp_assignments(RSPPlanner(8; seed=33),5)
+    rsp_assignments(RSPPlanner(5; seed=33),5)
     @test rand() == second_draw
     labels = [1,1,3,2,3]
     dag = S.PartitionSolver(labels)
@@ -83,7 +83,7 @@ end
     @test length(pair.metadata.worker_threads) > 1
     @test traces[1].started_ns < traces[2].finished_ns && traces[2].started_ns < traces[1].finished_ns
     results = Any[pair,serial_pair]
-    for rounds in (4,8)
+    for rounds in (4,5)
         serial = plan_rsp(configs,states,RSPPlanner(rounds;seed=22))
         threaded = plan_rsp(configs,states,RSPPlanner(rounds;seed=22,threaded=true))
         @test serial.metadata.assignments == threaded.metadata.assignments

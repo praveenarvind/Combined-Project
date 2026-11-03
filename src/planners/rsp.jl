@@ -16,6 +16,14 @@ function rsp_assignments(planner::RSPPlanner, num_robots::Integer)
     rand(MersenneTwister(planner.seed), 1:planner.rounds, num_robots)
 end
 
+function _rsp_labels(planner::RSPPlanner, num_robots::Integer, assignments)
+    labels = assignments === nothing ? rsp_assignments(planner,num_robots) : collect(assignments)
+    length(labels)==num_robots || throw(ArgumentError("one round assignment is required per robot"))
+    all(x -> x isa Integer && !(x isa Bool) && 1<=x<=planner.rounds,labels) ||
+        throw(ArgumentError("round assignments must be integer labels in 1:configured_rounds"))
+    Int[labels...]
+end
+
 """All original robots and actor poses on an explicitly truncated horizon; no camera/motion changes."""
 function pilot_configuration(configs=load_scenario(); horizon::Integer=3)
     2 <= horizon <= configs.horizon || throw(ArgumentError("pilot horizon must lie in 2:original_horizon"))
@@ -158,11 +166,7 @@ function plan_rsp(configs, states::Vector{MDMA.MDPState}, planner::RSPPlanner; a
         throw(ArgumentError("threaded RSP requires Julia --threads=2 or more"))
     configs.num_robots > 0 || throw(ArgumentError("RSP requires at least one robot"))
     source = assignments === nothing ? "seeded_independent_uniform" : "explicit_replay"
-    labels = assignments === nothing ? rsp_assignments(planner, configs.num_robots) : collect(assignments)
-    length(labels) == configs.num_robots || throw(ArgumentError("one round assignment is required per robot"))
-    all(x -> x isa Integer && 1 <= x <= planner.rounds, labels) ||
-        throw(ArgumentError("round assignments must lie in 1:configured_rounds"))
-    labels = Int[labels...]
+    labels = _rsp_labels(planner,configs.num_robots,assignments)
     dag = SubmodularMaximization.PartitionSolver(copy(labels))
     problem = MDMA.MultiRobotTargetCoverageProblem(copy(states), configs)
     measured = _measure_schedule(p -> SubmodularMaximization.solve_dag(dag,p; threaded=planner.threaded), problem)

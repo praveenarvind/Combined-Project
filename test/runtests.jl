@@ -11,7 +11,7 @@ const provenance = TOML.parsefile(joinpath(@__DIR__, "..", "third_party", "SOURC
 include("srppa.jl")
 
 @testset "Scenario inputs and reproducible initialization" begin
-    entry = only(filter(e -> endswith(e["destination"], "cluster_data.json"), provenance["files"]))
+    entry = only(filter(e -> e["destination"]=="data/scenarios/cluster/cluster_data.json", provenance["files"]))
     @test bytes2hex(sha256(read(cluster_scenario()))) == entry["sha256"]
     configs = load_scenario()
     @test (configs.num_robots, configs.horizon, size(configs.target_trajectories, 2)) == (5, 60, 6)
@@ -100,3 +100,5 @@ end
 include("rsp.jl")
 
 include("benchmarking.jl")
+
+include("phase5.jl")
