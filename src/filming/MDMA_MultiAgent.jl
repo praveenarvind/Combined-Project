@@ -241,7 +241,9 @@ function solve_block(
     # Reward for each target that is covered
     # Check if target is covered in reward
     # Will later have new number and old number of pixels
-    covered_states = compute_prior_coverage(p.configs, trajectories)
+    covered_states = _profile_stage(:prior_coverage) do
+        compute_prior_coverage(p.configs, trajectories)
+    end
 
 
     # Get the state of the robot?
@@ -265,7 +267,9 @@ function solve_block(
     # Submodular solver expects certain output. We send that here.
     policy = solve_single_robot(single_problem)
 
-    solution_trajectory = compute_path(single_problem, policy, state)
+    solution_trajectory = _profile_stage(:path_extraction) do
+        compute_path(single_problem, policy, state)
+    end
 
     (block, solution_trajectory)
     # call solve_sequential on this

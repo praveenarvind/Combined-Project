@@ -1,0 +1,43 @@
+Phase 4 local validation, 2026-11-02/03 UTC
+Julia 1.8.5, OPENBLAS_NUM_THREADS=1
+Package: Pkg.test(; julia_args=["--threads=4"])
+
+Test Summary:                                            | Pass  Total  Time
+Joint density reduction: overlap, faces, actors and time |   15     15  0.6s
+Test Summary:                                     | Pass  Total  Time
+Model-based SRPPA validation, weighting and order |   27     27  3.9s
+Test Summary:                                   | Pass  Total  Time
+Scenario inputs and reproducible initialization |   10     10  0.2s
+Test Summary:                                       | Pass  Total     Time
+Fresh baseline solves on a reduced cluster scenario |  114    114  1m08.4s
+Test Summary:                           | Pass  Total  Time
+Preserved legacy reward and camera APIs |    4      4  0.1s
+Test Summary:                 | Pass  Total  Time
+Single reused submodular core |    4      4  0.7s
+Test Summary:                                       | Pass  Total  Time
+Seeded RSP assignment and original DAG conditioning |   45     45  1.0s
+Test Summary:                      | Pass  Total  Time
+Thread-local filming reward caches |    4      4  0.3s
+Test Summary:                                              | Pass  Total     Time
+Fresh RSP VI, replay, limiting cases and Phase 2 marginals |  359    359  1m20.7s
+Test Summary:                                    | Pass  Total  Time
+Explicit benchmark cases and scenario provenance |   18     18  0.8s
+Test Summary:                                          | Pass  Total   Time
+Profile hooks preserve algorithm behavior and counters |   25     25  37.1s
+Testing DistributedFilming tests passed; total assertions = 625
+
+four-thread artifact validator
+Test Summary:                                            | Pass  Total  Time
+Controlled benchmark output and scheduler-control schema |  267    267  1.2s
+
+one-thread artifact validator
+Test Summary:                                            | Pass  Total  Time
+Controlled benchmark output and scheduler-control schema |   56     56  1.1s
+
+pair artifact validator
+Test Summary:               | Pass  Total  Time
+Cross-runtime paired replay |   51     51  0.5s
+
+CONVERGENCE_OK (robot = 1, call = 1, bellman_residual = 0.0, converged = true, tolerance = 1.0e-6, states_checked = 25600, method = "independent_all_state_backup", iterations = nothing)
+
+Implementation GitHub Actions: https://github.com/praveenarvind/Combined-Project/actions/runs/41549004992 — Success

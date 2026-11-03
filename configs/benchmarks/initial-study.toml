@@ -1,0 +1,53 @@
+name = "initial-controlled-study"
+# Deliberately enumerated cases, not a full Cartesian matrix.
+[[case]]
+id = "phase3-match"
+scenario = "cluster"
+robots = 5
+horizon = 3
+initial_seed = 2026
+partition_seed = 11
+repeats = 3
+planners = ["greedy", "rsp2_serial", "rsp2_threaded"]
+
+[[case]]
+id = "partition-seed-check"
+scenario = "cluster"
+robots = 5
+horizon = 3
+initial_seed = 2026
+partition_seed = 22
+repeats = 1
+planners = ["greedy", "rsp2_serial", "rsp2_threaded"]
+
+[[case]]
+id = "baseline-functionality"
+scenario = "cluster"
+robots = 2
+horizon = 2
+initial_seed = 2027
+partition_seed = 22
+repeats = 1
+planners = ["greedy", "multiround", "myopic", "assignment", "formation_idealized", "rsp2_serial", "rsp2_threaded", "rsp4_serial", "rsp4_threaded", "rsp8_serial", "rsp8_threaded"]
+
+[[case]]
+id = "split-input-check"
+start_frame = 30
+scenario = "split_and_join"
+robots = 2
+horizon = 2
+initial_seed = 2026
+partition_seed = 11
+repeats = 1
+planners = ["greedy", "rsp2_serial", "rsp2_threaded"]
+
+[[case]]
+id = "priority-input-check"
+start_frame = 15
+scenario = "priority_speaker"
+robots = 2
+horizon = 2
+initial_seed = 2026
+partition_seed = 11
+repeats = 1
+planners = ["greedy", "rsp2_serial", "rsp2_threaded"]

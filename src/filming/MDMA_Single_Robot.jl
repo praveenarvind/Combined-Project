@@ -82,7 +82,9 @@ mutable struct SingleRobotMultiTargetViewCoverageProblem <: AbstractSingleRobotP
             zeros(Float64, 0, 0, 0, 0)
         )
 
-        this.view_reward_cache = initialize_reward_cache(this)
+        this.view_reward_cache = _profile_stage(:reward_cache) do
+            initialize_reward_cache(this)
+        end
         this
     end
 end
@@ -257,7 +259,9 @@ function solve_single_robot(problem::AbstractSingleRobotProblem)
         verbose = true,
         include_Q = false,
     )
-    policy = solve(solver, problem)
+    policy = _profile_stage(:value_iteration, problem) do
+        solve(solver, problem)
+    end
 
     return policy
 end

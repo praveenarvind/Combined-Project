@@ -1,0 +1,426 @@
+Overhead ╎ [+additional indent] Count File:Line; Function
+=========================================================
+Thread 1 Total snapshots: 3689. Utilization: 97%
+   ╎1    ...-1-dot-8/src/task.c:830;
+   ╎ 1    [unknown stackframe]
+   ╎  1    ...DMA_Single_Robot.jl:170; transition(model::DistributedF...
+   ╎   1    @Base/array.jl:126; vect
+   ╎    1    @Base/array.jl:679; _array_for
+   ╎     1    @Base/array.jl:676; _array_for
+   ╎    ╎ 1    .../abstractarray.jl:840; similar
+   ╎    ╎  1    .../abstractarray.jl:841; similar
+   ╎    ╎   1    @Base/boot.jl:468; Array
+   ╎    ╎    1    @Base/boot.jl:459; Array
+   ╎    ╎     1    [unknown stackframe]
+  1╎    ╎    ╎ 1    ...t-8/src/array.c:435; ijl_alloc_array_1d
+   ╎4    [unknown stackframe]
+   ╎ 1    [unknown stackframe]
+  1╎  1    ...-linux-gnu/libc.so.6:?;
+  3╎ 3    ...-linux-gnu/libc.so.6:?;
+   ╎8    ...DMA_Single_Robot.jl:262; solve_single_robot(problem::Dis...
+   ╎ 8    .../profiling/stages.jl:21; _profile_stage
+   ╎  8    ...DMA_Single_Robot.jl:263; #15
+   ╎   8    ...tion/src/vanilla.jl:64; solve
+   ╎    1    ...MA_Single_Robot.jl:231; neighbors(model::DistributedF...
+   ╎     1    [unknown stackframe]
+  1╎    ╎ 1    ...ng/MDMA_States.jl:157; DistributedFilming.MDMA.UAVS...
+   ╎    2    ...MA_Single_Robot.jl:227; neighbors(model::DistributedF...
+   ╎     2    ...MA_Single_Robot.jl:241; in_bounds
+   ╎    ╎ 2    [unknown stackframe]
+  2╎    ╎  2    ...ng/MDMA_States.jl:157; DistributedFilming.MDMA.UAV...
+   ╎    5    ...MA_Single_Robot.jl:230; neighbors(model::DistributedF...
+   ╎     5    [unknown stackframe]
+  1╎    ╎ 1    ...ng/MDMA_States.jl:157; DistributedFilming.MDMA.UAVS...
+  4╎    ╎ 4    ...MDMA_Detection.jl:5; ccw(d::Symbol)
+   ╎37   ...-1-dot-8/src/task.c:942; start_task
+   ╎ 37   ...-1-dot-8/src/task.c:254; jl_finish_task
+   ╎  37   ...1-dot-8/src/julia.h:1843; jl_apply
+   ╎   37   ...e-1-dot-8/src/gf.c:2559; ijl_apply_generic
+   ╎    37   ...e-1-dot-8/src/gf.c:2377; _jl_invoke
+   ╎     37   ...ia/lib/julia/sys.so:?; jfptr_task_done_hook_49067.clo...
+   ╎    ╎ 37   @Base/task.jl:634; task_done_hook(t::Task)
+   ╎    ╎  37   @Base/task.jl:930; wait()
+   ╎    ╎   37   @Base/task.jl:921; poptask(W::Base.InvasiveLin...
+   ╎    ╎    37   ...ot-8/src/partr.c:596; ijl_task_get_next
+   ╎    ╎     37   ...rc/unix/thread.c:883; uv_cond_wait
+   ╎    ╎    ╎ 37   ...ux-gnu/libc.so.6:?; pthread_cond_wait
+   ╎    ╎    ╎  37   ...ux-gnu/libc.so.6:?;
+   ╎    ╎    ╎   37   ...x-gnu/libc.so.6:?;
+ 37╎    ╎    ╎    37   ...x-gnu/libc.so.6:?;
+   ╎249  .../x86_64/elf/start.S:113;
+   ╎ 249  ...-linux-gnu/libc.so.6:?; __libc_start_main
+   ╎  249  ...-linux-gnu/libc.so.6:?;
+   ╎   249  ...-8/cli/loader_exe.c:59; main
+   ╎    249  ...-dot-8/src/jlapi.c:719; jl_repl_entrypoint
+   ╎     249  ...-dot-8/src/jlapi.c:575; true_main
+   ╎    ╎ 249  ...dot-8/src/julia.h:1843; jl_apply
+   ╎    ╎  249  ...-1-dot-8/src/gf.c:2559; ijl_apply_generic
+   ╎    ╎   249  ...1-dot-8/src/gf.c:2377; _jl_invoke
+   ╎    ╎    249  .../lib/julia/sys.so:?; jfptr__start_38041.clone_1
+   ╎    ╎     249  @Base/client.jl:522; _start()
+   ╎    ╎    ╎ 249  @Base/client.jl:303; exec_options(opts::Base.J...
+   ╎    ╎    ╎  249  ...-dot-8/src/gf.c:2559; ijl_apply_generic
+   ╎    ╎    ╎   249  ...dot-8/src/gf.c:2377; _jl_invoke
+   ╎    ╎    ╎    249  ...ib/julia/sys.so:?; jfptr_include_38905.clone_1
+   ╎    ╎    ╎     249  @Base/Base.jl:419; include(mod::Module, _...
+   ╎    ╎    ╎    ╎ 249  @Base/loading.jl:1488; _include(mapexpr::Fun...
+   ╎    ╎    ╎    ╎  249  ...ot-8/src/gf.c:2559; ijl_apply_generic
+   ╎    ╎    ╎    ╎   249  ...t-8/src/gf.c:2377; _jl_invoke
+   ╎984  ...se-1-dot-8/src/gc.c:3391; jl_gc_alloc
+   ╎ 326  ...rc/julia_internal.h:373; jl_gc_alloc_
+   ╎  326  ...se-1-dot-8/src/gc.c:1007; jl_gc_big_alloc_noinline
+   ╎   326  ...se-1-dot-8/src/gc.c:968; jl_gc_big_alloc_inner
+   ╎    326  ...rc/julia_threads.h:333; maybe_collect
+   ╎     326  ...rc/julia_threads.h:340; jl_gc_state_set
+   ╎    ╎ 326  ...inux-gnu/libc.so.6:?;
+   ╎    ╎  326  ...rc/signals-unix.c:313; segv_handler
+   ╎    ╎   326  ...rc/signals-unix.c:326; segv_handler
+   ╎    ╎    326  ...julia_internal.h:840; jl_set_gc_and_wait
+   ╎    ╎     326  .../src/safepoint.c:163; jl_safepoint_wait_gc
+326╎    ╎    ╎ 326  ...ude/xmmintrin.h:1271; _mm_pause
+   ╎ 658  ...rc/julia_internal.h:368; jl_gc_alloc_
+   ╎  658  ...se-1-dot-8/src/gc.c:1306; jl_gc_pool_alloc_noinline
+   ╎   658  ...e-1-dot-8/src/gc.c:1247; jl_gc_pool_alloc_inner
+   ╎    658  ...rc/julia_threads.h:333; maybe_collect
+   ╎     658  ...rc/julia_threads.h:340; jl_gc_state_set
+   ╎    ╎ 658  ...inux-gnu/libc.so.6:?;
+  1╎    ╎  1    ...8/src/safepoint.c:162; jl_safepoint_wait_gc
+   ╎    ╎  657  ...rc/signals-unix.c:313; segv_handler
+   ╎    ╎   657  ...rc/signals-unix.c:326; segv_handler
+   ╎    ╎    657  ...julia_internal.h:840; jl_set_gc_and_wait
+  2╎    ╎     2    .../src/safepoint.c:162; jl_safepoint_wait_gc
+   ╎    ╎     655  .../src/safepoint.c:163; jl_safepoint_wait_gc
+655╎    ╎    ╎ 655  ...ude/xmmintrin.h:1271; _mm_pause
+   ╎2406 ...-1-dot-8/src/task.c:931; start_task
+   ╎ 2406 ...1-dot-8/src/julia.h:1843; jl_apply
+   ╎  2406 ...se-1-dot-8/src/gf.c:2559; ijl_apply_generic
+   ╎   2406 ...e-1-dot-8/src/gf.c:2377; _jl_invoke
+   ╎    2406 [unknown stackframe]
+   ╎     2406 ...adingconstructs.jl:30; (::Base.Threads.var"#1#2"{Dis...
+   ╎    ╎ 2406 ...adingconstructs.jl:51; #15#threadsfor_fun
+   ╎    ╎  2406 ...dingconstructs.jl:84; (::DistributedFilming.Submod...
+   ╎    ╎   2406 ...odular/solvers.jl:13; macro expansion
+   ╎    ╎    2406 ...dular/solvers.jl:153; (::DistributedFilming.Subm...
+   ╎    ╎     2406 .../planners/rsp.jl:72; solve_block(p::Distributed...
+   ╎    ╎    ╎ 2406 ...filing/stages.jl:31; _with_profile
+   ╎    ╎    ╎  2406 @Base/task.jl:292; task_local_storage(body:...
+   ╎    ╎    ╎   2406 ...planners/rsp.jl:73; #22
+   ╎    ╎    ╎    20   ..._MultiAgent.jl:256; solve_block(p::Distribu...
+   ╎    ╎    ╎     20   ...ingle_Robot.jl:85; DistributedFilming.MDMA...
+   ╎    ╎    ╎    ╎ 20   ...ling/stages.jl:12; _profile_stage
+   ╎    ╎    ╎    ╎  20   ...ing/stages.jl:21; _profile_stage
+   ╎    ╎    ╎    ╎   20   ...ngle_Robot.jl:86; #11
+   ╎    ╎    ╎    2386 ..._MultiAgent.jl:268; solve_block(p::Distribu...
+   ╎    ╎    ╎     2386 ...ingle_Robot.jl:262; solve_single_robot(pro...
+   ╎    ╎    ╎    ╎ 2386 ...ling/stages.jl:21; _profile_stage
+   ╎    ╎    ╎    ╎  2386 ...ngle_Robot.jl:263; #15
+   ╎    ╎    ╎    ╎   2386 ...rc/vanilla.jl:64; solve
+
+Thread 2 Total snapshots: 3689. Utilization: 54%
+  1╎1    ...linux-gnu/libc.so.6:?;
+   ╎1    [unknown stackframe]
+  1╎ 1    ...e/twiceprecision.jl:792; lcm_unchecked(a::Int64, b::Int64)
+   ╎2    ...DMA_Single_Robot.jl:262; solve_single_robot(problem::Dis...
+   ╎ 2    .../profiling/stages.jl:21; _profile_stage
+   ╎  2    ...DMA_Single_Robot.jl:263; #15
+   ╎   2    ...tion/src/vanilla.jl:64; solve
+   ╎    2    ...MA_Single_Robot.jl:230; neighbors(model::DistributedF...
+   ╎     2    [unknown stackframe]
+  2╎    ╎ 2    ...ng/MDMA_States.jl:157; DistributedFilming.MDMA.UAVS...
+   ╎64   ...se-1-dot-8/src/gc.c:1296; ijl_gc_pool_alloc
+   ╎ 64   ...se-1-dot-8/src/gc.c:1247; jl_gc_pool_alloc_inner
+   ╎  64   ...src/julia_threads.h:333; maybe_collect
+   ╎   64   ...src/julia_threads.h:340; jl_gc_state_set
+   ╎    64   ...linux-gnu/libc.so.6:?;
+   ╎     64   ...src/signals-unix.c:313; segv_handler
+   ╎    ╎ 64   ...rc/signals-unix.c:326; segv_handler
+   ╎    ╎  64   .../julia_internal.h:840; jl_set_gc_and_wait
+  1╎    ╎   1    ...8/src/safepoint.c:162; jl_safepoint_wait_gc
+   ╎    ╎   63   ...8/src/safepoint.c:163; jl_safepoint_wait_gc
+ 63╎    ╎    63   ...lude/xmmintrin.h:1271; _mm_pause
+   ╎790  ...1-dot-8/src/jlapi.c:470; ijl_gc_safepoint
+   ╎ 790  ...-linux-gnu/libc.so.6:?;
+   ╎  790  .../src/signals-unix.c:313; segv_handler
+   ╎   790  .../src/signals-unix.c:326; segv_handler
+   ╎    790  ...c/julia_internal.h:840; jl_set_gc_and_wait
+  1╎     1    ...-8/src/safepoint.c:162; jl_safepoint_wait_gc
+   ╎     789  ...-8/src/safepoint.c:163; jl_safepoint_wait_gc
+789╎    ╎ 789  ...clude/xmmintrin.h:1271; _mm_pause
+   ╎873  ...se-1-dot-8/src/gc.c:3391; jl_gc_alloc
+   ╎ 314  ...rc/julia_internal.h:373; jl_gc_alloc_
+   ╎  314  ...se-1-dot-8/src/gc.c:1007; jl_gc_big_alloc_noinline
+   ╎   314  ...se-1-dot-8/src/gc.c:968; jl_gc_big_alloc_inner
+   ╎    314  ...rc/julia_threads.h:333; maybe_collect
+   ╎     314  ...rc/julia_threads.h:340; jl_gc_state_set
+   ╎    ╎ 314  ...inux-gnu/libc.so.6:?;
+   ╎    ╎  314  ...rc/signals-unix.c:313; segv_handler
+   ╎    ╎   314  ...rc/signals-unix.c:326; segv_handler
+   ╎    ╎    314  ...julia_internal.h:840; jl_set_gc_and_wait
+   ╎    ╎     314  .../src/safepoint.c:163; jl_safepoint_wait_gc
+314╎    ╎    ╎ 314  ...ude/xmmintrin.h:1271; _mm_pause
+   ╎ 559  ...rc/julia_internal.h:368; jl_gc_alloc_
+   ╎  559  ...se-1-dot-8/src/gc.c:1306; jl_gc_pool_alloc_noinline
+   ╎   559  ...e-1-dot-8/src/gc.c:1247; jl_gc_pool_alloc_inner
+   ╎    559  ...rc/julia_threads.h:333; maybe_collect
+   ╎     559  ...rc/julia_threads.h:340; jl_gc_state_set
+   ╎    ╎ 559  ...inux-gnu/libc.so.6:?;
+   ╎    ╎  559  ...rc/signals-unix.c:313; segv_handler
+   ╎    ╎   559  ...rc/signals-unix.c:326; segv_handler
+   ╎    ╎    559  ...julia_internal.h:840; jl_set_gc_and_wait
+  2╎    ╎     2    .../src/safepoint.c:162; jl_safepoint_wait_gc
+   ╎    ╎     557  .../src/safepoint.c:163; jl_safepoint_wait_gc
+557╎    ╎    ╎ 557  ...ude/xmmintrin.h:1271; _mm_pause
+   ╎895  ...-1-dot-8/src/task.c:942; start_task
+   ╎ 895  ...-1-dot-8/src/task.c:254; jl_finish_task
+   ╎  895  ...1-dot-8/src/julia.h:1843; jl_apply
+   ╎   895  ...e-1-dot-8/src/gf.c:2559; ijl_apply_generic
+   ╎    895  ...e-1-dot-8/src/gf.c:2377; _jl_invoke
+   ╎     895  ...ia/lib/julia/sys.so:?; jfptr_task_done_hook_49067.clo...
+   ╎    ╎ 895  @Base/task.jl:634; task_done_hook(t::Task)
+   ╎    ╎  895  @Base/task.jl:930; wait()
+   ╎    ╎   895  @Base/task.jl:921; poptask(W::Base.InvasiveLin...
+   ╎    ╎    1    ...ot-8/src/partr.c:486; ijl_task_get_next
+   ╎    ╎     1    ...ot-8/src/partr.c:456; get_next_task
+   ╎    ╎    ╎ 1    ...t-8/src/julia.h:1843; jl_apply
+   ╎    ╎    ╎  1    ...-dot-8/src/gf.c:2559; ijl_apply_generic
+   ╎    ╎    ╎   1    ...dot-8/src/gf.c:2377; _jl_invoke
+  1╎    ╎    ╎    1    ...ib/julia/sys.so:?; jfptr_trypoptask_45168.c...
+   ╎    ╎    201  ...ot-8/src/partr.c:596; ijl_task_get_next
+   ╎    ╎     201  ...rc/unix/thread.c:883; uv_cond_wait
+   ╎    ╎    ╎ 201  ...ux-gnu/libc.so.6:?; pthread_cond_wait
+   ╎    ╎    ╎  201  ...ux-gnu/libc.so.6:?;
+   ╎    ╎    ╎   201  ...x-gnu/libc.so.6:?;
+201╎    ╎    ╎    201  ...x-gnu/libc.so.6:?;
+   ╎    ╎    693  ...ot-8/src/partr.c:565; ijl_task_get_next
+   ╎    ╎     693  .../src/unix/core.c:400; uv_run
+   ╎    ╎    ╎ 693  ...rc/unix/epoll.c:236; uv__io_poll
+   ╎    ╎    ╎  693  ...ux-gnu/libc.so.6:?; epoll_wait
+   ╎    ╎    ╎   693  ...x-gnu/libc.so.6:?;
+   ╎    ╎    ╎    693  ...x-gnu/libc.so.6:?;
+692╎    ╎    ╎     693  ...x-gnu/libc.so.6:?;
+   ╎1063 ...-1-dot-8/src/task.c:931; start_task
+   ╎ 1063 ...1-dot-8/src/julia.h:1843; jl_apply
+   ╎  1063 ...se-1-dot-8/src/gf.c:2559; ijl_apply_generic
+   ╎   1063 ...e-1-dot-8/src/gf.c:2377; _jl_invoke
+   ╎    1063 [unknown stackframe]
+   ╎     1063 ...adingconstructs.jl:30; (::Base.Threads.var"#1#2"{Dis...
+   ╎    ╎ 1063 ...adingconstructs.jl:51; #15#threadsfor_fun
+   ╎    ╎  1063 ...dingconstructs.jl:84; (::DistributedFilming.Submod...
+   ╎    ╎   1063 ...odular/solvers.jl:13; macro expansion
+   ╎    ╎    1063 ...dular/solvers.jl:153; (::DistributedFilming.Subm...
+   ╎    ╎     1063 .../planners/rsp.jl:72; solve_block(p::Distributed...
+   ╎    ╎    ╎ 1063 ...filing/stages.jl:31; _with_profile
+   ╎    ╎    ╎  1063 @Base/task.jl:292; task_local_storage(body:...
+   ╎    ╎    ╎   1063 ...planners/rsp.jl:73; #22
+   ╎    ╎    ╎    11   ..._MultiAgent.jl:256; solve_block(p::Distribu...
+   ╎    ╎    ╎     11   ...ingle_Robot.jl:85; DistributedFilming.MDMA...
+   ╎    ╎    ╎    ╎ 11   ...ling/stages.jl:12; _profile_stage
+   ╎    ╎    ╎    ╎  11   ...ing/stages.jl:21; _profile_stage
+   ╎    ╎    ╎    ╎   11   ...ngle_Robot.jl:86; #11
+   ╎    ╎    ╎    1052 ..._MultiAgent.jl:268; solve_block(p::Distribu...
+   ╎    ╎    ╎     1052 ...ingle_Robot.jl:262; solve_single_robot(pro...
+   ╎    ╎    ╎    ╎ 1052 ...ling/stages.jl:21; _profile_stage
+   ╎    ╎    ╎    ╎  1052 ...ngle_Robot.jl:263; #15
+   ╎    ╎    ╎    ╎   1052 ...rc/vanilla.jl:64; solve
+
+Thread 3 Total snapshots: 3689. Utilization: 40%
+    ╎3    [unknown stackframe]
+    ╎ 1    ...-linux-gnu/libc.so.6:?;
+    ╎  1    [unknown stackframe]
+   1╎   1    ...linux-gnu/libc.so.6:?;
+    ╎ 1    [unknown stackframe]
+   1╎  1    ...linux-gnu/libc.so.6:?;
+   1╎ 1    ...-linux-gnu/libc.so.6:?; malloc
+    ╎4    ...DMA_Single_Robot.jl:262; solve_single_robot(problem::Di...
+    ╎ 4    ...profiling/stages.jl:21; _profile_stage
+    ╎  4    ...DMA_Single_Robot.jl:263; #15
+    ╎   4    ...tion/src/vanilla.jl:64; solve
+    ╎    1    ...MA_Single_Robot.jl:231; neighbors(model::Distributed...
+    ╎     1    [unknown stackframe]
+   1╎    ╎ 1    ...ng/MDMA_States.jl:157; DistributedFilming.MDMA.UAV...
+    ╎    1    ...MA_Single_Robot.jl:230; neighbors(model::Distributed...
+    ╎     1    [unknown stackframe]
+   1╎    ╎ 1    ...ng/MDMA_States.jl:157; DistributedFilming.MDMA.UAV...
+    ╎    2    ...MA_Single_Robot.jl:227; neighbors(model::Distributed...
+    ╎     2    ...A_Single_Robot.jl:241; in_bounds
+    ╎    ╎ 2    [unknown stackframe]
+   2╎    ╎  2    ...ng/MDMA_States.jl:157; DistributedFilming.MDMA.UAV...
+    ╎24   ...se-1-dot-8/src/gc.c:1296; ijl_gc_pool_alloc
+    ╎ 24   ...se-1-dot-8/src/gc.c:1247; jl_gc_pool_alloc_inner
+    ╎  24   ...src/julia_threads.h:333; maybe_collect
+    ╎   24   ...rc/julia_threads.h:340; jl_gc_state_set
+    ╎    24   ...linux-gnu/libc.so.6:?;
+    ╎     24   ...rc/signals-unix.c:313; segv_handler
+    ╎    ╎ 24   ...rc/signals-unix.c:326; segv_handler
+    ╎    ╎  24   .../julia_internal.h:840; jl_set_gc_and_wait
+    ╎    ╎   24   .../src/safepoint.c:163; jl_safepoint_wait_gc
+  24╎    ╎    24   ...ude/xmmintrin.h:1271; _mm_pause
+    ╎538  ...se-1-dot-8/src/gc.c:3391; jl_gc_alloc
+    ╎ 215  ...rc/julia_internal.h:373; jl_gc_alloc_
+    ╎  215  ...e-1-dot-8/src/gc.c:1007; jl_gc_big_alloc_noinline
+    ╎   215  ...e-1-dot-8/src/gc.c:968; jl_gc_big_alloc_inner
+    ╎    215  ...rc/julia_threads.h:333; maybe_collect
+    ╎     215  ...c/julia_threads.h:340; jl_gc_state_set
+    ╎    ╎ 215  ...inux-gnu/libc.so.6:?;
+    ╎    ╎  215  ...rc/signals-unix.c:313; segv_handler
+    ╎    ╎   215  ...c/signals-unix.c:326; segv_handler
+    ╎    ╎    215  ...julia_internal.h:840; jl_set_gc_and_wait
+    ╎    ╎     215  ...src/safepoint.c:163; jl_safepoint_wait_gc
+ 215╎    ╎    ╎ 215  ...ude/xmmintrin.h:1271; _mm_pause
+    ╎ 323  ...rc/julia_internal.h:368; jl_gc_alloc_
+    ╎  323  ...e-1-dot-8/src/gc.c:1306; jl_gc_pool_alloc_noinline
+    ╎   323  ...e-1-dot-8/src/gc.c:1247; jl_gc_pool_alloc_inner
+    ╎    323  ...rc/julia_threads.h:333; maybe_collect
+    ╎     323  ...c/julia_threads.h:340; jl_gc_state_set
+    ╎    ╎ 323  ...inux-gnu/libc.so.6:?;
+   1╎    ╎  1    ...8/src/safepoint.c:162; jl_safepoint_wait_gc
+    ╎    ╎  322  ...rc/signals-unix.c:313; segv_handler
+    ╎    ╎   322  ...c/signals-unix.c:326; segv_handler
+    ╎    ╎    322  ...julia_internal.h:840; jl_set_gc_and_wait
+   2╎    ╎     2    ...src/safepoint.c:162; jl_safepoint_wait_gc
+    ╎    ╎     320  ...src/safepoint.c:163; jl_safepoint_wait_gc
+ 320╎    ╎    ╎ 320  ...ude/xmmintrin.h:1271; _mm_pause
+    ╎879  ...-1-dot-8/src/task.c:942; start_task
+    ╎ 879  ...-1-dot-8/src/task.c:254; jl_finish_task
+    ╎  879  ...-dot-8/src/julia.h:1843; jl_apply
+    ╎   879  ...e-1-dot-8/src/gf.c:2559; ijl_apply_generic
+    ╎    879  ...-1-dot-8/src/gf.c:2377; _jl_invoke
+    ╎     879  ...a/lib/julia/sys.so:?; jfptr_task_done_hook_49067.cl...
+    ╎    ╎ 879  @Base/task.jl:634; task_done_hook(t::Task)
+    ╎    ╎  879  @Base/task.jl:930; wait()
+    ╎    ╎   879  @Base/task.jl:921; poptask(W::Base.InvasiveLi...
+    ╎    ╎    185  ...ot-8/src/partr.c:596; ijl_task_get_next
+    ╎    ╎     185  ...c/unix/thread.c:883; uv_cond_wait
+    ╎    ╎    ╎ 185  ...ux-gnu/libc.so.6:?; pthread_cond_wait
+    ╎    ╎    ╎  185  ...x-gnu/libc.so.6:?;
+    ╎    ╎    ╎   185  ...x-gnu/libc.so.6:?;
+ 185╎    ╎    ╎    185  ...x-gnu/libc.so.6:?;
+    ╎    ╎    694  ...ot-8/src/partr.c:565; ijl_task_get_next
+    ╎    ╎     694  ...src/unix/core.c:400; uv_run
+    ╎    ╎    ╎ 694  ...rc/unix/epoll.c:236; uv__io_poll
+    ╎    ╎    ╎  694  ...x-gnu/libc.so.6:?; epoll_wait
+    ╎    ╎    ╎   694  ...x-gnu/libc.so.6:?;
+    ╎    ╎    ╎    694  ...x-gnu/libc.so.6:?;
+ 694╎    ╎    ╎     694  ...-gnu/libc.so.6:?;
+    ╎914  ...-1-dot-8/src/task.c:931; start_task
+    ╎ 914  ...1-dot-8/src/julia.h:1843; jl_apply
+    ╎  914  ...e-1-dot-8/src/gf.c:2559; ijl_apply_generic
+    ╎   914  ...e-1-dot-8/src/gf.c:2377; _jl_invoke
+    ╎    914  [unknown stackframe]
+    ╎     914  ...adingconstructs.jl:30; (::Base.Threads.var"#1#2"{Di...
+    ╎    ╎ 914  ...dingconstructs.jl:51; #15#threadsfor_fun
+    ╎    ╎  914  ...dingconstructs.jl:84; (::DistributedFilming.Submo...
+    ╎    ╎   914  ...odular/solvers.jl:13; macro expansion
+    ╎    ╎    914  ...dular/solvers.jl:153; (::DistributedFilming.Sub...
+    ╎    ╎     914  .../planners/rsp.jl:72; solve_block(p::Distribute...
+    ╎    ╎    ╎ 914  ...iling/stages.jl:31; _with_profile
+    ╎    ╎    ╎  914  @Base/task.jl:292; task_local_storage(body:...
+    ╎    ╎    ╎   914  ...planners/rsp.jl:73; #22
+    ╎    ╎    ╎    13   ..._MultiAgent.jl:256; solve_block(p::Distrib...
+    ╎    ╎    ╎     13   ...ingle_Robot.jl:85; DistributedFilming.MDM...
+    ╎    ╎    ╎    ╎ 13   ...ing/stages.jl:12; _profile_stage
+    ╎    ╎    ╎    ╎  13   ...ing/stages.jl:21; _profile_stage
+    ╎    ╎    ╎    ╎   13   ...ngle_Robot.jl:86; #11
+    ╎    ╎    ╎    901  ..._MultiAgent.jl:268; solve_block(p::Distrib...
+    ╎    ╎    ╎     901  ...ngle_Robot.jl:262; solve_single_robot(pro...
+    ╎    ╎    ╎    ╎ 901  ...ing/stages.jl:21; _profile_stage
+    ╎    ╎    ╎    ╎  901  ...ngle_Robot.jl:263; #15
+    ╎    ╎    ╎    ╎   901  ...rc/vanilla.jl:64; solve
+    ╎1327 ...1-dot-8/src/jlapi.c:470; ijl_gc_safepoint
+    ╎ 1327 ...-linux-gnu/libc.so.6:?;
+   2╎  2    ...t-8/src/safepoint.c:162; jl_safepoint_wait_gc
+    ╎  1325 .../src/signals-unix.c:313; segv_handler
+    ╎   1325 ...src/signals-unix.c:326; segv_handler
+    ╎    1325 ...c/julia_internal.h:840; jl_set_gc_and_wait
+   5╎     5    ...8/src/safepoint.c:162; jl_safepoint_wait_gc
+    ╎     1320 ...8/src/safepoint.c:163; jl_safepoint_wait_gc
+1320╎    ╎ 1320 ...clude/xmmintrin.h:1271; _mm_pause
+
+Thread 4 Total snapshots: 3689. Utilization: 55%
+    ╎1    [unknown stackframe]
+   1╎ 1    ...e/twiceprecision.jl:792; lcm_unchecked(a::Int64, b::Int64)
+    ╎2    ...DMA_Single_Robot.jl:262; solve_single_robot(problem::Di...
+    ╎ 2    ...profiling/stages.jl:21; _profile_stage
+    ╎  2    ...DMA_Single_Robot.jl:263; #15
+    ╎   2    ...tion/src/vanilla.jl:64; solve
+    ╎    1    ...MA_Single_Robot.jl:231; neighbors(model::Distributed...
+    ╎     1    [unknown stackframe]
+   1╎    ╎ 1    ...ng/MDMA_States.jl:157; DistributedFilming.MDMA.UAV...
+    ╎    1    ...MA_Single_Robot.jl:230; neighbors(model::Distributed...
+    ╎     1    [unknown stackframe]
+   1╎    ╎ 1    ...ng/MDMA_States.jl:157; DistributedFilming.MDMA.UAV...
+    ╎10   ...se-1-dot-8/src/gc.c:1296; ijl_gc_pool_alloc
+    ╎ 10   ...se-1-dot-8/src/gc.c:1247; jl_gc_pool_alloc_inner
+    ╎  10   ...src/julia_threads.h:333; maybe_collect
+    ╎   10   ...rc/julia_threads.h:340; jl_gc_state_set
+    ╎    10   ...linux-gnu/libc.so.6:?;
+    ╎     10   ...rc/signals-unix.c:313; segv_handler
+    ╎    ╎ 10   ...rc/signals-unix.c:326; segv_handler
+    ╎    ╎  10   .../julia_internal.h:840; jl_set_gc_and_wait
+    ╎    ╎   10   .../src/safepoint.c:163; jl_safepoint_wait_gc
+  10╎    ╎    10   ...ude/xmmintrin.h:1271; _mm_pause
+    ╎881  ...se-1-dot-8/src/gc.c:3391; jl_gc_alloc
+    ╎ 286  ...rc/julia_internal.h:373; jl_gc_alloc_
+    ╎  286  ...e-1-dot-8/src/gc.c:1007; jl_gc_big_alloc_noinline
+    ╎   286  ...e-1-dot-8/src/gc.c:968; jl_gc_big_alloc_inner
+    ╎    286  ...rc/julia_threads.h:333; maybe_collect
+    ╎     286  ...c/julia_threads.h:340; jl_gc_state_set
+    ╎    ╎ 286  ...inux-gnu/libc.so.6:?;
+    ╎    ╎  286  ...rc/signals-unix.c:313; segv_handler
+    ╎    ╎   286  ...c/signals-unix.c:326; segv_handler
+    ╎    ╎    286  ...julia_internal.h:840; jl_set_gc_and_wait
+   2╎    ╎     2    ...src/safepoint.c:162; jl_safepoint_wait_gc
+    ╎    ╎     284  ...src/safepoint.c:163; jl_safepoint_wait_gc
+ 284╎    ╎    ╎ 284  ...ude/xmmintrin.h:1271; _mm_pause
+    ╎ 595  ...rc/julia_internal.h:368; jl_gc_alloc_
+    ╎  595  ...e-1-dot-8/src/gc.c:1306; jl_gc_pool_alloc_noinline
+    ╎   595  ...e-1-dot-8/src/gc.c:1247; jl_gc_pool_alloc_inner
+    ╎    595  ...rc/julia_threads.h:333; maybe_collect
+    ╎     595  ...c/julia_threads.h:340; jl_gc_state_set
+    ╎    ╎ 595  ...inux-gnu/libc.so.6:?;
+   1╎    ╎  1    ...8/src/safepoint.c:162; jl_safepoint_wait_gc
+    ╎    ╎  594  ...rc/signals-unix.c:313; segv_handler
+    ╎    ╎   594  ...c/signals-unix.c:326; segv_handler
+    ╎    ╎    594  ...julia_internal.h:840; jl_set_gc_and_wait
+   4╎    ╎     4    ...src/safepoint.c:162; jl_safepoint_wait_gc
+    ╎    ╎     590  ...src/safepoint.c:163; jl_safepoint_wait_gc
+ 590╎    ╎    ╎ 590  ...ude/xmmintrin.h:1271; _mm_pause
+    ╎1127 ...-1-dot-8/src/task.c:931; start_task
+    ╎ 1127 ...1-dot-8/src/julia.h:1843; jl_apply
+    ╎  1127 ...e-1-dot-8/src/gf.c:2559; ijl_apply_generic
+    ╎   1127 ...e-1-dot-8/src/gf.c:2377; _jl_invoke
+    ╎    1127 [unknown stackframe]
+    ╎     1127 ...adingconstructs.jl:30; (::Base.Threads.var"#1#2"{Di...
+    ╎    ╎ 1127 ...dingconstructs.jl:51; #15#threadsfor_fun
+    ╎    ╎  1127 ...dingconstructs.jl:84; (::DistributedFilming.Submo...
+    ╎    ╎   1127 ...odular/solvers.jl:13; macro expansion
+    ╎    ╎    1127 ...dular/solvers.jl:153; (::DistributedFilming.Sub...
+    ╎    ╎     1127 .../planners/rsp.jl:72; solve_block(p::Distribute...
+    ╎    ╎    ╎ 1127 ...iling/stages.jl:31; _with_profile
+    ╎    ╎    ╎  1127 @Base/task.jl:292; task_local_storage(body:...
+    ╎    ╎    ╎   1127 ...planners/rsp.jl:73; #22
+    ╎    ╎    ╎    13   ..._MultiAgent.jl:256; solve_block(p::Distrib...
+    ╎    ╎    ╎     13   ...ingle_Robot.jl:85; DistributedFilming.MDM...
+    ╎    ╎    ╎    ╎ 13   ...ing/stages.jl:12; _profile_stage
+    ╎    ╎    ╎    ╎  13   ...ing/stages.jl:21; _profile_stage
+    ╎    ╎    ╎    ╎   13   ...ngle_Robot.jl:86; #11
+    ╎    ╎    ╎    1114 ..._MultiAgent.jl:268; solve_block(p::Distrib...
+    ╎    ╎    ╎     1114 ...ngle_Robot.jl:262; solve_single_robot(pro...
+    ╎    ╎    ╎    ╎ 1114 ...ing/stages.jl:21; _profile_stage
+    ╎    ╎    ╎    ╎  1114 ...ngle_Robot.jl:263; #15
+    ╎    ╎    ╎    ╎   1114 ...rc/vanilla.jl:64; solve
+    ╎1668 ...-1-dot-8/src/task.c:942; start_task
+    ╎ 1668 ...-1-dot-8/src/task.c:254; jl_finish_task
+    ╎  1668 ...-dot-8/src/julia.h:1843; jl_apply
+    ╎   1668 ...e-1-dot-8/src/gf.c:2559; ijl_apply_generic
+    ╎    1668 ...-1-dot-8/src/gf.c:2377; _jl_invoke
+    ╎     1668 ...a/lib/julia/sys.so:?; jfptr_task_done_hook_49067.cl...
+    ╎    ╎ 1668 @Base/task.jl:634; task_done_hook(t::Task)
+    ╎    ╎  1668 @Base/task.jl:930; wait()
+    ╎    ╎   1668 @Base/task.jl:921; poptask(W::Base.InvasiveLi...
+    ╎    ╎    1668 ...ot-8/src/partr.c:596; ijl_task_get_next
+    ╎    ╎     1668 ...c/unix/thread.c:883; uv_cond_wait
+    ╎    ╎    ╎ 1668 ...ux-gnu/libc.so.6:?; pthread_cond_wait
+    ╎    ╎    ╎  1668 ...x-gnu/libc.so.6:?;
+    ╎    ╎    ╎   1668 ...x-gnu/libc.so.6:?;
+1667╎    ╎    ╎    1668 ...x-gnu/libc.so.6:?;

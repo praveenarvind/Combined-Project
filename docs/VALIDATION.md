@@ -130,3 +130,34 @@ was 15.147 seconds. These observations establish no speedup on this host for thi
 tiny workload. Raw values and sample SDs are retained. All source repositories,
 original solver/VI/camera/motion code, baseline behavior, Phase 2 score definitions
 and dependency locks remain unchanged.
+
+# Phase 4 controlled benchmarking validation
+
+Executed 2026-11-02/03 UTC with Julia 1.8.5. Primary measurements use clean source
+commit `3f646d655fa90e82bcd459e8c65f2dec36c8091d`; measured source digest and input
+hashes are saved in every run. No precomputed trajectories were loaded. The
+[Phase 4 report](PHASE4_RESULTS.md) contains actual timing/quality tables, figures,
+raw CSV/JSON and a proposed larger study. Original A/B checkouts remain untouched.
+
+| Check | Actual result |
+| --- | --- |
+| Full four-thread `Pkg.test` | 625 assertions passed, zero failures/errors; all 582 earlier assertions retained plus 43 new checks. |
+| Explicit frame windows and scenario provenance | 18 configuration/provenance assertions passed, including all three exact input hashes. |
+| Profiled/unprofiled/threaded equivalence, VI certificates and multi-round histories | 25 assertions passed. |
+| Fresh bounded four-thread study | 29 primary plans, 94 observed VI calls; all structural/marginal/feasible movement checks passed. |
+| Fresh matched one-thread control | 6 primary plans, 30 calls; all checks passed. |
+| Saved-output schemas, counters, normalizations, occupancy and marginal validation | 267 assertions (four-thread) and 56 (one-thread) passed. |
+| Separate-process deterministic replay | 51 assertions passed, including full trajectory/score/input/settings equality. |
+| Profiled policy convergence | Ten policies, zero independent Bellman residual over 9,600 states each. |
+| Longer horizon check | N=1,H=8: zero Bellman residual over all 25,600 states; movement/marginal validation passed. Cold timing is not used as a benchmark. |
+| No-op scheduler control | 100 warmed repetitions for RSP-2/4/8 serial/threaded in a four-thread runtime and serial in a one-thread runtime; all nine controls completed. |
+| Summary CSV export and plots | Actual JSON summaries exported; three PNG/PDF comparison figures generated and inspected using Python 3.12.14, NumPy 1.26.4, Matplotlib 3.7.5. |
+| GitHub Actions implementation | [41549004992](https://github.com/praveenarvind/Combined-Project/actions/runs/41549004992) succeeded on `3f646d6`. Final workflow additionally checks fresh cross-runtime cold CI replay. |
+
+The local summary log is [benchmarks/phase4/VALIDATION.txt](benchmarks/phase4/VALIDATION.txt).
+Source measurement hooks delegate the original calls; no camera, reward, movement,
+VI setting or baseline update rule changed. All normalized quality uses Phase 2
+joint SRPPA; legacy value and motion bonuses remain separate. Formation is an
+idealized differently constrained reference. CIs are null for this study's single
+initial condition per matched case; timing SD is descriptive. Full matrices,
+Blender, R-IRSP, theoretical guarantees and Phase 5 were not run.

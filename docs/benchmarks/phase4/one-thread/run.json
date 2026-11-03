@@ -1,0 +1,2181 @@
+{
+    "schema_version": 1,
+    "context": {
+        "source_commit": "3f646d655fa90e82bcd459e8c65f2dec36c8091d",
+        "source_dirty": false,
+        "source_sha256": "453e0d8a665a0155c6eb6e71b6ef80097c17a38b34860de02183dd6330109692",
+        "julia_version": "1.8.5",
+        "julia_threads": 1,
+        "blas_threads": 1,
+        "cpu_quota": "400000 100000",
+        "cpu_allowed": "Cpus_allowed_list:\t0-3",
+        "memory_limit": "34359738368",
+        "process_peak_rss_bytes": 697049088,
+        "warmup_enabled": true,
+        "purpose": "benchmark"
+    },
+    "config": {
+        "name": "one-thread-control",
+        "case": [
+            {
+                "scenario": "cluster",
+                "repeats": 3,
+                "robots": 5,
+                "partition_seed": 11,
+                "initial_seed": 2026,
+                "id": "phase3-match",
+                "horizon": 3,
+                "planners": [
+                    "greedy",
+                    "rsp2_serial"
+                ]
+            }
+        ]
+    },
+    "estimate": {
+        "measured_vi_calls": 30,
+        "nonterminal_state_visits_per_vi_sweep": 192000,
+        "note": "No automatic matrix expansion. Warmups, diagnostic passes, legacy evaluation and validation add cost; calibrate before large runs."
+    },
+    "records": [
+        {
+            "case_id": "phase3-match",
+            "replicate": 1,
+            "scenario": "cluster",
+            "robots": 5,
+            "horizon": 3,
+            "start_frame": 1,
+            "initial_seed": 2026,
+            "partition_seed": 11,
+            "input": {
+                "path": "/workspace/Combined-Project/data/scenarios/cluster/cluster_data.json",
+                "sha256": "67b4c1b3aea58758c7ccf888b58aa9b6bc36728871b9eb3f8b175df4205992a7",
+                "original_robots": 5,
+                "original_horizon": 60,
+                "original_frame_start": 1,
+                "original_frame_end": 3,
+                "camera_policy": "unchanged upstream view-cone override"
+            },
+            "initial_states": [
+                {
+                    "state": {
+                        "x": 18,
+                        "y": 12,
+                        "heading": "SW"
+                    },
+                    "depth": 1,
+                    "horizon": 3
+                },
+                {
+                    "state": {
+                        "x": 7,
+                        "y": 15,
+                        "heading": "SW"
+                    },
+                    "depth": 1,
+                    "horizon": 3
+                },
+                {
+                    "state": {
+                        "x": 6,
+                        "y": 16,
+                        "heading": "E"
+                    },
+                    "depth": 1,
+                    "horizon": 3
+                },
+                {
+                    "state": {
+                        "x": 1,
+                        "y": 20,
+                        "heading": "SE"
+                    },
+                    "depth": 1,
+                    "horizon": 3
+                },
+                {
+                    "state": {
+                        "x": 5,
+                        "y": 20,
+                        "heading": "W"
+                    },
+                    "depth": 1,
+                    "horizon": 3
+                }
+            ],
+            "gc_policy": "full_before_run",
+            "normalized_srppa": 1,
+            "serial_speedup": null,
+            "result": {
+                "planner": "greedy",
+                "mode": "serial",
+                "scores": {
+                    "joint_srppa": 10.730734237108177,
+                    "legacy_value": 17.954202449279595,
+                    "heading_bonus": 0.08,
+                    "stationary_bonus": 0
+                },
+                "metrics": {
+                    "planning_seconds": 15.300882007,
+                    "solver_seconds": 16.210001456,
+                    "legacy_evaluation_seconds": 0.909119449,
+                    "allocated_bytes": 42347142024,
+                    "gc_seconds": 1.9865713469999997,
+                    "process_cpu_seconds": 15.299610999999999,
+                    "vi_calls": 5,
+                    "active_block_wall_seconds": 15.300858463,
+                    "outside_block_wall_seconds": 2.3543999999375842e-5,
+                    "completion_skew_wait_proxy_seconds": 0,
+                    "block_wall_sum_seconds": 15.300858463
+                },
+                "redundancy_per_robot": 1.3546936424342824,
+                "configured_rounds": 5,
+                "occupied_rounds": 5,
+                "logical_dependency_depth": 5,
+                "assignments": null,
+                "settings": {
+                    "horizon": 3,
+                    "num_robots": 5,
+                    "grid": {
+                        "width": 20,
+                        "height": 20,
+                        "headings": 8
+                    },
+                    "camera": {
+                        "model": "DistributedFilming.MDMA.ViewConeSensor",
+                        "fov": 1.5707963267948966,
+                        "cutoff": 100
+                    },
+                    "move_dist": 3,
+                    "vi": {
+                        "max_iterations": 90,
+                        "belres": 1.0e-6,
+                        "include_Q": false,
+                        "discount": 1,
+                        "verbose": true
+                    }
+                },
+                "validation": {
+                    "movement_checked": true,
+                    "initial_states_checked": true,
+                    "max_marginal_error": 3.608224830031759e-15,
+                    "feasibility": "original_grid_and_motion"
+                },
+                "detailed": false,
+                "stages": [
+                ],
+                "convergence": [
+                ],
+                "traces": [
+                    {
+                        "robot_id": 1,
+                        "conditioned_on": [
+                        ],
+                        "thread_id": 1,
+                        "started_ns": 15383552852862,
+                        "finished_ns": 15386533821248
+                    },
+                    {
+                        "robot_id": 2,
+                        "conditioned_on": [
+                            1
+                        ],
+                        "thread_id": 1,
+                        "started_ns": 15386533824733,
+                        "finished_ns": 15389689307117
+                    },
+                    {
+                        "robot_id": 3,
+                        "conditioned_on": [
+                            1,
+                            2
+                        ],
+                        "thread_id": 1,
+                        "started_ns": 15389689311183,
+                        "finished_ns": 15392790268386
+                    },
+                    {
+                        "robot_id": 4,
+                        "conditioned_on": [
+                            1,
+                            2,
+                            3
+                        ],
+                        "thread_id": 1,
+                        "started_ns": 15392790271220,
+                        "finished_ns": 15395876270476
+                    },
+                    {
+                        "robot_id": 5,
+                        "conditioned_on": [
+                            1,
+                            2,
+                            3,
+                            4
+                        ],
+                        "thread_id": 1,
+                        "started_ns": 15395876274031,
+                        "finished_ns": 15398853725265
+                    }
+                ],
+                "solution": {
+                    "value": 17.954202449279595,
+                    "elements": [
+                        [
+                            1,
+                            [
+                                {
+                                    "state": {
+                                        "x": 18,
+                                        "y": 12,
+                                        "heading": "SW"
+                                    },
+                                    "depth": 1,
+                                    "horizon": 3
+                                },
+                                {
+                                    "state": {
+                                        "x": 16,
+                                        "y": 10,
+                                        "heading": "W"
+                                    },
+                                    "depth": 2,
+                                    "horizon": 3
+                                },
+                                {
+                                    "state": {
+                                        "x": 14,
+                                        "y": 9,
+                                        "heading": "W"
+                                    },
+                                    "depth": 3,
+                                    "horizon": 3
+                                }
+                            ]
+                        ],
+                        [
+                            2,
+                            [
+                                {
+                                    "state": {
+                                        "x": 7,
+                                        "y": 15,
+                                        "heading": "SW"
+                                    },
+                                    "depth": 1,
+                                    "horizon": 3
+                                },
+                                {
+                                    "state": {
+                                        "x": 7,
+                                        "y": 14,
+                                        "heading": "S"
+                                    },
+                                    "depth": 2,
+                                    "horizon": 3
+                                },
+                                {
+                                    "state": {
+                                        "x": 6,
+                                        "y": 13,
+                                        "heading": "SE"
+                                    },
+                                    "depth": 3,
+                                    "horizon": 3
+                                }
+                            ]
+                        ],
+                        [
+                            3,
+                            [
+                                {
+                                    "state": {
+                                        "x": 6,
+                                        "y": 16,
+                                        "heading": "E"
+                                    },
+                                    "depth": 1,
+                                    "horizon": 3
+                                },
+                                {
+                                    "state": {
+                                        "x": 6,
+                                        "y": 14,
+                                        "heading": "SE"
+                                    },
+                                    "depth": 2,
+                                    "horizon": 3
+                                },
+                                {
+                                    "state": {
+                                        "x": 6,
+                                        "y": 13,
+                                        "heading": "SE"
+                                    },
+                                    "depth": 3,
+                                    "horizon": 3
+                                }
+                            ]
+                        ],
+                        [
+                            4,
+                            [
+                                {
+                                    "state": {
+                                        "x": 1,
+                                        "y": 20,
+                                        "heading": "SE"
+                                    },
+                                    "depth": 1,
+                                    "horizon": 3
+                                },
+                                {
+                                    "state": {
+                                        "x": 3,
+                                        "y": 18,
+                                        "heading": "SE"
+                                    },
+                                    "depth": 2,
+                                    "horizon": 3
+                                },
+                                {
+                                    "state": {
+                                        "x": 5,
+                                        "y": 16,
+                                        "heading": "SE"
+                                    },
+                                    "depth": 3,
+                                    "horizon": 3
+                                }
+                            ]
+                        ],
+                        [
+                            5,
+                            [
+                                {
+                                    "state": {
+                                        "x": 5,
+                                        "y": 20,
+                                        "heading": "W"
+                                    },
+                                    "depth": 1,
+                                    "horizon": 3
+                                },
+                                {
+                                    "state": {
+                                        "x": 7,
+                                        "y": 18,
+                                        "heading": "SW"
+                                    },
+                                    "depth": 2,
+                                    "horizon": 3
+                                },
+                                {
+                                    "state": {
+                                        "x": 9,
+                                        "y": 16,
+                                        "heading": "S"
+                                    },
+                                    "depth": 3,
+                                    "horizon": 3
+                                }
+                            ]
+                        ]
+                    ]
+                }
+            }
+        },
+        {
+            "case_id": "phase3-match",
+            "replicate": 1,
+            "scenario": "cluster",
+            "robots": 5,
+            "horizon": 3,
+            "start_frame": 1,
+            "initial_seed": 2026,
+            "partition_seed": 11,
+            "input": {
+                "path": "/workspace/Combined-Project/data/scenarios/cluster/cluster_data.json",
+                "sha256": "67b4c1b3aea58758c7ccf888b58aa9b6bc36728871b9eb3f8b175df4205992a7",
+                "original_robots": 5,
+                "original_horizon": 60,
+                "original_frame_start": 1,
+                "original_frame_end": 3,
+                "camera_policy": "unchanged upstream view-cone override"
+            },
+            "initial_states": [
+                {
+                    "state": {
+                        "x": 18,
+                        "y": 12,
+                        "heading": "SW"
+                    },
+                    "depth": 1,
+                    "horizon": 3
+                },
+                {
+                    "state": {
+                        "x": 7,
+                        "y": 15,
+                        "heading": "SW"
+                    },
+                    "depth": 1,
+                    "horizon": 3
+                },
+                {
+                    "state": {
+                        "x": 6,
+                        "y": 16,
+                        "heading": "E"
+                    },
+                    "depth": 1,
+                    "horizon": 3
+                },
+                {
+                    "state": {
+                        "x": 1,
+                        "y": 20,
+                        "heading": "SE"
+                    },
+                    "depth": 1,
+                    "horizon": 3
+                },
+                {
+                    "state": {
+                        "x": 5,
+                        "y": 20,
+                        "heading": "W"
+                    },
+                    "depth": 1,
+                    "horizon": 3
+                }
+            ],
+            "gc_policy": "full_before_run",
+            "normalized_srppa": 0.9982654733948956,
+            "serial_speedup": null,
+            "result": {
+                "planner": "rsp2_serial",
+                "mode": "serial",
+                "scores": {
+                    "joint_srppa": 10.712121493081607,
+                    "legacy_value": 17.80356276610334,
+                    "heading_bonus": 0.1,
+                    "stationary_bonus": 0
+                },
+                "metrics": {
+                    "planning_seconds": 15.534085162,
+                    "solver_seconds": 16.463802181,
+                    "legacy_evaluation_seconds": 0.929717019,
+                    "allocated_bytes": 42347008920,
+                    "gc_seconds": 1.946462866,
+                    "process_cpu_seconds": 15.53297400000001,
+                    "vi_calls": 5,
+                    "active_block_wall_seconds": 15.534021956,
+                    "outside_block_wall_seconds": 6.320600000009335e-5,
+                    "completion_skew_wait_proxy_seconds": 0,
+                    "block_wall_sum_seconds": 15.534021955999998
+                },
+                "redundancy_per_robot": 1.3282882546043453,
+                "configured_rounds": 2,
+                "occupied_rounds": 2,
+                "logical_dependency_depth": 2,
+                "assignments": [
+                    2,
+                    2,
+                    1,
+                    1,
+                    2
+                ],
+                "settings": {
+                    "horizon": 3,
+                    "num_robots": 5,
+                    "grid": {
+                        "width": 20,
+                        "height": 20,
+                        "headings": 8
+                    },
+                    "camera": {
+                        "model": "DistributedFilming.MDMA.ViewConeSensor",
+                        "fov": 1.5707963267948966,
+                        "cutoff": 100
+                    },
+                    "move_dist": 3,
+                    "vi": {
+                        "max_iterations": 90,
+                        "belres": 1.0e-6,
+                        "include_Q": false,
+                        "discount": 1,
+                        "verbose": true
+                    }
+                },
+                "validation": {
+                    "movement_checked": true,
+                    "initial_states_checked": true,
+                    "max_marginal_error": 8.215650382226158e-15,
+                    "feasibility": "original_grid_and_motion"
+                },
+                "detailed": false,
+                "stages": [
+                ],
+                "convergence": [
+                ],
+                "traces": [
+                    {
+                        "robot_id": 1,
+                        "conditioned_on": [
+                            3,
+                            4
+                        ],
+                        "thread_id": 1,
+                        "started_ns": 15406643337346,
+                        "finished_ns": 15409664462015
+                    },
+                    {
+                        "robot_id": 2,
+                        "conditioned_on": [
+                            3,
+                            4
+                        ],
+                        "thread_id": 1,
+                        "started_ns": 15409664474484,
+                        "finished_ns": 15412794861764
+                    },
+                    {
+                        "robot_id": 3,
+                        "conditioned_on": [
+                        ],
+                        "thread_id": 1,
+                        "started_ns": 15400410987937,
+                        "finished_ns": 15403582364827
+                    },
+                    {
+                        "robot_id": 4,
+                        "conditioned_on": [
+                        ],
+                        "thread_id": 1,
+                        "started_ns": 15403582375433,
+                        "finished_ns": 15406643327320
+                    },
+                    {
+                        "robot_id": 5,
+                        "conditioned_on": [
+                            3,
+                            4
+                        ],
+                        "thread_id": 1,
+                        "started_ns": 15412794874483,
+                        "finished_ns": 15415945055713
+                    }
+                ],
+                "solution": {
+                    "value": 17.80356276610334,
+                    "elements": [
+                        [
+                            1,
+                            [
+                                {
+                                    "state": {
+                                        "x": 18,
+                                        "y": 12,
+                                        "heading": "SW"
+                                    },
+                                    "depth": 1,
+                                    "horizon": 3
+                                },
+                                {
+                                    "state": {
+                                        "x": 16,
+                                        "y": 10,
+                                        "heading": "W"
+                                    },
+                                    "depth": 2,
+                                    "horizon": 3
+                                },
+                                {
+                                    "state": {
+                                        "x": 15,
+                                        "y": 9,
+                                        "heading": "W"
+                                    },
+                                    "depth": 3,
+                                    "horizon": 3
+                                }
+                            ]
+                        ],
+                        [
+                            2,
+                            [
+                                {
+                                    "state": {
+                                        "x": 7,
+                                        "y": 15,
+                                        "heading": "SW"
+                                    },
+                                    "depth": 1,
+                                    "horizon": 3
+                                },
+                                {
+                                    "state": {
+                                        "x": 9,
+                                        "y": 14,
+                                        "heading": "S"
+                                    },
+                                    "depth": 2,
+                                    "horizon": 3
+                                },
+                                {
+                                    "state": {
+                                        "x": 11,
+                                        "y": 14,
+                                        "heading": "S"
+                                    },
+                                    "depth": 3,
+                                    "horizon": 3
+                                }
+                            ]
+                        ],
+                        [
+                            3,
+                            [
+                                {
+                                    "state": {
+                                        "x": 6,
+                                        "y": 16,
+                                        "heading": "E"
+                                    },
+                                    "depth": 1,
+                                    "horizon": 3
+                                },
+                                {
+                                    "state": {
+                                        "x": 6,
+                                        "y": 14,
+                                        "heading": "SE"
+                                    },
+                                    "depth": 2,
+                                    "horizon": 3
+                                },
+                                {
+                                    "state": {
+                                        "x": 6,
+                                        "y": 13,
+                                        "heading": "SE"
+                                    },
+                                    "depth": 3,
+                                    "horizon": 3
+                                }
+                            ]
+                        ],
+                        [
+                            4,
+                            [
+                                {
+                                    "state": {
+                                        "x": 1,
+                                        "y": 20,
+                                        "heading": "SE"
+                                    },
+                                    "depth": 1,
+                                    "horizon": 3
+                                },
+                                {
+                                    "state": {
+                                        "x": 3,
+                                        "y": 18,
+                                        "heading": "SE"
+                                    },
+                                    "depth": 2,
+                                    "horizon": 3
+                                },
+                                {
+                                    "state": {
+                                        "x": 5,
+                                        "y": 16,
+                                        "heading": "SE"
+                                    },
+                                    "depth": 3,
+                                    "horizon": 3
+                                }
+                            ]
+                        ],
+                        [
+                            5,
+                            [
+                                {
+                                    "state": {
+                                        "x": 5,
+                                        "y": 20,
+                                        "heading": "W"
+                                    },
+                                    "depth": 1,
+                                    "horizon": 3
+                                },
+                                {
+                                    "state": {
+                                        "x": 7,
+                                        "y": 18,
+                                        "heading": "SW"
+                                    },
+                                    "depth": 2,
+                                    "horizon": 3
+                                },
+                                {
+                                    "state": {
+                                        "x": 9,
+                                        "y": 16,
+                                        "heading": "S"
+                                    },
+                                    "depth": 3,
+                                    "horizon": 3
+                                }
+                            ]
+                        ]
+                    ]
+                }
+            }
+        },
+        {
+            "case_id": "phase3-match",
+            "replicate": 2,
+            "scenario": "cluster",
+            "robots": 5,
+            "horizon": 3,
+            "start_frame": 1,
+            "initial_seed": 2026,
+            "partition_seed": 11,
+            "input": {
+                "path": "/workspace/Combined-Project/data/scenarios/cluster/cluster_data.json",
+                "sha256": "67b4c1b3aea58758c7ccf888b58aa9b6bc36728871b9eb3f8b175df4205992a7",
+                "original_robots": 5,
+                "original_horizon": 60,
+                "original_frame_start": 1,
+                "original_frame_end": 3,
+                "camera_policy": "unchanged upstream view-cone override"
+            },
+            "initial_states": [
+                {
+                    "state": {
+                        "x": 18,
+                        "y": 12,
+                        "heading": "SW"
+                    },
+                    "depth": 1,
+                    "horizon": 3
+                },
+                {
+                    "state": {
+                        "x": 7,
+                        "y": 15,
+                        "heading": "SW"
+                    },
+                    "depth": 1,
+                    "horizon": 3
+                },
+                {
+                    "state": {
+                        "x": 6,
+                        "y": 16,
+                        "heading": "E"
+                    },
+                    "depth": 1,
+                    "horizon": 3
+                },
+                {
+                    "state": {
+                        "x": 1,
+                        "y": 20,
+                        "heading": "SE"
+                    },
+                    "depth": 1,
+                    "horizon": 3
+                },
+                {
+                    "state": {
+                        "x": 5,
+                        "y": 20,
+                        "heading": "W"
+                    },
+                    "depth": 1,
+                    "horizon": 3
+                }
+            ],
+            "gc_policy": "full_before_run",
+            "normalized_srppa": 1,
+            "serial_speedup": null,
+            "result": {
+                "planner": "greedy",
+                "mode": "serial",
+                "scores": {
+                    "joint_srppa": 10.730734237108177,
+                    "legacy_value": 17.954202449279595,
+                    "heading_bonus": 0.08,
+                    "stationary_bonus": 0
+                },
+                "metrics": {
+                    "planning_seconds": 15.763550081,
+                    "solver_seconds": 16.695699595,
+                    "legacy_evaluation_seconds": 0.932149514,
+                    "allocated_bytes": 42347142024,
+                    "gc_seconds": 2.048043426,
+                    "process_cpu_seconds": 15.762630999999999,
+                    "vi_calls": 5,
+                    "active_block_wall_seconds": 15.763526115,
+                    "outside_block_wall_seconds": 2.39660000005415e-5,
+                    "completion_skew_wait_proxy_seconds": 0,
+                    "block_wall_sum_seconds": 15.763526115
+                },
+                "redundancy_per_robot": 1.3546936424342824,
+                "configured_rounds": 5,
+                "occupied_rounds": 5,
+                "logical_dependency_depth": 5,
+                "assignments": null,
+                "settings": {
+                    "horizon": 3,
+                    "num_robots": 5,
+                    "grid": {
+                        "width": 20,
+                        "height": 20,
+                        "headings": 8
+                    },
+                    "camera": {
+                        "model": "DistributedFilming.MDMA.ViewConeSensor",
+                        "fov": 1.5707963267948966,
+                        "cutoff": 100
+                    },
+                    "move_dist": 3,
+                    "vi": {
+                        "max_iterations": 90,
+                        "belres": 1.0e-6,
+                        "include_Q": false,
+                        "discount": 1,
+                        "verbose": true
+                    }
+                },
+                "validation": {
+                    "movement_checked": true,
+                    "initial_states_checked": true,
+                    "max_marginal_error": 3.608224830031759e-15,
+                    "feasibility": "original_grid_and_motion"
+                },
+                "detailed": false,
+                "stages": [
+                ],
+                "convergence": [
+                ],
+                "traces": [
+                    {
+                        "robot_id": 1,
+                        "conditioned_on": [
+                        ],
+                        "thread_id": 1,
+                        "started_ns": 15435968181930,
+                        "finished_ns": 15438998647250
+                    },
+                    {
+                        "robot_id": 2,
+                        "conditioned_on": [
+                            1
+                        ],
+                        "thread_id": 1,
+                        "started_ns": 15438998650936,
+                        "finished_ns": 15441993167176
+                    },
+                    {
+                        "robot_id": 3,
+                        "conditioned_on": [
+                            1,
+                            2
+                        ],
+                        "thread_id": 1,
+                        "started_ns": 15441993170631,
+                        "finished_ns": 15445110816610
+                    },
+                    {
+                        "robot_id": 4,
+                        "conditioned_on": [
+                            1,
+                            2,
+                            3
+                        ],
+                        "thread_id": 1,
+                        "started_ns": 15445110820105,
+                        "finished_ns": 15448527776784
+                    },
+                    {
+                        "robot_id": 5,
+                        "conditioned_on": [
+                            1,
+                            2,
+                            3,
+                            4
+                        ],
+                        "thread_id": 1,
+                        "started_ns": 15448527780069,
+                        "finished_ns": 15451731721966
+                    }
+                ],
+                "solution": {
+                    "value": 17.954202449279595,
+                    "elements": [
+                        [
+                            1,
+                            [
+                                {
+                                    "state": {
+                                        "x": 18,
+                                        "y": 12,
+                                        "heading": "SW"
+                                    },
+                                    "depth": 1,
+                                    "horizon": 3
+                                },
+                                {
+                                    "state": {
+                                        "x": 16,
+                                        "y": 10,
+                                        "heading": "W"
+                                    },
+                                    "depth": 2,
+                                    "horizon": 3
+                                },
+                                {
+                                    "state": {
+                                        "x": 14,
+                                        "y": 9,
+                                        "heading": "W"
+                                    },
+                                    "depth": 3,
+                                    "horizon": 3
+                                }
+                            ]
+                        ],
+                        [
+                            2,
+                            [
+                                {
+                                    "state": {
+                                        "x": 7,
+                                        "y": 15,
+                                        "heading": "SW"
+                                    },
+                                    "depth": 1,
+                                    "horizon": 3
+                                },
+                                {
+                                    "state": {
+                                        "x": 7,
+                                        "y": 14,
+                                        "heading": "S"
+                                    },
+                                    "depth": 2,
+                                    "horizon": 3
+                                },
+                                {
+                                    "state": {
+                                        "x": 6,
+                                        "y": 13,
+                                        "heading": "SE"
+                                    },
+                                    "depth": 3,
+                                    "horizon": 3
+                                }
+                            ]
+                        ],
+                        [
+                            3,
+                            [
+                                {
+                                    "state": {
+                                        "x": 6,
+                                        "y": 16,
+                                        "heading": "E"
+                                    },
+                                    "depth": 1,
+                                    "horizon": 3
+                                },
+                                {
+                                    "state": {
+                                        "x": 6,
+                                        "y": 14,
+                                        "heading": "SE"
+                                    },
+                                    "depth": 2,
+                                    "horizon": 3
+                                },
+                                {
+                                    "state": {
+                                        "x": 6,
+                                        "y": 13,
+                                        "heading": "SE"
+                                    },
+                                    "depth": 3,
+                                    "horizon": 3
+                                }
+                            ]
+                        ],
+                        [
+                            4,
+                            [
+                                {
+                                    "state": {
+                                        "x": 1,
+                                        "y": 20,
+                                        "heading": "SE"
+                                    },
+                                    "depth": 1,
+                                    "horizon": 3
+                                },
+                                {
+                                    "state": {
+                                        "x": 3,
+                                        "y": 18,
+                                        "heading": "SE"
+                                    },
+                                    "depth": 2,
+                                    "horizon": 3
+                                },
+                                {
+                                    "state": {
+                                        "x": 5,
+                                        "y": 16,
+                                        "heading": "SE"
+                                    },
+                                    "depth": 3,
+                                    "horizon": 3
+                                }
+                            ]
+                        ],
+                        [
+                            5,
+                            [
+                                {
+                                    "state": {
+                                        "x": 5,
+                                        "y": 20,
+                                        "heading": "W"
+                                    },
+                                    "depth": 1,
+                                    "horizon": 3
+                                },
+                                {
+                                    "state": {
+                                        "x": 7,
+                                        "y": 18,
+                                        "heading": "SW"
+                                    },
+                                    "depth": 2,
+                                    "horizon": 3
+                                },
+                                {
+                                    "state": {
+                                        "x": 9,
+                                        "y": 16,
+                                        "heading": "S"
+                                    },
+                                    "depth": 3,
+                                    "horizon": 3
+                                }
+                            ]
+                        ]
+                    ]
+                }
+            }
+        },
+        {
+            "case_id": "phase3-match",
+            "replicate": 2,
+            "scenario": "cluster",
+            "robots": 5,
+            "horizon": 3,
+            "start_frame": 1,
+            "initial_seed": 2026,
+            "partition_seed": 11,
+            "input": {
+                "path": "/workspace/Combined-Project/data/scenarios/cluster/cluster_data.json",
+                "sha256": "67b4c1b3aea58758c7ccf888b58aa9b6bc36728871b9eb3f8b175df4205992a7",
+                "original_robots": 5,
+                "original_horizon": 60,
+                "original_frame_start": 1,
+                "original_frame_end": 3,
+                "camera_policy": "unchanged upstream view-cone override"
+            },
+            "initial_states": [
+                {
+                    "state": {
+                        "x": 18,
+                        "y": 12,
+                        "heading": "SW"
+                    },
+                    "depth": 1,
+                    "horizon": 3
+                },
+                {
+                    "state": {
+                        "x": 7,
+                        "y": 15,
+                        "heading": "SW"
+                    },
+                    "depth": 1,
+                    "horizon": 3
+                },
+                {
+                    "state": {
+                        "x": 6,
+                        "y": 16,
+                        "heading": "E"
+                    },
+                    "depth": 1,
+                    "horizon": 3
+                },
+                {
+                    "state": {
+                        "x": 1,
+                        "y": 20,
+                        "heading": "SE"
+                    },
+                    "depth": 1,
+                    "horizon": 3
+                },
+                {
+                    "state": {
+                        "x": 5,
+                        "y": 20,
+                        "heading": "W"
+                    },
+                    "depth": 1,
+                    "horizon": 3
+                }
+            ],
+            "gc_policy": "full_before_run",
+            "normalized_srppa": 0.9982654733948956,
+            "serial_speedup": null,
+            "result": {
+                "planner": "rsp2_serial",
+                "mode": "serial",
+                "scores": {
+                    "joint_srppa": 10.712121493081607,
+                    "legacy_value": 17.80356276610334,
+                    "heading_bonus": 0.1,
+                    "stationary_bonus": 0
+                },
+                "metrics": {
+                    "planning_seconds": 16.947704893,
+                    "solver_seconds": 17.875850782,
+                    "legacy_evaluation_seconds": 0.928145889,
+                    "allocated_bytes": 42347008920,
+                    "gc_seconds": 2.16447224,
+                    "process_cpu_seconds": 16.944956999999988,
+                    "vi_calls": 5,
+                    "active_block_wall_seconds": 16.947641018,
+                    "outside_block_wall_seconds": 6.387500000215596e-5,
+                    "completion_skew_wait_proxy_seconds": 0,
+                    "block_wall_sum_seconds": 16.947641018
+                },
+                "redundancy_per_robot": 1.3282882546043453,
+                "configured_rounds": 2,
+                "occupied_rounds": 2,
+                "logical_dependency_depth": 2,
+                "assignments": [
+                    2,
+                    2,
+                    1,
+                    1,
+                    2
+                ],
+                "settings": {
+                    "horizon": 3,
+                    "num_robots": 5,
+                    "grid": {
+                        "width": 20,
+                        "height": 20,
+                        "headings": 8
+                    },
+                    "camera": {
+                        "model": "DistributedFilming.MDMA.ViewConeSensor",
+                        "fov": 1.5707963267948966,
+                        "cutoff": 100
+                    },
+                    "move_dist": 3,
+                    "vi": {
+                        "max_iterations": 90,
+                        "belres": 1.0e-6,
+                        "include_Q": false,
+                        "discount": 1,
+                        "verbose": true
+                    }
+                },
+                "validation": {
+                    "movement_checked": true,
+                    "initial_states_checked": true,
+                    "max_marginal_error": 8.215650382226158e-15,
+                    "feasibility": "original_grid_and_motion"
+                },
+                "detailed": false,
+                "stages": [
+                ],
+                "convergence": [
+                ],
+                "traces": [
+                    {
+                        "robot_id": 1,
+                        "conditioned_on": [
+                            3,
+                            4
+                        ],
+                        "thread_id": 1,
+                        "started_ns": 15424317633204,
+                        "finished_ns": 15427837522675
+                    },
+                    {
+                        "robot_id": 2,
+                        "conditioned_on": [
+                            3,
+                            4
+                        ],
+                        "thread_id": 1,
+                        "started_ns": 15427837534733,
+                        "finished_ns": 15431222561195
+                    },
+                    {
+                        "robot_id": 3,
+                        "conditioned_on": [
+                        ],
+                        "thread_id": 1,
+                        "started_ns": 15417520869107,
+                        "finished_ns": 15420860772300
+                    },
+                    {
+                        "robot_id": 4,
+                        "conditioned_on": [
+                        ],
+                        "thread_id": 1,
+                        "started_ns": 15420860783286,
+                        "finished_ns": 15424317623129
+                    },
+                    {
+                        "robot_id": 5,
+                        "conditioned_on": [
+                            3,
+                            4
+                        ],
+                        "thread_id": 1,
+                        "started_ns": 15431222573263,
+                        "finished_ns": 15434468555312
+                    }
+                ],
+                "solution": {
+                    "value": 17.80356276610334,
+                    "elements": [
+                        [
+                            1,
+                            [
+                                {
+                                    "state": {
+                                        "x": 18,
+                                        "y": 12,
+                                        "heading": "SW"
+                                    },
+                                    "depth": 1,
+                                    "horizon": 3
+                                },
+                                {
+                                    "state": {
+                                        "x": 16,
+                                        "y": 10,
+                                        "heading": "W"
+                                    },
+                                    "depth": 2,
+                                    "horizon": 3
+                                },
+                                {
+                                    "state": {
+                                        "x": 15,
+                                        "y": 9,
+                                        "heading": "W"
+                                    },
+                                    "depth": 3,
+                                    "horizon": 3
+                                }
+                            ]
+                        ],
+                        [
+                            2,
+                            [
+                                {
+                                    "state": {
+                                        "x": 7,
+                                        "y": 15,
+                                        "heading": "SW"
+                                    },
+                                    "depth": 1,
+                                    "horizon": 3
+                                },
+                                {
+                                    "state": {
+                                        "x": 9,
+                                        "y": 14,
+                                        "heading": "S"
+                                    },
+                                    "depth": 2,
+                                    "horizon": 3
+                                },
+                                {
+                                    "state": {
+                                        "x": 11,
+                                        "y": 14,
+                                        "heading": "S"
+                                    },
+                                    "depth": 3,
+                                    "horizon": 3
+                                }
+                            ]
+                        ],
+                        [
+                            3,
+                            [
+                                {
+                                    "state": {
+                                        "x": 6,
+                                        "y": 16,
+                                        "heading": "E"
+                                    },
+                                    "depth": 1,
+                                    "horizon": 3
+                                },
+                                {
+                                    "state": {
+                                        "x": 6,
+                                        "y": 14,
+                                        "heading": "SE"
+                                    },
+                                    "depth": 2,
+                                    "horizon": 3
+                                },
+                                {
+                                    "state": {
+                                        "x": 6,
+                                        "y": 13,
+                                        "heading": "SE"
+                                    },
+                                    "depth": 3,
+                                    "horizon": 3
+                                }
+                            ]
+                        ],
+                        [
+                            4,
+                            [
+                                {
+                                    "state": {
+                                        "x": 1,
+                                        "y": 20,
+                                        "heading": "SE"
+                                    },
+                                    "depth": 1,
+                                    "horizon": 3
+                                },
+                                {
+                                    "state": {
+                                        "x": 3,
+                                        "y": 18,
+                                        "heading": "SE"
+                                    },
+                                    "depth": 2,
+                                    "horizon": 3
+                                },
+                                {
+                                    "state": {
+                                        "x": 5,
+                                        "y": 16,
+                                        "heading": "SE"
+                                    },
+                                    "depth": 3,
+                                    "horizon": 3
+                                }
+                            ]
+                        ],
+                        [
+                            5,
+                            [
+                                {
+                                    "state": {
+                                        "x": 5,
+                                        "y": 20,
+                                        "heading": "W"
+                                    },
+                                    "depth": 1,
+                                    "horizon": 3
+                                },
+                                {
+                                    "state": {
+                                        "x": 7,
+                                        "y": 18,
+                                        "heading": "SW"
+                                    },
+                                    "depth": 2,
+                                    "horizon": 3
+                                },
+                                {
+                                    "state": {
+                                        "x": 9,
+                                        "y": 16,
+                                        "heading": "S"
+                                    },
+                                    "depth": 3,
+                                    "horizon": 3
+                                }
+                            ]
+                        ]
+                    ]
+                }
+            }
+        },
+        {
+            "case_id": "phase3-match",
+            "replicate": 3,
+            "scenario": "cluster",
+            "robots": 5,
+            "horizon": 3,
+            "start_frame": 1,
+            "initial_seed": 2026,
+            "partition_seed": 11,
+            "input": {
+                "path": "/workspace/Combined-Project/data/scenarios/cluster/cluster_data.json",
+                "sha256": "67b4c1b3aea58758c7ccf888b58aa9b6bc36728871b9eb3f8b175df4205992a7",
+                "original_robots": 5,
+                "original_horizon": 60,
+                "original_frame_start": 1,
+                "original_frame_end": 3,
+                "camera_policy": "unchanged upstream view-cone override"
+            },
+            "initial_states": [
+                {
+                    "state": {
+                        "x": 18,
+                        "y": 12,
+                        "heading": "SW"
+                    },
+                    "depth": 1,
+                    "horizon": 3
+                },
+                {
+                    "state": {
+                        "x": 7,
+                        "y": 15,
+                        "heading": "SW"
+                    },
+                    "depth": 1,
+                    "horizon": 3
+                },
+                {
+                    "state": {
+                        "x": 6,
+                        "y": 16,
+                        "heading": "E"
+                    },
+                    "depth": 1,
+                    "horizon": 3
+                },
+                {
+                    "state": {
+                        "x": 1,
+                        "y": 20,
+                        "heading": "SE"
+                    },
+                    "depth": 1,
+                    "horizon": 3
+                },
+                {
+                    "state": {
+                        "x": 5,
+                        "y": 20,
+                        "heading": "W"
+                    },
+                    "depth": 1,
+                    "horizon": 3
+                }
+            ],
+            "gc_policy": "full_before_run",
+            "normalized_srppa": 1,
+            "serial_speedup": null,
+            "result": {
+                "planner": "greedy",
+                "mode": "serial",
+                "scores": {
+                    "joint_srppa": 10.730734237108177,
+                    "legacy_value": 17.954202449279595,
+                    "heading_bonus": 0.08,
+                    "stationary_bonus": 0
+                },
+                "metrics": {
+                    "planning_seconds": 16.265362749,
+                    "solver_seconds": 17.153756908,
+                    "legacy_evaluation_seconds": 0.888394159,
+                    "allocated_bytes": 42347142024,
+                    "gc_seconds": 2.073755266,
+                    "process_cpu_seconds": 16.262685999999974,
+                    "vi_calls": 5,
+                    "active_block_wall_seconds": 16.265338505,
+                    "outside_block_wall_seconds": 2.424400000222704e-5,
+                    "completion_skew_wait_proxy_seconds": 0,
+                    "block_wall_sum_seconds": 16.265338505
+                },
+                "redundancy_per_robot": 1.3546936424342824,
+                "configured_rounds": 5,
+                "occupied_rounds": 5,
+                "logical_dependency_depth": 5,
+                "assignments": null,
+                "settings": {
+                    "horizon": 3,
+                    "num_robots": 5,
+                    "grid": {
+                        "width": 20,
+                        "height": 20,
+                        "headings": 8
+                    },
+                    "camera": {
+                        "model": "DistributedFilming.MDMA.ViewConeSensor",
+                        "fov": 1.5707963267948966,
+                        "cutoff": 100
+                    },
+                    "move_dist": 3,
+                    "vi": {
+                        "max_iterations": 90,
+                        "belres": 1.0e-6,
+                        "include_Q": false,
+                        "discount": 1,
+                        "verbose": true
+                    }
+                },
+                "validation": {
+                    "movement_checked": true,
+                    "initial_states_checked": true,
+                    "max_marginal_error": 3.608224830031759e-15,
+                    "feasibility": "original_grid_and_motion"
+                },
+                "detailed": false,
+                "stages": [
+                ],
+                "convergence": [
+                ],
+                "traces": [
+                    {
+                        "robot_id": 1,
+                        "conditioned_on": [
+                        ],
+                        "thread_id": 1,
+                        "started_ns": 15453201121301,
+                        "finished_ns": 15456471346571
+                    },
+                    {
+                        "robot_id": 2,
+                        "conditioned_on": [
+                            1
+                        ],
+                        "thread_id": 1,
+                        "started_ns": 15456471350216,
+                        "finished_ns": 15459809619179
+                    },
+                    {
+                        "robot_id": 3,
+                        "conditioned_on": [
+                            1,
+                            2
+                        ],
+                        "thread_id": 1,
+                        "started_ns": 15459809622704,
+                        "finished_ns": 15463085126120
+                    },
+                    {
+                        "robot_id": 4,
+                        "conditioned_on": [
+                            1,
+                            2,
+                            3
+                        ],
+                        "thread_id": 1,
+                        "started_ns": 15463085129675,
+                        "finished_ns": 15466363313533
+                    },
+                    {
+                        "robot_id": 5,
+                        "conditioned_on": [
+                            1,
+                            2,
+                            3,
+                            4
+                        ],
+                        "thread_id": 1,
+                        "started_ns": 15466363317759,
+                        "finished_ns": 15469466474757
+                    }
+                ],
+                "solution": {
+                    "value": 17.954202449279595,
+                    "elements": [
+                        [
+                            1,
+                            [
+                                {
+                                    "state": {
+                                        "x": 18,
+                                        "y": 12,
+                                        "heading": "SW"
+                                    },
+                                    "depth": 1,
+                                    "horizon": 3
+                                },
+                                {
+                                    "state": {
+                                        "x": 16,
+                                        "y": 10,
+                                        "heading": "W"
+                                    },
+                                    "depth": 2,
+                                    "horizon": 3
+                                },
+                                {
+                                    "state": {
+                                        "x": 14,
+                                        "y": 9,
+                                        "heading": "W"
+                                    },
+                                    "depth": 3,
+                                    "horizon": 3
+                                }
+                            ]
+                        ],
+                        [
+                            2,
+                            [
+                                {
+                                    "state": {
+                                        "x": 7,
+                                        "y": 15,
+                                        "heading": "SW"
+                                    },
+                                    "depth": 1,
+                                    "horizon": 3
+                                },
+                                {
+                                    "state": {
+                                        "x": 7,
+                                        "y": 14,
+                                        "heading": "S"
+                                    },
+                                    "depth": 2,
+                                    "horizon": 3
+                                },
+                                {
+                                    "state": {
+                                        "x": 6,
+                                        "y": 13,
+                                        "heading": "SE"
+                                    },
+                                    "depth": 3,
+                                    "horizon": 3
+                                }
+                            ]
+                        ],
+                        [
+                            3,
+                            [
+                                {
+                                    "state": {
+                                        "x": 6,
+                                        "y": 16,
+                                        "heading": "E"
+                                    },
+                                    "depth": 1,
+                                    "horizon": 3
+                                },
+                                {
+                                    "state": {
+                                        "x": 6,
+                                        "y": 14,
+                                        "heading": "SE"
+                                    },
+                                    "depth": 2,
+                                    "horizon": 3
+                                },
+                                {
+                                    "state": {
+                                        "x": 6,
+                                        "y": 13,
+                                        "heading": "SE"
+                                    },
+                                    "depth": 3,
+                                    "horizon": 3
+                                }
+                            ]
+                        ],
+                        [
+                            4,
+                            [
+                                {
+                                    "state": {
+                                        "x": 1,
+                                        "y": 20,
+                                        "heading": "SE"
+                                    },
+                                    "depth": 1,
+                                    "horizon": 3
+                                },
+                                {
+                                    "state": {
+                                        "x": 3,
+                                        "y": 18,
+                                        "heading": "SE"
+                                    },
+                                    "depth": 2,
+                                    "horizon": 3
+                                },
+                                {
+                                    "state": {
+                                        "x": 5,
+                                        "y": 16,
+                                        "heading": "SE"
+                                    },
+                                    "depth": 3,
+                                    "horizon": 3
+                                }
+                            ]
+                        ],
+                        [
+                            5,
+                            [
+                                {
+                                    "state": {
+                                        "x": 5,
+                                        "y": 20,
+                                        "heading": "W"
+                                    },
+                                    "depth": 1,
+                                    "horizon": 3
+                                },
+                                {
+                                    "state": {
+                                        "x": 7,
+                                        "y": 18,
+                                        "heading": "SW"
+                                    },
+                                    "depth": 2,
+                                    "horizon": 3
+                                },
+                                {
+                                    "state": {
+                                        "x": 9,
+                                        "y": 16,
+                                        "heading": "S"
+                                    },
+                                    "depth": 3,
+                                    "horizon": 3
+                                }
+                            ]
+                        ]
+                    ]
+                }
+            }
+        },
+        {
+            "case_id": "phase3-match",
+            "replicate": 3,
+            "scenario": "cluster",
+            "robots": 5,
+            "horizon": 3,
+            "start_frame": 1,
+            "initial_seed": 2026,
+            "partition_seed": 11,
+            "input": {
+                "path": "/workspace/Combined-Project/data/scenarios/cluster/cluster_data.json",
+                "sha256": "67b4c1b3aea58758c7ccf888b58aa9b6bc36728871b9eb3f8b175df4205992a7",
+                "original_robots": 5,
+                "original_horizon": 60,
+                "original_frame_start": 1,
+                "original_frame_end": 3,
+                "camera_policy": "unchanged upstream view-cone override"
+            },
+            "initial_states": [
+                {
+                    "state": {
+                        "x": 18,
+                        "y": 12,
+                        "heading": "SW"
+                    },
+                    "depth": 1,
+                    "horizon": 3
+                },
+                {
+                    "state": {
+                        "x": 7,
+                        "y": 15,
+                        "heading": "SW"
+                    },
+                    "depth": 1,
+                    "horizon": 3
+                },
+                {
+                    "state": {
+                        "x": 6,
+                        "y": 16,
+                        "heading": "E"
+                    },
+                    "depth": 1,
+                    "horizon": 3
+                },
+                {
+                    "state": {
+                        "x": 1,
+                        "y": 20,
+                        "heading": "SE"
+                    },
+                    "depth": 1,
+                    "horizon": 3
+                },
+                {
+                    "state": {
+                        "x": 5,
+                        "y": 20,
+                        "heading": "W"
+                    },
+                    "depth": 1,
+                    "horizon": 3
+                }
+            ],
+            "gc_policy": "full_before_run",
+            "normalized_srppa": 0.9982654733948956,
+            "serial_speedup": null,
+            "result": {
+                "planner": "rsp2_serial",
+                "mode": "serial",
+                "scores": {
+                    "joint_srppa": 10.712121493081607,
+                    "legacy_value": 17.80356276610334,
+                    "heading_bonus": 0.1,
+                    "stationary_bonus": 0
+                },
+                "metrics": {
+                    "planning_seconds": 15.923018489,
+                    "solver_seconds": 16.840850777,
+                    "legacy_evaluation_seconds": 0.917832288,
+                    "allocated_bytes": 42347008920,
+                    "gc_seconds": 2.034370826,
+                    "process_cpu_seconds": 15.921204999999986,
+                    "vi_calls": 5,
+                    "active_block_wall_seconds": 15.922950118,
+                    "outside_block_wall_seconds": 6.837100000112173e-5,
+                    "completion_skew_wait_proxy_seconds": 0,
+                    "block_wall_sum_seconds": 15.922950118000001
+                },
+                "redundancy_per_robot": 1.3282882546043453,
+                "configured_rounds": 2,
+                "occupied_rounds": 2,
+                "logical_dependency_depth": 2,
+                "assignments": [
+                    2,
+                    2,
+                    1,
+                    1,
+                    2
+                ],
+                "settings": {
+                    "horizon": 3,
+                    "num_robots": 5,
+                    "grid": {
+                        "width": 20,
+                        "height": 20,
+                        "headings": 8
+                    },
+                    "camera": {
+                        "model": "DistributedFilming.MDMA.ViewConeSensor",
+                        "fov": 1.5707963267948966,
+                        "cutoff": 100
+                    },
+                    "move_dist": 3,
+                    "vi": {
+                        "max_iterations": 90,
+                        "belres": 1.0e-6,
+                        "include_Q": false,
+                        "discount": 1,
+                        "verbose": true
+                    }
+                },
+                "validation": {
+                    "movement_checked": true,
+                    "initial_states_checked": true,
+                    "max_marginal_error": 8.215650382226158e-15,
+                    "feasibility": "original_grid_and_motion"
+                },
+                "detailed": false,
+                "stages": [
+                ],
+                "convergence": [
+                ],
+                "traces": [
+                    {
+                        "robot_id": 1,
+                        "conditioned_on": [
+                            3,
+                            4
+                        ],
+                        "thread_id": 1,
+                        "started_ns": 15477221353058,
+                        "finished_ns": 15480354585634
+                    },
+                    {
+                        "robot_id": 2,
+                        "conditioned_on": [
+                            3,
+                            4
+                        ],
+                        "thread_id": 1,
+                        "started_ns": 15480354597411,
+                        "finished_ns": 15483609282684
+                    },
+                    {
+                        "robot_id": 3,
+                        "conditioned_on": [
+                        ],
+                        "thread_id": 1,
+                        "started_ns": 15470883717437,
+                        "finished_ns": 15474060710219
+                    },
+                    {
+                        "robot_id": 4,
+                        "conditioned_on": [
+                        ],
+                        "thread_id": 1,
+                        "started_ns": 15474060721516,
+                        "finished_ns": 15477221335622
+                    },
+                    {
+                        "robot_id": 5,
+                        "conditioned_on": [
+                            3,
+                            4
+                        ],
+                        "thread_id": 1,
+                        "started_ns": 15483609293240,
+                        "finished_ns": 15486806718621
+                    }
+                ],
+                "solution": {
+                    "value": 17.80356276610334,
+                    "elements": [
+                        [
+                            1,
+                            [
+                                {
+                                    "state": {
+                                        "x": 18,
+                                        "y": 12,
+                                        "heading": "SW"
+                                    },
+                                    "depth": 1,
+                                    "horizon": 3
+                                },
+                                {
+                                    "state": {
+                                        "x": 16,
+                                        "y": 10,
+                                        "heading": "W"
+                                    },
+                                    "depth": 2,
+                                    "horizon": 3
+                                },
+                                {
+                                    "state": {
+                                        "x": 15,
+                                        "y": 9,
+                                        "heading": "W"
+                                    },
+                                    "depth": 3,
+                                    "horizon": 3
+                                }
+                            ]
+                        ],
+                        [
+                            2,
+                            [
+                                {
+                                    "state": {
+                                        "x": 7,
+                                        "y": 15,
+                                        "heading": "SW"
+                                    },
+                                    "depth": 1,
+                                    "horizon": 3
+                                },
+                                {
+                                    "state": {
+                                        "x": 9,
+                                        "y": 14,
+                                        "heading": "S"
+                                    },
+                                    "depth": 2,
+                                    "horizon": 3
+                                },
+                                {
+                                    "state": {
+                                        "x": 11,
+                                        "y": 14,
+                                        "heading": "S"
+                                    },
+                                    "depth": 3,
+                                    "horizon": 3
+                                }
+                            ]
+                        ],
+                        [
+                            3,
+                            [
+                                {
+                                    "state": {
+                                        "x": 6,
+                                        "y": 16,
+                                        "heading": "E"
+                                    },
+                                    "depth": 1,
+                                    "horizon": 3
+                                },
+                                {
+                                    "state": {
+                                        "x": 6,
+                                        "y": 14,
+                                        "heading": "SE"
+                                    },
+                                    "depth": 2,
+                                    "horizon": 3
+                                },
+                                {
+                                    "state": {
+                                        "x": 6,
+                                        "y": 13,
+                                        "heading": "SE"
+                                    },
+                                    "depth": 3,
+                                    "horizon": 3
+                                }
+                            ]
+                        ],
+                        [
+                            4,
+                            [
+                                {
+                                    "state": {
+                                        "x": 1,
+                                        "y": 20,
+                                        "heading": "SE"
+                                    },
+                                    "depth": 1,
+                                    "horizon": 3
+                                },
+                                {
+                                    "state": {
+                                        "x": 3,
+                                        "y": 18,
+                                        "heading": "SE"
+                                    },
+                                    "depth": 2,
+                                    "horizon": 3
+                                },
+                                {
+                                    "state": {
+                                        "x": 5,
+                                        "y": 16,
+                                        "heading": "SE"
+                                    },
+                                    "depth": 3,
+                                    "horizon": 3
+                                }
+                            ]
+                        ],
+                        [
+                            5,
+                            [
+                                {
+                                    "state": {
+                                        "x": 5,
+                                        "y": 20,
+                                        "heading": "W"
+                                    },
+                                    "depth": 1,
+                                    "horizon": 3
+                                },
+                                {
+                                    "state": {
+                                        "x": 7,
+                                        "y": 18,
+                                        "heading": "SW"
+                                    },
+                                    "depth": 2,
+                                    "horizon": 3
+                                },
+                                {
+                                    "state": {
+                                        "x": 9,
+                                        "y": 16,
+                                        "heading": "S"
+                                    },
+                                    "depth": 3,
+                                    "horizon": 3
+                                }
+                            ]
+                        ]
+                    ]
+                }
+            }
+        }
+    ],
+    "diagnostic_passes": [
+    ],
+    "summaries": [
+        {
+            "scenario": "cluster",
+            "start_frame": 1,
+            "robots": 5,
+            "horizon": 3,
+            "planner": "greedy",
+            "n_runs": 3,
+            "n_initial_seeds": 1,
+            "n_seed_conditions": 1,
+            "mean_joint_srppa": 10.730734237108175,
+            "sd_joint_srppa": null,
+            "mean_normalized_srppa": 1,
+            "normalized_ci": {
+                "lower": null,
+                "upper": null,
+                "method": "not_estimated_fewer_than_10_independent_initial_seeds"
+            },
+            "mean_planning_seconds": 15.776598279,
+            "sd_planning_seconds": 0.4823727469763435,
+            "mean_allocated_bytes": 42347142024,
+            "mean_gc_seconds": 2.036123346333333,
+            "mean_redundancy_per_robot": 1.3546936424342821
+        },
+        {
+            "scenario": "cluster",
+            "start_frame": 1,
+            "robots": 5,
+            "horizon": 3,
+            "planner": "rsp2_serial",
+            "n_runs": 3,
+            "n_initial_seeds": 1,
+            "n_seed_conditions": 1,
+            "mean_joint_srppa": 10.712121493081606,
+            "sd_joint_srppa": null,
+            "mean_normalized_srppa": 0.9982654733948956,
+            "normalized_ci": {
+                "lower": null,
+                "upper": null,
+                "method": "not_estimated_fewer_than_10_independent_initial_seeds"
+            },
+            "mean_planning_seconds": 16.134936181333334,
+            "sd_planning_seconds": 0.7302479148967442,
+            "mean_allocated_bytes": 42347008920,
+            "mean_gc_seconds": 2.0484353106666666,
+            "mean_redundancy_per_robot": 1.3282882546043453
+        }
+    ],
+    "limitations": "Stage allocations/GC attributable only in serial diagnostic passes; threaded windows overlap. Stage and worker wall times cannot be added into parallel wall time. Completion skew is a wait proxy; outside-block residual is not pure scheduler cost."
+}

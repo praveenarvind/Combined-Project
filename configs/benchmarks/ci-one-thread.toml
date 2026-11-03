@@ -1,0 +1,13 @@
+name = "benchmark-one-thread-functional-ci"
+purpose = "ci_functional_validation"
+max_measured_vi_calls = 2
+# Same case as ci.toml; cold functional replay, never performance evidence.
+[[case]]
+id = "all-planners-ci"
+scenario = "cluster"
+robots = 1
+horizon = 2
+initial_seed = 2026
+partition_seed = 11
+repeats = 1
+planners = ["greedy", "rsp2_serial"]

@@ -38,6 +38,13 @@ mutable struct PlanningTrace
     # Each robot owns exactly one slot; no concurrent push!, dictionaries or shared caches.
     blocks::Vector{Union{Nothing,BlockObservation}}
     legacy_evaluation_ns::UInt64
+    legacy_bytes::Int
+    legacy_gc_seconds::Float64
+    legacy_cpu_seconds::Float64
+    history::Vector{Vector{BlockObservation}}
+    profiles::Vector{Vector{StageProfile}}
+    detailed::Bool
+    attributable_allocations::Bool
 end
 
 struct ObservedProblem{T,P<:SubmodularMaximization.PartitionProblem{T}} <:
@@ -46,9 +53,10 @@ struct ObservedProblem{T,P<:SubmodularMaximization.PartitionProblem{T}} <:
     trace::PlanningTrace
 end
 
-function ObservedProblem(problem::SubmodularMaximization.PartitionProblem{T}) where T
+function ObservedProblem(problem::SubmodularMaximization.PartitionProblem{T}; detailed=false, attributable_allocations=false) where T
     n = SubmodularMaximization.get_num_agents(problem)
-    trace = PlanningTrace(Threads.Atomic{Int}(0), fill!(Vector{Union{Nothing,BlockObservation}}(undef,n), nothing), 0)
+    trace = PlanningTrace(Threads.Atomic{Int}(0), fill!(Vector{Union{Nothing,BlockObservation}}(undef,n), nothing), 0, 0, 0.0, 0.0,
+        [BlockObservation[] for _ in 1:n], [StageProfile[] for _ in 1:n], detailed, attributable_allocations)
     ObservedProblem{T,typeof(problem)}(problem, trace)
 end
 
@@ -58,31 +66,57 @@ function SubmodularMaximization.solve_block(p::ObservedProblem{T}, robot::Intege
     conditioned_on = Int[first(e) for e in selections]
     started = time_ns()
     Threads.atomic_add!(p.trace.calls, 1)
-    element = SubmodularMaximization.solve_block(p.problem, robot, selections)
-    p.trace.blocks[robot] = BlockObservation(robot, conditioned_on, Threads.threadid(), started, time_ns())
+    if p.trace.detailed
+        context = StageProfile(p.trace.attributable_allocations)
+        push!(p.trace.profiles[robot],context) # Robot-owned history, including sequential replanning sweeps.
+        element = _with_profile(context) do
+            SubmodularMaximization.solve_block(p.problem,robot,selections)
+        end
+    else
+        element = SubmodularMaximization.solve_block(p.problem,robot,selections)
+    end
+    observation = BlockObservation(robot,conditioned_on,Threads.threadid(),started,time_ns())
+    p.trace.blocks[robot] = observation
+    push!(p.trace.history[robot],observation)
     element
 end
 
 function SubmodularMaximization.objective(p::ObservedProblem, selections)
     started = time_ns()
-    value = SubmodularMaximization.objective(p.problem, selections)
+    cpu = _process_cpu_seconds()
+    timed = @timed SubmodularMaximization.objective(p.problem, selections)
     # Called once after all scheduler barriers; this field is not concurrently written.
     p.trace.legacy_evaluation_ns += time_ns() - started
-    value
+    p.trace.legacy_bytes += timed.bytes
+    p.trace.legacy_gc_seconds += timed.gctime
+    p.trace.legacy_cpu_seconds += _process_cpu_seconds() - cpu
+    timed.value
 end
 
 # Measures the actual upstream solver. Its final legacy evaluation is separately timed
 # and subtracted; authoritative Phase 2 scoring occurs after this timing boundary.
-function _measure_schedule(solve, problem)
-    observed = ObservedProblem(problem)
+function _measure_schedule(solve, problem; detailed=false, attributable_allocations=false, sampling=false)
+    observed = ObservedProblem(problem;detailed=detailed,attributable_allocations=attributable_allocations)
+    cpu = _process_cpu_seconds()
     started = time_ns()
-    solution = solve(observed)
+    timed = if sampling
+        @timed Profile.@profile solve(observed)
+    else
+        @timed solve(observed)
+    end
+    solution = timed.value
     solver_ns = time_ns() - started
+    cpu_seconds = _process_cpu_seconds() - cpu
     all(x -> x !== nothing, observed.trace.blocks) || error("scheduler left an unplanned robot")
     (solution=solution, trace=observed.trace,
      planning_seconds=(solver_ns - observed.trace.legacy_evaluation_ns) / 1e9,
      solver_seconds=solver_ns / 1e9,
-     legacy_evaluation_seconds=observed.trace.legacy_evaluation_ns / 1e9)
+     legacy_evaluation_seconds=observed.trace.legacy_evaluation_ns / 1e9,
+     planning_allocated_bytes=max(0,timed.bytes-observed.trace.legacy_bytes),
+     planning_gc_seconds=max(0.0,timed.gctime-observed.trace.legacy_gc_seconds),
+     planning_cpu_seconds=max(0.0,cpu_seconds-observed.trace.legacy_cpu_seconds),
+     solver_allocated_bytes=timed.bytes,solver_gc_seconds=timed.gctime,
+     gc_pauses=timed.gcstats.pause, gc_full_sweeps=timed.gcstats.full_sweep)
 end
 
 function _planner_settings(configs)

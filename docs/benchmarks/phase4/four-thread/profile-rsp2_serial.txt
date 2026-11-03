@@ -1,0 +1,117 @@
+Overhead ╎ [+additional indent] Count File:Line; Function
+=========================================================
+Thread 1 Total snapshots: 3113. Utilization: 100%
+   ╎1    ...MDMA_Single_Robot.jl:170; transition(model::DistributedFi...
+   ╎ 1    @Base/array.jl:126; vect
+   ╎  1    @Base/array.jl:679; _array_for
+   ╎   1    @Base/array.jl:676; _array_for
+   ╎    1    ...e/abstractarray.jl:840; similar
+   ╎     1    ...e/abstractarray.jl:841; similar
+   ╎    ╎ 1    @Base/boot.jl:468; Array
+   ╎    ╎  1    @Base/boot.jl:459; Array
+   ╎    ╎   1    [unknown stackframe]
+  1╎    ╎    1    ...ot-8/src/array.c:435; ijl_alloc_array_1d
+   ╎1    ...../lib/libjulia.so.1:?; jl_tuple_typename
+   ╎ 1    ...ot-8/src/datatype.c:302; ijl_islayout_inline
+   ╎  1    ...ot-8/src/datatype.c:268; union_isinlinable
+  1╎   1    ...ot-8/src/datatype.c:279; union_isinlinable
+   ╎1    ...lia/lib/julia/sys.so:?; jl_system_image_data
+  1╎ 1    ...-linux-gnu/libc.so.6:?;
+   ╎1    ...-linux-gnu/libc.so.6:?; __libc_free
+   ╎ 1    [unknown stackframe]
+  1╎  1    ...-linux-gnu/libc.so.6:?;
+   ╎2    ...-linux-gnu/libc.so.6:?;
+  1╎ 1    ...-linux-gnu/libc.so.6:?;
+   ╎ 1    [unknown stackframe]
+  1╎  1    ...-linux-gnu/libc.so.6:?;
+   ╎2    ...-linux-gnu/libc.so.6:?; posix_memalign
+   ╎ 2    [unknown stackframe]
+  2╎  2    ...-linux-gnu/libc.so.6:?;
+   ╎3    ...MDMA_Single_Robot.jl:232; neighbors(model::DistributedFil...
+   ╎ 3    [unknown stackframe]
+  3╎  3    ...ming/MDMA_States.jl:157; DistributedFilming.MDMA.UAVSta...
+   ╎5    ...MDMA_Single_Robot.jl:231; neighbors(model::DistributedFil...
+   ╎ 5    [unknown stackframe]
+  5╎  5    ...ming/MDMA_States.jl:157; DistributedFilming.MDMA.UAVSta...
+   ╎6    ...MDMA_Single_Robot.jl:227; neighbors(model::DistributedFil...
+   ╎ 6    ...DMA_Single_Robot.jl:241; in_bounds
+   ╎  6    [unknown stackframe]
+  6╎   6    ...ming/MDMA_States.jl:157; DistributedFilming.MDMA.UAVSta...
+   ╎13   [unknown stackframe]
+  2╎ 2    ...e/twiceprecision.jl:792; lcm_unchecked(a::Int64, b::Int64)
+  5╎ 5    ...linux-gnu/libc.so.6:?; __libc_free
+  6╎ 6    ...linux-gnu/libc.so.6:?;
+   ╎20   ...MDMA_Single_Robot.jl:230; neighbors(model::DistributedFil...
+   ╎ 20   [unknown stackframe]
+  8╎  8    ...g/MDMA_Detection.jl:5; ccw(d::Symbol)
+ 12╎  12   ...ming/MDMA_States.jl:157; DistributedFilming.MDMA.UAVSta...
+   ╎3058 ...s/x86_64/elf/start.S:113;
+   ╎ 3058 ...-linux-gnu/libc.so.6:?; __libc_start_main
+   ╎  3058 ...-linux-gnu/libc.so.6:?;
+   ╎   3058 ...-8/cli/loader_exe.c:59; main
+   ╎    3058 ...-dot-8/src/jlapi.c:719; jl_repl_entrypoint
+   ╎     3058 ...-dot-8/src/jlapi.c:575; true_main
+   ╎    ╎ 3058 ...dot-8/src/julia.h:1843; jl_apply
+   ╎    ╎  3058 ...-1-dot-8/src/gf.c:2559; ijl_apply_generic
+   ╎    ╎   3058 ...1-dot-8/src/gf.c:2377; _jl_invoke
+   ╎    ╎    3058 .../lib/julia/sys.so:?; jfptr__start_38041.clone_1
+   ╎    ╎     3058 @Base/client.jl:522; _start()
+   ╎    ╎    ╎ 3058 @Base/client.jl:303; exec_options(opts::Base.J...
+   ╎    ╎    ╎  3058 ...-dot-8/src/gf.c:2559; ijl_apply_generic
+   ╎    ╎    ╎   3058 ...dot-8/src/gf.c:2377; _jl_invoke
+   ╎    ╎    ╎    3058 ...ib/julia/sys.so:?; jfptr_include_38905.clone_1
+   ╎    ╎    ╎     3058 @Base/Base.jl:419; include(mod::Module, _...
+   ╎    ╎    ╎    ╎ 3058 @Base/loading.jl:1488; _include(mapexpr::Fun...
+   ╎    ╎    ╎    ╎  3058 ...ot-8/src/gf.c:2559; ijl_apply_generic
+   ╎    ╎    ╎    ╎   3058 ...t-8/src/gf.c:2377; _jl_invoke
+
+Thread 2 Total snapshots: 3113. Utilization: 0%
+    ╎3113 ...-1-dot-8/src/task.c:942; start_task
+    ╎ 3113 ...-1-dot-8/src/task.c:254; jl_finish_task
+    ╎  3113 ...-dot-8/src/julia.h:1843; jl_apply
+    ╎   3113 ...e-1-dot-8/src/gf.c:2559; ijl_apply_generic
+    ╎    3113 ...-1-dot-8/src/gf.c:2377; _jl_invoke
+    ╎     3113 ...a/lib/julia/sys.so:?; jfptr_task_done_hook_49067.cl...
+    ╎    ╎ 3113 @Base/task.jl:634; task_done_hook(t::Task)
+    ╎    ╎  3113 @Base/task.jl:930; wait()
+    ╎    ╎   3113 @Base/task.jl:921; poptask(W::Base.InvasiveLi...
+    ╎    ╎    3113 ...ot-8/src/partr.c:596; ijl_task_get_next
+    ╎    ╎     3113 ...c/unix/thread.c:883; uv_cond_wait
+    ╎    ╎    ╎ 3113 ...ux-gnu/libc.so.6:?; pthread_cond_wait
+    ╎    ╎    ╎  3113 ...x-gnu/libc.so.6:?;
+    ╎    ╎    ╎   3113 ...x-gnu/libc.so.6:?;
+3112╎    ╎    ╎    3113 ...x-gnu/libc.so.6:?;
+
+Thread 3 Total snapshots: 3113. Utilization: 0%
+    ╎3113 ...-1-dot-8/src/task.c:942; start_task
+    ╎ 3113 ...-1-dot-8/src/task.c:254; jl_finish_task
+    ╎  3113 ...-dot-8/src/julia.h:1843; jl_apply
+    ╎   3113 ...e-1-dot-8/src/gf.c:2559; ijl_apply_generic
+    ╎    3113 ...-1-dot-8/src/gf.c:2377; _jl_invoke
+    ╎     3113 ...a/lib/julia/sys.so:?; jfptr_task_done_hook_49067.cl...
+    ╎    ╎ 3113 @Base/task.jl:634; task_done_hook(t::Task)
+    ╎    ╎  3113 @Base/task.jl:930; wait()
+    ╎    ╎   3113 @Base/task.jl:921; poptask(W::Base.InvasiveLi...
+    ╎    ╎    3113 ...ot-8/src/partr.c:596; ijl_task_get_next
+    ╎    ╎     3113 ...c/unix/thread.c:883; uv_cond_wait
+    ╎    ╎    ╎ 3113 ...ux-gnu/libc.so.6:?; pthread_cond_wait
+    ╎    ╎    ╎  3113 ...x-gnu/libc.so.6:?;
+    ╎    ╎    ╎   3113 ...x-gnu/libc.so.6:?;
+3112╎    ╎    ╎    3113 ...x-gnu/libc.so.6:?;
+
+Thread 4 Total snapshots: 3113. Utilization: 0%
+    ╎3113 ...-1-dot-8/src/task.c:942; start_task
+    ╎ 3113 ...-1-dot-8/src/task.c:254; jl_finish_task
+    ╎  3113 ...-dot-8/src/julia.h:1843; jl_apply
+    ╎   3113 ...e-1-dot-8/src/gf.c:2559; ijl_apply_generic
+    ╎    3113 ...-1-dot-8/src/gf.c:2377; _jl_invoke
+    ╎     3113 ...a/lib/julia/sys.so:?; jfptr_task_done_hook_49067.cl...
+    ╎    ╎ 3113 @Base/task.jl:634; task_done_hook(t::Task)
+    ╎    ╎  3113 @Base/task.jl:930; wait()
+    ╎    ╎   3113 @Base/task.jl:921; poptask(W::Base.InvasiveLi...
+    ╎    ╎    3113 ...ot-8/src/partr.c:596; ijl_task_get_next
+    ╎    ╎     3113 ...c/unix/thread.c:883; uv_cond_wait
+    ╎    ╎    ╎ 3113 ...ux-gnu/libc.so.6:?; pthread_cond_wait
+    ╎    ╎    ╎  3113 ...x-gnu/libc.so.6:?;
+    ╎    ╎    ╎   3113 ...x-gnu/libc.so.6:?;
+3112╎    ╎    ╎    3113 ...x-gnu/libc.so.6:?;
