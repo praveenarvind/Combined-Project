@@ -10,10 +10,10 @@ were verified successful from the GitHub website. The API remains separately blo
 ```sh
 julia --threads=4 --project=. scripts/benchmark.jl --config=configs/benchmarks/initial-study.toml
 # Estimate only; executing requires --run.
-julia --threads=4 --project=. scripts/benchmark.jl \
+taskset -c 0-3 julia --threads=4 --project=. scripts/benchmark.jl \
   --config=configs/benchmarks/initial-study.toml --run --diagnostics \
   --output=results/phase4-four-thread
-julia --threads=1 --project=. scripts/benchmark.jl \
+taskset -c 0-3 julia --threads=1 --project=. scripts/benchmark.jl \
   --config=configs/benchmarks/one-thread-control.toml --run \
   --output=results/phase4-one-thread
 ```
@@ -140,6 +140,34 @@ python scripts/plot_benchmarks.py results/phase4-four-thread/run.json \
   results/phase4-one-thread/run.json results/phase4-plots
 ```
 
-A reviewed larger matrix and interpretation of measured evidence will be recorded
-in the Phase 4 results report. No full-scale run, R-IRSP, theoretical guarantee,
+Measured evidence and a proposed larger matrix are in
+[PHASE4_RESULTS.md](PHASE4_RESULTS.md). No full-scale run, R-IRSP, theoretical guarantee,
 Blender rendering or Phase 5 is authorized by this phase.
+
+## Reproduce controls, validators and exports
+
+CPU numbering/availability varies by host; `taskset -c 0-3` above describes the
+actual Linux launches here. Select and record a suitable allowed subset elsewhere.
+Julia dependencies and installation are unchanged; four new direct dependencies
+(Profile, Statistics, SHA, TOML) are Julia standard libraries. External manifest
+package versions/content remain unchanged.
+
+```sh
+OPENBLAS_NUM_THREADS=1 taskset -c 0-3 julia --threads=4 --project=. scripts/scheduling_control.jl
+OPENBLAS_NUM_THREADS=1 taskset -c 0-3 julia --threads=1 --project=. scripts/scheduling_control.jl
+OPENBLAS_NUM_THREADS=1 taskset -c 0-3 julia --threads=4 --project=. scripts/convergence_check.jl
+julia --threads=4 --project=. test/benchmark_output.jl results/phase4-four-thread/run.json
+julia --threads=1 --project=. test/benchmark_output.jl results/phase4-one-thread/run.json
+julia --threads=4 --project=. test/benchmark_pair_output.jl results/phase4-four-thread/run.json results/phase4-one-thread/run.json
+python scripts/export_benchmark_summaries.py results/phase4-four-thread/run.json results/phase4-four-thread/summary.csv
+python scripts/export_benchmark_summaries.py results/phase4-one-thread/run.json results/phase4-one-thread/summary.csv
+python -m pip install -r requirements-plots.txt
+MPLCONFIGDIR=/tmp/filming-mpl python scripts/plot_benchmarks.py results/phase4-four-thread/run.json results/phase4-one-thread/run.json results/phase4-plots
+```
+
+Do not run tests/other planning jobs concurrently with measured study processes.
+The H=8 script is convergence-only; its cold timing must not be used as performance
+evidence. The final Actions workflow runs all 11 planner tags on a cold N=1,H=2
+case, then freshly replays greedy/RSP-2 serial in a one-thread process and validates
+cross-process equality. These CI runs are explicitly labeled functional validation;
+they are not included in performance plots or the initial-study statistics.

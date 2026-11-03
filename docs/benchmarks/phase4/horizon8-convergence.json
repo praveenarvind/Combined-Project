@@ -1,0 +1,236 @@
+{
+    "context": {
+        "source_commit": "3f646d655fa90e82bcd459e8c65f2dec36c8091d",
+        "source_dirty": false,
+        "source_sha256": "453e0d8a665a0155c6eb6e71b6ef80097c17a38b34860de02183dd6330109692",
+        "julia_version": "1.8.5",
+        "julia_threads": 4,
+        "blas_threads": 1,
+        "cpu_quota": "400000 100000",
+        "cpu_allowed": "Cpus_allowed_list:\t0-3",
+        "memory_limit": "34359738368"
+    },
+    "input": {
+        "path": "/workspace/Combined-Project/data/scenarios/cluster/cluster_data.json",
+        "sha256": "67b4c1b3aea58758c7ccf888b58aa9b6bc36728871b9eb3f8b175df4205992a7",
+        "original_robots": 5,
+        "original_horizon": 60,
+        "original_frame_start": 1,
+        "original_frame_end": 8,
+        "camera_policy": "unchanged upstream view-cone override"
+    },
+    "initial_states": [
+        {
+            "state": {
+                "x": 18,
+                "y": 12,
+                "heading": "SW"
+            },
+            "depth": 1,
+            "horizon": 8
+        }
+    ],
+    "result": {
+        "planner": "greedy",
+        "mode": "serial",
+        "scores": {
+            "joint_srppa": 13.972611686323267,
+            "legacy_value": 14.212611686323259,
+            "heading_bonus": 0.12,
+            "stationary_bonus": 0.05
+        },
+        "metrics": {
+            "planning_seconds": 15.041063174,
+            "solver_seconds": 16.475424024,
+            "legacy_evaluation_seconds": 1.43436085,
+            "allocated_bytes": 29727500014,
+            "gc_seconds": 2.014334657,
+            "process_cpu_seconds": 15.039827000000002,
+            "vi_calls": 1,
+            "active_block_wall_seconds": 15.041051988,
+            "outside_block_wall_seconds": 1.1186000000051877e-5,
+            "completion_skew_wait_proxy_seconds": 0,
+            "block_wall_sum_seconds": 15.041051988
+        },
+        "redundancy_per_robot": 0,
+        "configured_rounds": 1,
+        "occupied_rounds": 1,
+        "logical_dependency_depth": 1,
+        "assignments": null,
+        "settings": {
+            "horizon": 8,
+            "num_robots": 1,
+            "grid": {
+                "width": 20,
+                "height": 20,
+                "headings": 8
+            },
+            "camera": {
+                "model": "DistributedFilming.MDMA.ViewConeSensor",
+                "fov": 1.5707963267948966,
+                "cutoff": 100
+            },
+            "move_dist": 3,
+            "vi": {
+                "max_iterations": 90,
+                "belres": 1.0e-6,
+                "include_Q": false,
+                "discount": 1,
+                "verbose": true
+            }
+        },
+        "validation": {
+            "movement_checked": true,
+            "initial_states_checked": true,
+            "max_marginal_error": 5.329070518200751e-15,
+            "feasibility": "original_grid_and_motion"
+        },
+        "detailed": true,
+        "stages": [
+            {
+                "robot": 1,
+                "call": 1,
+                "stage": "prior_coverage",
+                "started_ns": 15527723902226,
+                "finished_ns": 15527741484755,
+                "wall_seconds": 0.014683016,
+                "allocated_bytes": 1201875,
+                "gc_seconds": 0
+            },
+            {
+                "robot": 1,
+                "call": 1,
+                "stage": "reward_cache",
+                "started_ns": 15527746530719,
+                "finished_ns": 15527993954923,
+                "wall_seconds": 0.247409722,
+                "allocated_bytes": 132936158,
+                "gc_seconds": 0.048504012
+            },
+            {
+                "robot": 1,
+                "call": 1,
+                "stage": "value_iteration",
+                "started_ns": 15527993961052,
+                "finished_ns": 15542748193721,
+                "wall_seconds": 14.754219158,
+                "allocated_bytes": 29592225442,
+                "gc_seconds": 1.965830645
+            },
+            {
+                "robot": 1,
+                "call": 1,
+                "stage": "path_extraction",
+                "started_ns": 15542748204837,
+                "finished_ns": 15542748212950,
+                "wall_seconds": 4.888e-6,
+                "allocated_bytes": 1520,
+                "gc_seconds": 0
+            }
+        ],
+        "convergence": [
+            {
+                "robot": 1,
+                "call": 1,
+                "bellman_residual": 0,
+                "converged": true,
+                "tolerance": 1.0e-6,
+                "states_checked": 25600,
+                "method": "independent_all_state_backup",
+                "iterations": null
+            }
+        ],
+        "traces": [
+            {
+                "robot_id": 1,
+                "conditioned_on": [
+                ],
+                "thread_id": 1,
+                "started_ns": 15527707162414,
+                "finished_ns": 15542748214402
+            }
+        ],
+        "solution": {
+            "value": 14.212611686323259,
+            "elements": [
+                [
+                    1,
+                    [
+                        {
+                            "state": {
+                                "x": 18,
+                                "y": 12,
+                                "heading": "SW"
+                            },
+                            "depth": 1,
+                            "horizon": 8
+                        },
+                        {
+                            "state": {
+                                "x": 16,
+                                "y": 10,
+                                "heading": "W"
+                            },
+                            "depth": 2,
+                            "horizon": 8
+                        },
+                        {
+                            "state": {
+                                "x": 14,
+                                "y": 9,
+                                "heading": "W"
+                            },
+                            "depth": 3,
+                            "horizon": 8
+                        },
+                        {
+                            "state": {
+                                "x": 14,
+                                "y": 9,
+                                "heading": "W"
+                            },
+                            "depth": 4,
+                            "horizon": 8
+                        },
+                        {
+                            "state": {
+                                "x": 14,
+                                "y": 9,
+                                "heading": "W"
+                            },
+                            "depth": 5,
+                            "horizon": 8
+                        },
+                        {
+                            "state": {
+                                "x": 14,
+                                "y": 9,
+                                "heading": "W"
+                            },
+                            "depth": 6,
+                            "horizon": 8
+                        },
+                        {
+                            "state": {
+                                "x": 14,
+                                "y": 9,
+                                "heading": "W"
+                            },
+                            "depth": 7,
+                            "horizon": 8
+                        },
+                        {
+                            "state": {
+                                "x": 14,
+                                "y": 9,
+                                "heading": "W"
+                            },
+                            "depth": 8,
+                            "horizon": 8
+                        }
+                    ]
+                ]
+            ]
+        }
+    }
+}

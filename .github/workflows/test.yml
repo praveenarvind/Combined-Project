@@ -22,7 +22,11 @@ jobs:
           path: results/rsp-ci/
       - run: julia --startup-file=no --project=. scripts/benchmark.jl --config=configs/benchmarks/ci.toml --run --output=results/benchmark-ci
       - run: julia --startup-file=no --project=. test/benchmark_output.jl
+      - run: julia --threads=1 --startup-file=no --project=. scripts/benchmark.jl --config=configs/benchmarks/ci-one-thread.toml --run --output=results/benchmark-ci-one-thread
+      - run: julia --startup-file=no --project=. test/benchmark_pair_output.jl results/benchmark-ci/run.json results/benchmark-ci-one-thread/run.json
       - uses: actions/upload-artifact@v4
         with:
           name: benchmark-functional-ci
-          path: results/benchmark-ci/
+          path: |
+            results/benchmark-ci/
+            results/benchmark-ci-one-thread/

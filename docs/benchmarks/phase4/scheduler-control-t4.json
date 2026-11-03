@@ -1,0 +1,135 @@
+{
+    "context": {
+        "source_commit": "3f646d655fa90e82bcd459e8c65f2dec36c8091d",
+        "source_dirty": false,
+        "source_sha256": "453e0d8a665a0155c6eb6e71b6ef80097c17a38b34860de02183dd6330109692",
+        "julia_version": "1.8.5",
+        "julia_threads": 4,
+        "blas_threads": 1,
+        "cpu_quota": "400000 100000",
+        "cpu_allowed": "Cpus_allowed_list:\t0-3",
+        "memory_limit": "34359738368"
+    },
+    "controls": [
+        {
+            "kind": "no_op_scheduler_control",
+            "configured_rounds": 2,
+            "occupied_rounds": 2,
+            "assignments": [
+                2,
+                2,
+                1,
+                1,
+                2
+            ],
+            "threaded": false,
+            "available_threads": 4,
+            "repeats": 100,
+            "mean_seconds": 3.45797e-6,
+            "sd_seconds": 4.966206739849772e-6,
+            "min_seconds": 2.133e-6,
+            "max_seconds": 5.2078e-5,
+            "note": "Includes tracing overhead; no VI/model computation. Not a physical synchronization wait measurement."
+        },
+        {
+            "kind": "no_op_scheduler_control",
+            "configured_rounds": 2,
+            "occupied_rounds": 2,
+            "assignments": [
+                2,
+                2,
+                1,
+                1,
+                2
+            ],
+            "threaded": true,
+            "available_threads": 4,
+            "repeats": 100,
+            "mean_seconds": 2.7856569999999995e-5,
+            "sd_seconds": 2.4496280735734952e-5,
+            "min_seconds": 1.2028e-5,
+            "max_seconds": 0.000128995,
+            "note": "Includes tracing overhead; no VI/model computation. Not a physical synchronization wait measurement."
+        },
+        {
+            "kind": "no_op_scheduler_control",
+            "configured_rounds": 4,
+            "occupied_rounds": 4,
+            "assignments": [
+                3,
+                4,
+                1,
+                2,
+                4
+            ],
+            "threaded": false,
+            "available_threads": 4,
+            "repeats": 100,
+            "mean_seconds": 3.2472700000000003e-6,
+            "sd_seconds": 2.863911240424588e-6,
+            "min_seconds": 2.083e-6,
+            "max_seconds": 2.8973e-5,
+            "note": "Includes tracing overhead; no VI/model computation. Not a physical synchronization wait measurement."
+        },
+        {
+            "kind": "no_op_scheduler_control",
+            "configured_rounds": 4,
+            "occupied_rounds": 4,
+            "assignments": [
+                3,
+                4,
+                1,
+                2,
+                4
+            ],
+            "threaded": true,
+            "available_threads": 4,
+            "repeats": 100,
+            "mean_seconds": 7.091342999999999e-5,
+            "sd_seconds": 5.733161115353114e-5,
+            "min_seconds": 2.642e-5,
+            "max_seconds": 0.000547365,
+            "note": "Includes tracing overhead; no VI/model computation. Not a physical synchronization wait measurement."
+        },
+        {
+            "kind": "no_op_scheduler_control",
+            "configured_rounds": 8,
+            "occupied_rounds": 5,
+            "assignments": [
+                5,
+                7,
+                2,
+                3,
+                8
+            ],
+            "threaded": false,
+            "available_threads": 4,
+            "repeats": 100,
+            "mean_seconds": 3.3395600000000003e-6,
+            "sd_seconds": 2.2293368326781293e-6,
+            "min_seconds": 2.034e-6,
+            "max_seconds": 2.1081e-5,
+            "note": "Includes tracing overhead; no VI/model computation. Not a physical synchronization wait measurement."
+        },
+        {
+            "kind": "no_op_scheduler_control",
+            "configured_rounds": 8,
+            "occupied_rounds": 5,
+            "assignments": [
+                5,
+                7,
+                2,
+                3,
+                8
+            ],
+            "threaded": true,
+            "available_threads": 4,
+            "repeats": 100,
+            "mean_seconds": 0.00012427577,
+            "sd_seconds": 4.099458187354726e-5,
+            "min_seconds": 7.4082e-5,
+            "max_seconds": 0.000345882,
+            "note": "Includes tracing overhead; no VI/model computation. Not a physical synchronization wait measurement."
+        }
+    ]
+}

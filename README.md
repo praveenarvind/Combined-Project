@@ -159,7 +159,11 @@ Formation remains a separately labeled idealized reference.
 
 See [docs/PHASE4.md](docs/PHASE4.md) for resource estimates, timing boundaries,
 convergence checks, statistics, CI labels and reproduction instructions. Large
-matrices and Phase 5 remain pending review. Plotting is optional and separate from
+matrices and Phase 5 remain pending review. Actual timings, CSV/JSON artifacts,
+plots and the proposed larger matrix are in [docs/PHASE4_RESULTS.md](docs/PHASE4_RESULTS.md).
+The matched RSP-2 study retained 99.83% of greedy SRPPA but was 28.6% slower threaded
+than serial; stage diagnostics place 99.4% of measured allocation inside VI.
+Plotting is optional and separate from
 Julia planning; pinned Python plot dependencies are in requirements-plots.txt.
 
 ## Docker
@@ -271,7 +275,7 @@ scripts/baseline.jl              one fresh baseline at a time
 scripts/rsp_pilot.jl             controlled serial/threaded small pilots
 scripts/benchmark.jl             bounded configurable benchmark runner
 configs/benchmarks/              explicit study and CI cases
-data/scenarios/cluster/         original JSON and Blender scene inputs
+data/scenarios/                 exact cluster, split_and_join and priority_speaker inputs
 third_party/                    source references, hashes and BSD notices
 test/                           integration, compatibility and SRPPA unit checks
 docs/                           import notes, validation and evaluator conventions
